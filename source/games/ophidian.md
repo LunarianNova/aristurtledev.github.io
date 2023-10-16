@@ -10,7 +10,7 @@ Ophidian
 
 </h1>
 
-## About Beats
+## About Ophidian
 Ophidian is an arcade puzzle game inspired by classic snake games. In Ophidian, players navigate the player area to consume food blocks, while avoiding any obstacles set in the way. Ophidian features multiple game modes for players to enjoy.
 
 Arcade features a classic style of game play with newly added features.
