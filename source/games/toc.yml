@@ -1,0 +1,14 @@
+- name: Games
+  items:
+  - name: Beats
+    href: beats.md
+  - name: Droplet
+    href: droplet.md
+  - name: Echo
+    href: echo.md
+  - name: Ophidian
+    href: ophidian.md
+  - name: Slime Battle Royale
+    href: slime-battle-royale.md
+  - name: Snake, But Every Ten Seconds The Food Turns Into Walls
+    href: snake-but-every-ten-seconds.md

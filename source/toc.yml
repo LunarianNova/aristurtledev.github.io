@@ -1,0 +1,7 @@
+- name: Games
+  href: games/index.md
+- name: Tutorials
+  href: tutorials/
+- name: MonoGame.Aseprite
+  href: https://monogameaseprite.net
+
