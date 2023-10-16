@@ -35,6 +35,6 @@
     ],
     "postProcessors": [],
     "keepFileLink": false,
-    "disableGitFeatures": false
+    "disableGitFeatures": true
   }
 }
