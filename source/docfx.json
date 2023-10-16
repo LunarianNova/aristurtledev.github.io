@@ -21,10 +21,11 @@
     ],
     "output": "_site",
     "globalMetadata": {
-      "_appTitle": "Aristurtle Tutorials",
+      "_appTitle": "Aristurtle",
       "_appName": "Aristurtle",
       "_appLogoPath": "images/logo.svg",
-      "_appFooter": "© 2023 Christopher Whitley"
+      "_appFooter": "© 2023 Christopher Whitley",
+      "_description": "Official site of all Aristurtle related things"
     },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
