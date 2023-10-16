@@ -1,4 +1,4 @@
-# 09: Edit The `JsonContentTypeWriter`
+# Edit The `JsonContentTypeWriter`
 On the previous page we discussed the anatomy of a `ContentTypeWriter`.  Now that we have an understanding of this, let's make the changes neccessary to our `JsonContentTypeWriter` class so that it writes the results to an `.xnb` file.
 
 Open the `JsonContentTypeWriter.cs` file and make the following adjustments:
