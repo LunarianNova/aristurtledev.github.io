@@ -18,13 +18,13 @@ Echo was developed for Ludum Dare 42, with the theme "Running out of space". In 
 ## Platforms
 
 <div class="row">
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <a class="platform-button button-itch" href="https://ldjam.com/events/ludum-dare/42/echo" target="_blank">
             <img src="/images/platforms/itch.png" class="platform-image"/>
             <span class="platform-label">Available on Itch.io</span>
         </a>
     </div>
-        <div class="col col-4">
+        <div class="col-12 col-md-4">
         <a class="platform-button button-ludum" href="https://ldjam.com/events/ludum-dare/42/echo" target="_blank">
             <img src="/images/platforms/ludum.png" class="platform-image"/>
             <span class="platform-label">Ludum Dare 42</span>
@@ -35,13 +35,13 @@ Echo was developed for Ludum Dare 42, with the theme "Running out of space". In 
 ## Screenshots
 
 <div class="row">
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/echo/screenshot_01.png" />
     </div>
-    <div class="col col-4">q
+    <div class="col-12 col-md-4">
         <img src="/images/games/echo/screenshot_02.png" />
     </div>
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/echo/screenshot_03.png" />
     </div>        
 </div>

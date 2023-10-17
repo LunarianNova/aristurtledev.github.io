@@ -18,13 +18,13 @@ Slime Battle Royale was made for Ludum Dare 41 with the them Combine two incompa
 ## Platforms
 
 <div class="row">
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <a class="platform-button button-itch" href="https://manbeardgames.itch.io/slime-battle-royale" target="_blank">
             <img src="/images/platforms/itch.png" class="platform-image"/>
             <span class="platform-label">Available on Itch.io</span>
         </a>
     </div>
-        <div class="col col-4">
+        <div class="col-12 col-md-4">
         <a class="platform-button button-ludum" href="https://ldjam.com/events/ludum-dare/41/slime-battle-royale" target="_blank">
             <img src="/images/platforms/ludum.png" class="platform-image"/>
             <span class="platform-label">Ludum Dare 41</span>
@@ -35,16 +35,16 @@ Slime Battle Royale was made for Ludum Dare 41 with the them Combine two incompa
 ## Screenshots
 
 <div class="row">
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/slime-battle-royale/screenshot_01.png" />
     </div>
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/slime-battle-royale/screenshot_02.png" />
     </div>
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/slime-battle-royale/screenshot_03.png" />
     </div>
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/slime-battle-royale/screenshot_04.png" />
     </div>
 </div>

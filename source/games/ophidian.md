@@ -29,13 +29,13 @@ Challenge Mode features levels designed for players to navigate the ophidian thr
 ## Platforms
 
 <div class="row">
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <a class="platform-button button-steam" href="https://store.steampowered.com/app/697710/Ophidian/" target="_blank">
             <img src="/images/platforms/steam.png" class="platform-image"/>
-            <span class="platform-label">Available on Itch.io</span>
+            <span class="platform-label">Available on Steam</span>
         </a>
     </div>
-        <div class="col col-4">
+        <div class="col-12 col-md-4">
         <a class="platform-button button-gdq" href="https://itch.io/jam/omgjam5/rate/326293" target="_blank">
             <img src="/images/platforms/gdq.png" class="platform-image"/>
             <span class="platform-label">OMG Jam 5</span>
@@ -46,34 +46,34 @@ Challenge Mode features levels designed for players to navigate the ophidian thr
 ## Screenshots
 
 <div class="row">
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/ophidian/screenshot_01.png" />
     </div>
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/ophidian/screenshot_02.png" />
     </div>
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/ophidian/screenshot_03.png" />
     </div>
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/ophidian/screenshot_04.png" />
     </div>
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/ophidian/screenshot_05.png" />
     </div>
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/ophidian/screenshot_06.png" />
     </div>
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/ophidian/screenshot_07.png" />
     </div>
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/ophidian/screenshot_08.png" />
     </div>
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/ophidian/screenshot_09.png" />
     </div>
-    <div class="col col-4">
+    <div class="col-12 col-md-4">
         <img src="/images/games/ophidian/screenshot_10.png" />
     </div>                    
 </div>
