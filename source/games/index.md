@@ -3,7 +3,7 @@ layout: landing
 ---
 
 <div class="row">
-    <div class="col col-md-4 d-flex  align-items-stretch">
+    <div class="col-12 col-md-4 d-flex  align-items-stretch">
         <div class="card" style="width: 100%; margin-bottom: 2rem;">
             <img src="/images/games/ophidian/game_preview.png" class="card-img-top">
             <div class="card-body d-flex flex-column">
@@ -13,7 +13,7 @@ layout: landing
             </div>
         </div>
     </div>
-    <div class="col col-md-4 d-flex  align-items-stretch">
+    <div class="col-12 col-md-4 d-flex  align-items-stretch">
         <div class="card" style="width: 100%; margin-bottom: 2rem;">
             <img src="/images/games/beats/game_preview.png" class="card-img-top">
             <div class="card-body d-flex flex-column">
@@ -23,7 +23,7 @@ layout: landing
             </div>
         </div>
     </div>
-    <div class="col col-md-4 d-flex  align-items-stretch">
+    <div class="col-12 col-md-4 d-flex  align-items-stretch">
         <div class="card" style="width: 100%; margin-bottom: 2rem;">
             <img src="/images/games/echo/game_preview.png" class="card-img-top">
             <div class="card-body d-flex flex-column">
@@ -33,7 +33,7 @@ layout: landing
             </div>
         </div>
     </div>
-    <div class="col col-md-4 d-flex align-items-stretch">
+    <div class="col-12 col-md-4 d-flex align-items-stretch">
         <div class="card" style="width: 100%; margin-bottom: 2rem;">
             <img src="/images/games/slime-battle-royale/game_preview.png" class="card-img-top">
             <div class="card-body d-flex flex-column">
@@ -43,7 +43,7 @@ layout: landing
             </div>
         </div>
     </div>
-    <div class="col col-md-4 d-flex  align-items-stretch">
+    <div class="col-12 col-md-4 d-flex  align-items-stretch">
         <div class="card" style="width: 100%; margin-bottom: 2rem;">
             <img src="/images/games/droplet/game_preview.png" class="card-img-top">
             <div class="card-body d-flex flex-column">
