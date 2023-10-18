@@ -9,16 +9,21 @@ on:
 
 env:
   DOTNET_VERSION: '6.0.400'
-  RSYNC_PASSWORD: ${{ secrets.PASSWORD }}
-  RSYNC_USERNAME: ${{ secrets.USERNAME }}
-  RSYNC_HOSTNAME: ${{ secrets.HOSTNAME }}
-  RSYNC_DEST_PATH: ${{ secrets.DEST_PATH }}
 
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ignore
+
+      - name: Adding Known Hosts
+        run: ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+
       - name: Clone Repository
         uses: actions/checkout@v3
         with:
@@ -35,6 +40,4 @@ jobs:
           cd ./source
           dotnet tool restore
           dotnet docfx build
-          echo "${{ env.RSYNC_PASSWORD }}" >> $RSYNC_PASSWORD
-          echo "032615487Aa@!&lokiju5511" >> $RSYNC_PASSWORD
-          rsync -avh ./_site aristurtle@aristurtle.net:/var/www/aristurtle-dot-net-test
+          rsync -avh ./_site ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_NAME }}:${{ secrets.SSH_DEST_PATH }}
