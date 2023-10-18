@@ -39,7 +39,7 @@ layout: landing
             <div class="card-body d-flex flex-column">
                 <h3 class="card-title">Slime Battle Royale</h3>
                 <p class="card-text">The rules are simple, only one slime can leave.</p>
-                <a href="/games.slime-battle-royale.html" class="btn btn-primary w-100 mt-auto">More Info</a>
+                <a href="/games/slime-battle-royale.html" class="btn btn-primary w-100 mt-auto">More Info</a>
             </div>
         </div>
     </div>
@@ -51,6 +51,6 @@ layout: landing
                 <p class="card-text">Tiny and insignificant, you are not discourage from dreaming big. Consume those around you, but remember there is always someone bigger waiting</p>
                 <a href="/games/droplet.html" class="btn btn-primary w-100 mt-auto">More Info</a>
             </div>
-        </div>               
-    </div>    
+        </div>
+    </div>
 </div>
