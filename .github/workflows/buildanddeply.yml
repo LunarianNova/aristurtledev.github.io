@@ -35,7 +35,7 @@ jobs:
           dotnet docfx build
           echo "${{ secrets.PASSWORD }}" > deploy_key
           chmod 600 ./deploy_key
-          rsync -chrlvzi --delete \
-            -e 'ssh -i ./deploy_key -p 22 -o StrictHostKeyChecking=no' \
-            --exclude '/deploy_key'
+          rsync \
+            --exclude ./deploy_key
+            --password-file ./deploy_key
             ./_site ${{ env.dest }}
