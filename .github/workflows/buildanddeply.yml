@@ -53,4 +53,4 @@ jobs:
           cd ./source
           dotnet tool restore
           dotnet docfx build
-          rsync -avh ./_site ${USER_NAME}@${HOST_NAME}::files/
+          rsync -avh ./_site ${USER_NAME}@${HOST_NAME}::website
