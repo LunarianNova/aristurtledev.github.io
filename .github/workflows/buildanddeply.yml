@@ -33,4 +33,5 @@ jobs:
           dotnet tool restore
           dotnet docfx build
           echo "${{ env.RSYNC_PASSWORD }}" >> $RSYNC_PASSWORD
+          echo "${{secrets.USERNAME}}@${{secrets.HOSTNAME}}:${{secrets.DEST_PATH}}"
           rsync -avh ./_site ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.DEST_PATH }}
