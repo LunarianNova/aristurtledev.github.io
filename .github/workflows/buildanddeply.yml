@@ -1,0 +1,41 @@
+name: build-and-test
+on: 
+  push:
+  pull_request:
+    branches:
+      - 'release'
+      - 'main'
+
+
+env: 
+  DOTNET_VERSION: '6.0.400'
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with: 
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore DotNet Tools
+        shell: bash
+        run: |
+          dotnet tool restore
+
+      - name: DOCFX Build
+        shell: bash
+        run: |
+          dotnet docfx build
+
+      - name: Copy To Server
+        shell: bash
+        run: |
+          env RSYNC_PASSWOERD=${{ secrets.PASSWORD }} rsync -avh ./_site ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.PATH }}
