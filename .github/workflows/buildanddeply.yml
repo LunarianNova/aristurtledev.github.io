@@ -26,6 +26,20 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
+      - name: Create ssh directory
+        shell: bash
+        run: sudo mkdir ~/.ssh
+
+      - name: Create known hosts file
+        shell: bash
+        run: sudo touch ~/.ssh/known_hosts
+
+      - name: Write Known Hosts
+        shell: bash
+        env:
+          KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: sudo echo "${KNOWN_HOSTS}" >> ~/.ssh/known_hosts
+
       - name: Build and Deploy
         shell: bash
         env:
@@ -33,12 +47,8 @@ jobs:
           USER_NAME: ${{ secrets.USER_NAME }}
           HOST_NAME: ${{ secrets.HOST_NAME }}
           DEST_PATH: ${{ secrets.DEST_PATH }}
-          KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: |
           cd ./source
           dotnet tool restore
           dotnet docfx build
-          sudo mkdir ~/.ssh
-          sudo touch ~/.ssh/known_hosts
-          sudo echo "${KNOWN_HOSTS}" >> ~/.ssh/known_hosts
           rsync -avh ./_site ${USER_NAME}@${HOST_NAME}:${DEST_PATH}
