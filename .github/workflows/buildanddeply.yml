@@ -1,5 +1,5 @@
 name: build-and-test
-on: 
+on:
   push:
   pull_request:
     branches:
@@ -7,8 +7,9 @@ on:
       - 'main'
 
 
-env: 
+env:
   DOTNET_VERSION: '6.0.400'
+  RSYNC_PASSWORD: ${{ secrets.PASSWORD }}
 
 
 jobs:
@@ -19,17 +20,16 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
-        with: 
+        with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Build and Deply
+      - name: Build and Deploy
         shell: bash
         run: |
           cd ./source
           dotnet tool restore
           dotnet docfx build
-          RSYNC_PASSWORD=${{ secrets.PASSWORD }}
           rsync -avh ./_site ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.DEST_PATH }}
