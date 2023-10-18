@@ -31,6 +31,5 @@ jobs:
           cd ./source
           dotnet tool restore
           dotnet docfx build
-          sudo apt-get install rsync
-          echo "${{ secrets.PASSWORD }}" > deploy_key
-          rsync -avh --password-file ./deploy_key ./_site ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.DEST_PATH }}
+          RSYNC_PASSWORD=${{ secrets.PASSWORD }}
+          rsync -avh ./_site ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.DEST_PATH }}
