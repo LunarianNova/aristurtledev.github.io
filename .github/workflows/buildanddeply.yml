@@ -25,15 +25,10 @@ jobs:
         with: 
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Install rsync
-        shell: bash
-        run: |
-          sudo apt install rsync
-
       - name: Build and Deply
         shell: bash
         run: |
           cd ./source
           dotnet tool restore
           dotnet docfx build
-          env RSYNC_PASSWOERD=${{ secrets.PASSWORD }} rsync -avh ./_site ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.PATH }}
+          RSYNC_PASSWOERD=${{ secrets.PASSWORD }} rsync -avh ./_site ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.PATH }}
