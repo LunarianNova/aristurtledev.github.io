@@ -34,7 +34,6 @@ jobs:
           dotnet tool restore
           dotnet docfx build
           echo "${{ secrets.PASSWORD }}" > deploy_key
-          chmod 600 ./deploy_key
           rsync \
             --exclude ./deploy_key
             --password-file ./deploy_key
