@@ -31,4 +31,5 @@ jobs:
           cd ./source
           dotnet tool restore
           dotnet docfx build
-          RSYNC_PASSWOERD=${{ secrets.PASSWORD }} rsync -avh ./_site ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.PATH }}
+          RSYNC_PASSWOERD=${{ secrets.PASSWORD }} 
+          rsync -avh ./_site ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.PATH }}
