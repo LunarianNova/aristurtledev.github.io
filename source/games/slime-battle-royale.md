@@ -10,7 +10,7 @@ Slime Battle Royale
 
 </h1>
 
-## About Droplet
+## About Slime Battle Royale
 You are trapped in a dungeon with other slimes. The rules are simple, only one slime can leave. Time is precious, as there is poison slowly creeping in from all sides of the dungeon. You must hurry to defeat them all, using the ancient fighting technique of rock-paper-scissors. Or die a painful death.
 
 Slime Battle Royale was made for Ludum Dare 41 with the them Combine two incompatible genres". This uses the Battle Royale genre and the Turn-Base Fighting genres. In Battle Royale games, the playing field is constantly closing in, getting smaller and smaller. So moving without delay is crucial. The Turn-Base Fighting serves as a deterrent to your movement, forcing you to stop and take actions.
