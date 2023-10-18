@@ -25,6 +25,11 @@ jobs:
         with: 
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
+      - name: Install rsync
+        shell: bash
+        run: |
+          sudo apt install rsync
+
       - name: Build and Deply
         shell: bash
         run: |
