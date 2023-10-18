@@ -33,7 +33,4 @@ jobs:
           dotnet docfx build
           sudo apt-get install rsync
           echo "${{ secrets.PASSWORD }}" > deploy_key
-          rsync \
-            --exclude ./deploy_key
-            --password-file ./deploy_key
-            ./_site ${{ secrets.USERNAME }}@{{ secrets.HOSTNAME }}:${{ secrets.DEST_PATH }}
+          rsync -avh --password-file ./deploy_key ./_site ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.DEST_PATH }}
