@@ -33,7 +33,7 @@ jobs:
           cd ./source
           dotnet tool restore
           dotnet docfx build
-          brew install rsync
+          sudo apt-get install rsync
           echo "${{ secrets.PASSWORD }}" > deploy_key
           rsync \
             --exclude ./deploy_key
