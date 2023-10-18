@@ -1,4 +1,42 @@
+- name: Tutorials
+  href: index.md
 - name: Collision Detection
-  href: collision-detection/toc.yml
+  items:
+    - name: Introduction
+      href: collision-detection/01_Introduction.md
+    - name: Axis-Aligned Bounding Box
+      href: collision-detection/02_axis-aligned-bounding-box.md
+    - name: Circle Collision
+      href: collision-detection/03_circle_collision.md
+    - name: Conclusion
+      href: collision-detection/04_conclusion.md
 - name: MonoGame Content Pipeline Extension
-  href: content-pipeline-extension/toc.yml
+  items:
+    - name: Introduction
+      href: content-pipeline-extension/01_introduction.md
+    - name: Content Pipeline Workflow
+      href: content-pipeline-extension/02_content-pipeline-workflow.md
+    - name: Create the MonoGame Content Pipeline Extension Project
+      href: content-pipeline-extension/03_create-content-pipeline-extension-project.md
+    - name: The ContentImporter Anatomy
+      href: content-pipeline-extension/04_the-content-importer.md
+    - name: Edit the JsonContentImporter
+      href: content-pipeline-extension/05_edit-json-content-importer.md
+    - name: The ContentProcessor Anatomy
+      href: content-pipeline-extension/06_the-content-processor.md
+    - name: Edit the JsonContentProcessor
+      href: content-pipeline-extension/07_edit-json-content-processor.md
+    - name: The ContentWriter Anatomy
+      href: content-pipeline-extension/08_the-content-writer.md
+    - name: Edit the JsonContentTypeWriter
+      href: content-pipeline-extension/09_edit-json-content-writer.md
+    - name: Create a MonoGame Game Library Project
+      href: content-pipeline-extension/10_create-monogame-library.md
+    - name: The ContentTypeReader
+      href: content-pipeline-extension/11_the-content-reader.md
+    - name: Edit the JsonContentTypeReader
+      href: content-pipeline-extension/12_edit-json-content-reader.md
+    - name: Create Game Project
+      href: content-pipeline-extension/13_create-game-project.md
+    - name: Conclusion
+      href: content-pipeline-extension/14_conclusion.md
