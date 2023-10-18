@@ -32,7 +32,9 @@ jobs:
 
       - name: Create known hosts file
         shell: bash
-        run: sudo touch ~/.ssh/known_hosts
+        run: |
+          sudo touch ~/.ssh/known_hosts
+          sudo chmod 777 ~/.ssh/known_hosts
 
       - name: Write Known Hosts
         shell: bash
