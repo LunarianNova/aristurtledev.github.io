@@ -26,8 +26,6 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Build and Deply
-        env:
-            dest: ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.PATH }}
         shell: bash
         run: |
           cd ./source
@@ -38,4 +36,4 @@ jobs:
           rsync \
             --exclude ./deploy_key
             --password-file ./deploy_key
-            ./_site ${{ env.dest }}
+            ./_site ${{ secrets.USERNAME }}@{{ secrets.HOSTNAME }}:${{ secrets.DEST_PATH }}
