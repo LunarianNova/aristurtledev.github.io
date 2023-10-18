@@ -3,7 +3,7 @@
 - name: Collision Detection
   items:
     - name: Introduction
-      href: collision-detection/01_Introduction.md
+      href: collision-detection/01_introduction.md
     - name: Axis-Aligned Bounding Box
       href: collision-detection/02_axis-aligned-bounding-box.md
     - name: Circle Collision
