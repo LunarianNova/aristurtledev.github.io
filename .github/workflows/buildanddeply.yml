@@ -26,10 +26,16 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Build and Deply
+        env:
+            dest: ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.PATH }}
         shell: bash
         run: |
           cd ./source
           dotnet tool restore
           dotnet docfx build
-          RSYNC_PASSWOERD=${{ secrets.PASSWORD }} 
-          rsync -avh ./_site ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.PATH }}
+          echo "${{ secrets.PASSWORD }}" > deploy_key
+          chmod 600 ./deploy_key
+          rsync -chrlvzi --delete \
+            -e 'ssh -i ./deploy_key -p 22 -o StrictHostKeyChecking=no' \
+            --exclude '/deploy_key'
+            ./_site ${{ secrets.PATH }}
