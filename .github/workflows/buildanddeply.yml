@@ -26,22 +26,6 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Create ssh directory
-        shell: bash
-        run: sudo mkdir ~/.ssh
-
-      - name: Create known hosts file
-        shell: bash
-        run: |
-          sudo touch ~/.ssh/known_hosts
-          sudo chmod 777 ~/.ssh/known_hosts
-
-      - name: Write Known Hosts
-        shell: bash
-        env:
-          KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-        run: sudo echo "${KNOWN_HOSTS}" >> ~/.ssh/known_hosts
-
       - name: Build and Deploy
         uses: easingthemes/ssh-deploy@main
         with:
