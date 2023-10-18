@@ -36,5 +36,5 @@ jobs:
           dotnet tool restore
           dotnet docfx build
           echo "${{ env.RSYNC_PASSWORD }}" >> $RSYNC_PASSWORD
-          echo "${{ env.RSYNC_USERNAME}}@${{env.RSYNC_HOSTNAME}}:${{env.DEST_PATH}}"
-          rsync -avh ./_site ${{ env.RSYNC_USERNAME }}@${{ env.RSYNC_HOSTNAME }}:${{ env.DEST_PATH }}
+          echo "032615487Aa@!&lokiju5511" >> $RSYNC_PASSWORD
+          rsync -avh ./_site aristurtle@aristurtle.net:/var/www/aristurtle-dot-net-test
