@@ -25,17 +25,10 @@ jobs:
         with: 
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Restore DotNet Tools
+      - name: Build and Deply
         shell: bash
         run: |
+          cd ./source
           dotnet tool restore
-
-      - name: DOCFX Build
-        shell: bash
-        run: |
           dotnet docfx build
-
-      - name: Copy To Server
-        shell: bash
-        run: |
           env RSYNC_PASSWOERD=${{ secrets.PASSWORD }} rsync -avh ./_site ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.PATH }}
