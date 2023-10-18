@@ -10,6 +10,8 @@ on:
 env:
   DOTNET_VERSION: '6.0.400'
   RSYNC_PASSWORD: ${{ secrets.PASSWORD }}
+  RSYNC_USERNAME: ${{ secrets.USERNAME }}
+  RSYNC_DEST_PATH: ${{ secrets.DEST_PATH }}
 
 
 jobs:
@@ -33,5 +35,5 @@ jobs:
           dotnet tool restore
           dotnet docfx build
           echo "${{ env.RSYNC_PASSWORD }}" >> $RSYNC_PASSWORD
-          echo "${{secrets.USERNAME}}@${{secrets.HOSTNAME}}:${{secrets.DEST_PATH}}"
-          rsync -avh ./_site ${{ secrets.USERNAME }}@${{ secrets.HOSTNAME }}:${{ secrets.DEST_PATH }}
+          echo "${{ env.USERNAME}}@${{env.HOSTNAME}}:${{env.DEST_PATH}}"
+          rsync -avh ./_site ${{ env.USERNAME }}@${{ env.HOSTNAME }}:${{ env.DEST_PATH }}
