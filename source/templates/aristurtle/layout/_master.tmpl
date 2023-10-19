@@ -41,6 +41,22 @@
       <meta name="og:image" content="https://aristurtle.net/images/aristurtle.png">
       <meta name="og:description" content="{{_description}}">
     {{/redirect_url}}
+
+    <!-- Matomo -->
+    <script>
+      var _paq = window._paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="https://matomo.aristurtle.net/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '2']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <!-- End Matomo Code -->
   </head>
 
   {{^redirect_url}}
@@ -54,16 +70,6 @@
     const theme = localStorage.getItem('theme') || 'auto'
     document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
   </script>
-
-  {{#_googleAnalyticsTagId}}
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{_googleAnalyticsTagId}}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', '{{_googleAnalyticsTagId}}');
-  </script>
-  {{/_googleAnalyticsTagId}}
 
   <body class="tex2jax_ignore" data-layout="{{_layout}}{{layout}}" data-yaml-mime="{{yamlmime}}">
     <header class="bg-body border-bottom">
