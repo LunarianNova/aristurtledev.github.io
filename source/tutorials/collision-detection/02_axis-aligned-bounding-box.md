@@ -1,6 +1,6 @@
 ---
 modificationDate: "10/18/2023"
-_ogImage: collision-detection/axis-aligned-boxes.png
+_ogImage: tutorials/collision-detection/axis-aligned-boxes.png
 _description: Axis-Aligned Bounding Box collision detect, or AABB for short, is one of the simplest forms of collision detection
 ---
 

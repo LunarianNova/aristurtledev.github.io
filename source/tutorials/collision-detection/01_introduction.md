@@ -1,6 +1,6 @@
 ---
 modificationDate: "10/18/2023"
-_ogImage: collision-detection/axis-aligned-boxes.png
+_ogImage: tutorials/collision-detection/axis-aligned-boxes.png
 _description: In this tutorial series, we're going to discuss two different methods of collision detection used in 2D games
 ---
 
