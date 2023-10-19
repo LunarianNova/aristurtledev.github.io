@@ -1,3 +1,7 @@
+---
+modificationDate: "10/16/2023"
+---
+
 # Edit The `JsonContentTypeWriter`
 On the previous page we discussed the anatomy of a `ContentTypeWriter`.  Now that we have an understanding of this, let's make the changes neccessary to our `JsonContentTypeWriter` class so that it writes the results to an `.xnb` file.
 

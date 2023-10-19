@@ -1,3 +1,7 @@
+---
+modificationDate: "10/16/2023"
+---
+
 # MonoGame Content Pipeline Extension Tutorial
 
 > [!VIDEO https://www.youtube.com/embed/fdbGz20q8yk?si=vdk8Wm7xgn7iHshM]

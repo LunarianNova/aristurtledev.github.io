@@ -1,3 +1,7 @@
+---
+modificationDate: "10/16/2023"
+---
+
 # The `ContentWriter`
 The job of the `ContentWriter` is to take the input from the `ContentProcessor` and write it to disk as a binary encoded`.xnb` file.
 

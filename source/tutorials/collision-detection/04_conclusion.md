@@ -1,5 +1,5 @@
 ---
-lastmod: 2023-18-10
+modificationDate: "10/18/2023"
 ---
 
 # Collision Detection Conclusion

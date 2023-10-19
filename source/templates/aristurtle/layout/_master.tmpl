@@ -138,6 +138,17 @@
         {{^_disableNextArticle}}
         <div class="next-article d-print-none border-top" id="nextArticle"></div>
         {{/_disableNextArticle}}
+
+        {{#modificationDate}}
+        <div id="modificationDate" class="my-5">
+          <div class="row">
+            <div class="col"></div>
+            <div class="col text-end"> 
+              <em><small>Last updated on {{modificationDate}} by {{_author}}
+            </div>
+          </div>
+        </div>
+        {{/modificationDate}}        
         
       </div>
 

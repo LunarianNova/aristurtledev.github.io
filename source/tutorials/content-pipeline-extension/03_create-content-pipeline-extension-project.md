@@ -1,3 +1,7 @@
+---
+modificationDate: "10/16/2023"
+---
+
 # Create the MonoGame Content Pipeline Extension Project
 The first thing we'll need to do is create a new **MonoGame Content Pipeline Extension** project.  Using this template to create the project will give us some necessary things already pre-configured for us, like the NuGet package references that would be needed.  Open Visual Studio and create a new **MonoGame Content Pipeline Extension** project
 

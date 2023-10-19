@@ -1,3 +1,7 @@
+---
+modificationDate: "10/16/2023"
+---
+
 # Conclusion
 That is all for this **MonoGame Content Pipeline Extension** tutorial.  In this tutorial, we have dived into creating a Content Pipeline extension for reading JSON file types.  We've discussed the anatomy of each of the components that make up the workflow of the content pipeline.
 

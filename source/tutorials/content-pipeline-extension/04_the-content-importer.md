@@ -1,3 +1,7 @@
+---
+modificationDate: "10/16/2023"
+---
+
 # The `ContentImporter`
 The job of the `ContentImporter` is to read the contents of the file being imported from disk and pass that data to the `ContentProcessor` where it can be processed.  You will, when able, want to perform some type of validation on the data that is imported to ensure it is the correct type of data expected so that there are no issues during the processing stage.  
 

@@ -1,3 +1,7 @@
+---
+modificationDate: "10/16/2023"
+---
+
 # The `ContentProcessor`
 The job of the `ContentProcessor` is to process the content that was imported by the `ContentImporter` and transform it in anyway necessary before sending it to the `ContentWriter` to be written to an `.xnb` file.  
 

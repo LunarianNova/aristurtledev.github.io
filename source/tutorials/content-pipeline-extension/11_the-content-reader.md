@@ -1,3 +1,7 @@
+---
+modificationDate: "10/16/2023"
+---
+
 # The `ContentTypeReader`
 The job of the `ContentTypeReader` is to read the contents of an `.xnb` file and return back the expected type instantiated from the data that is read.
 

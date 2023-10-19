@@ -1,3 +1,7 @@
+---
+modificationDate: "10/16/2023"
+---
+
 # Edit The `JsonContentTypeReader`
 On the previous page we discussed the anatomy of a `ContentTypeReader`.  Now that we have an understanding of this, let's make the changes necessary to our `JsonContentTypeReader` class so that it reads the `.xnb` file.and returns back the expected result.
 

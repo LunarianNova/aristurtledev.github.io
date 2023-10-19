@@ -4,6 +4,24 @@
     margin-right: 1rem;
 }
 
+/* Last Modified Date */
+#modificationDate {
+    display: block;
+}
+
+/* Next Prev Articles */
+.next-article {
+    border:none;
+    gap: 1rem;
+}
+
+.prev, .next {
+    border: 1px solid var(--bs-border-color);
+    border-radius: 10px;
+    padding-block: 1rem;
+    padding-inline: 1rem;
+}
+
 /* Games Page */
 .games-list {
     background-color: #F8F9FA;

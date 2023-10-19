@@ -1,3 +1,7 @@
+---
+modificationDate: "10/16/2023"
+---
+
 # Content Pipeline Workflow
 
 Before we get into creating the extension, it's important to understand what the **Content Pipeline** is.  Many people confuse the term *Content Pipeline* to mean specifically the MGCB Editor, which is not the case.  Instead, the **Content Pipeline** is the workflow that a content/asset for our game goes through from the content building step all the way to the content loading step at runtime within our game.

@@ -1,3 +1,7 @@
+---
+modificationDate: "10/16/2023"
+---
+
 ## Create a MonoGame Game Library
 For the next part of this tutorial, we will need to create a new **MonoGame Game Library** project and add it to our solution.  
 

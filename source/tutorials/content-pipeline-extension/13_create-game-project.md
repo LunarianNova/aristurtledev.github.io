@@ -1,3 +1,7 @@
+---
+modificationDate: "10/16/2023"
+---
+
 # Create Game Project
 The final thing we need to cover is how to add the **MonoGame Content Pipeline Extension** to be used in one of our game projects.  On this page, we'll go through the steps of creating a new game project, adding the correct references to both the project and the **MGCB Editor**, then testing out our new JSON content pipeline extension.
 

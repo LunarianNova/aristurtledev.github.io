@@ -1,3 +1,7 @@
+---
+modificationDate: "10/16/2023"
+---
+
 # Edit the `JsonContentProcessor`
 On the previous page we discussed the anatomy of a `ContentProcessor`.  Now that we have an understanding of this, let's make the changes necessary to our `JsonContentProcessor` class so that it imports the contents of a JSON file.
 
