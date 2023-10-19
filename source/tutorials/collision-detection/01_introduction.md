@@ -14,7 +14,7 @@ As we discuss each of these methods, we're going to create an implementation of 
 To follow along with this tutorial, you will need to create a brand new MonoGame game project.  For the purposes of this tutorial and the supplied project files, I'll be creating a **MonoGame Cross Platform Desktop** (DesktopGL) project.
 
 ## Project Files
-You can find the completed version of the projected created with this demo at [:TODO: ADD URL]
+You can find the completed version of the projected created with this demo at https://github.com/AristurtleDev/aristurlte-tutorial-files/tree/main/collision-detection-tutorial
 
 ## Code License
 All code written in this COllision Detection tutorial series, unless otherwise stated, is licensed under **The Unlicense**.  This license extends to only the code written, not the tutorial documentation itself.  The license text is as follows
