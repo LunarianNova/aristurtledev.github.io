@@ -1,5 +1,10 @@
 {
   "build": {
+    "sitemap": {
+        "baseurl": "https://aristurtle.net",
+        "priority": 0.1,
+        "changefreq": "daily"
+    },
     "content": [
       {
         "files": [
