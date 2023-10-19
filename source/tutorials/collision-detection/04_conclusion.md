@@ -1,5 +1,7 @@
 ---
 modificationDate: "10/18/2023"
+_ogImage: collision-detection/axis-aligned-boxes.png
+_description: Wrap up of the collision detection tutorial
 ---
 
 # Collision Detection Conclusion

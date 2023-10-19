@@ -26,7 +26,8 @@
       "_appLogoPath": "images/logo.svg",
       "_appFooter": "© 2023 Christopher Whitley",
       "_description": "Official site of all Aristurtle related things",
-      "_author": "Christopher Whitley"
+      "_author": "Christopher Whitley",
+      "_ogImage": "aristurtle.png"
     },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
