@@ -1,10 +1,10 @@
 - name: MonoGame Tutorials
   href: index.md
 
-- name: Game State Management
-  items:
-  - name: Scenes Tutorial
-    href: scenes/01_introduction.md
+# - name: Game State Management
+#   items:
+#   - name: Scenes Tutorial
+#     href: scenes/01_introduction.md
 
 - name: Physics Category
   items:
