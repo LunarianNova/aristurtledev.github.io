@@ -171,7 +171,7 @@ Now that we have a way to detect collision between circles, we need to test the 
 
 The circle image we'll be using is a 64px x 64px white circle.  You can download the already prepared version that is used for this tutorial by right-clicking the circle image below and selecting **Save Image As...**
 
-[!White Circle](~/images/tutorials/collision-detection/white-circle.png)
+![White Circle](~/images/tutorials/collision-detection/white-circle.png)
 
 Once downloaded, add the image to the game project using the MGCB Editor.  If you're unfamilar with how to add content files to your game, please read the [official MonoGame documentation](https://docs.monogame.net/articles/content/using_mgcb_editor.html)
 
