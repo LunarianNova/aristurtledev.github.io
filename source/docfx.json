@@ -33,7 +33,8 @@
       "_appFooter": "© 2023 Christopher Whitley",
       "_description": "Official site of all Aristurtle related things",
       "_author": "Christopher Whitley",
-      "_ogImage": "images/aristurtle.png"
+      "_ogImage": "images/aristurtle.png",
+      "_themeColor": "#49c961"
     },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
