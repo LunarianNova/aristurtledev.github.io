@@ -1,6 +1,7 @@
 ---
 layout: landing
 _title: Game
+_slug: games/index
 _description: Games developed by Christopher Whitley (Aristurtle)
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: landing
 _title: Slime Battle Royale
+_slug: games/slime-battle-royale
 _description: The rules are simple; only one slime can leave.
 _ogImage: images/games/slime-battle-royale/game_preview.png
 ---

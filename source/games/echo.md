@@ -2,6 +2,7 @@
 layout: landing
 _title: Echo
 _description: You wake up and find yourself trapped inside a room of a ruined structure.  The ceiling is descending, and you have no way to climb out.
+_slug: games/echo
 _ogImage: images/games/echo/game_preview.png
 ---
 

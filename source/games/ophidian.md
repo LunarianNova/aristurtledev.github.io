@@ -1,6 +1,7 @@
 ---
 layout: landing
 _title: Ophidian
+_slug: games/ophidian
 _description: Arcade puzzle game inspired by class snake games.
 _ogImage: images/games/ophidian/game_preview.png
 ---

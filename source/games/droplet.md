@@ -2,6 +2,7 @@
 layout: landing
 _title: Droplet
 _description: Small, tiny, insignificant droplet.  Dream big, but not too big.
+_slug: games/droplet
 _ogImage: images/games/droplet/game_preview.png
 ---
 
