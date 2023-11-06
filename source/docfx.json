@@ -24,7 +24,7 @@
         ]
       }
     ],
-    "output": "_site",
+    "output": "../artifacts/_site",
     "globalMetadata": {
       "_appTitle": "Aristurtle",
       "_appName": "Aristurtle",
