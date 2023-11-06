@@ -1,5 +1,7 @@
 ---
 modificationDate: "10/16/2023"
+_title: Edit the JsonContentTypeReader | MonoGame Content Pipeline Extension Tutorial Series
+_description: Updating our JsonContentTypeReader to read the xnb file.
 ---
 
 # Edit The `JsonContentTypeReader`
@@ -14,4 +16,4 @@ For the purposes of the example being used in this tutorial, there was not much 
 ## Next Steps
 That's all for our `JsonContentTypeReader`.  It simply just reads the JSON string from the `.xnb` file and serializes it, then returns the object type.
 
-Now that we have all of this setup, the next step is going to be creating a game project that we can use to test all of this and make sure it's working correctly. 
+Now that we have all of this setup, the next step is going to be creating a game project that we can use to test all of this and make sure it's working correctly.

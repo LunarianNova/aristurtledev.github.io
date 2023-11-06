@@ -1,9 +1,11 @@
 ---
 modificationDate: "10/16/2023"
+_title: The ContentImporter class | MonoGame Content Pipeline Extension Tutorial Series
+_description: Let's take a look at the ContentImporter class.
 ---
 
 # The `ContentImporter`
-The job of the `ContentImporter` is to read the contents of the file being imported from disk and pass that data to the `ContentProcessor` where it can be processed.  You will, when able, want to perform some type of validation on the data that is imported to ensure it is the correct type of data expected so that there are no issues during the processing stage.  
+The job of the `ContentImporter` is to read the contents of the file being imported from disk and pass that data to the `ContentProcessor` where it can be processed.  You will, when able, want to perform some type of validation on the data that is imported to ensure it is the correct type of data expected so that there are no issues during the processing stage.
 
 > [!NOTE]
 > This can sometimes be tricky to balance when validation of the data also means processing the data.  Just keep in mind there is no right or wrong way to do it, whether you place that validation in the importer or during the processing stage.
@@ -40,7 +42,7 @@ The first part we'll look at is the **using alias**
 using TImport = System.String;
 ```
 
-This is not something that is MonoGame specific, but rather a C# language feature. The short explanation is that we are creating an alias here for `System.STring` called `TImport`.  This means anywhere in **this** code file that we use the keyword `TImport` it is the same thing as if we said `System.String`. 
+This is not something that is MonoGame specific, but rather a C# language feature. The short explanation is that we are creating an alias here for `System.STring` called `TImport`.  This means anywhere in **this** code file that we use the keyword `TImport` it is the same thing as if we said `System.String`.
 
 If you're not familiar with the **using alias** concept in C#, you can read more about it on the [using directive - C# Reference | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive#using-alias) official page.
 

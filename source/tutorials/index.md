@@ -1,3 +1,7 @@
+---
+_title: MonoGame Tutorials
+_description: A collection of tutorials I have written for MonoGame.
+---
 # Tutorials
 Here you can find a collection of the tutorials I have written for MonoGame.  You can use the sidebar on the left to navigate the tutorials or you can choose one from the list below.
 

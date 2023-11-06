@@ -1,5 +1,7 @@
 ---
 modificationDate: "10/16/2023"
+_title: Edit the JsonContentImporter | MonoGame Content Pipeline Extension Tutorial Series
+_description: Updating our JsonContentImporter to import the contents of a JSON file.
 ---
 
 # Edit the `JsonContentImporter`
@@ -16,10 +18,10 @@ These changes are pretty minimal but let's discuss what we're doing here.
     - The `fileExtension` parameter was changed from `.txt` to `.json` since we will be importing JSON files specifically
     - The `DisplayName` property was changed to `JSON Importer - Aristurtle`.  This gives it a more descriptive name when displayed in the **MGCB Editor**.  It is common practice to include either your name or the name of your library at the end of the display name as I have done here with `- Aristurtle`.  You can change this to your name if you'd like.
     - The `DefaultProcessor` was changed to be our `JsonContentProcessor` class.  Here, in this example, I am making use of the `nameof` keyword in C#, however you could hae just typed it as a string `"JsonContentProcessor"` if you had wanted.  The only thing that matters is that the name used for the `DefaultProcessor` is a string and is the correct casing and spelling of the class.
-3. The logic of the `Import(string, ContentImporterContext)` method was updated to read all of the text from the JSON file into the `json` variable, validate that it is actually JSON, then return it.  The validation is done inside the `ThrowIfInvalidJson(string)` method that was added.  
+3. The logic of the `Import(string, ContentImporterContext)` method was updated to read all of the text from the JSON file into the `json` variable, validate that it is actually JSON, then return it.  The validation is done inside the `ThrowIfInvalidJson(string)` method that was added.
 
 ## Next Steps
-That's it for our JSON importer.  Remember, the job of the `ContentImporter` is to import the content of the file assets and perform any validation that the content imported is what is expected.  
+That's it for our JSON importer.  Remember, the job of the `ContentImporter` is to import the content of the file assets and perform any validation that the content imported is what is expected.
 
 On the next page, we'll go over the anatomy of a `ContentProcessor` class.
 

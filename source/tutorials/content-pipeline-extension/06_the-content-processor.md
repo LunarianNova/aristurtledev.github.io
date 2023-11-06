@@ -1,9 +1,11 @@
 ---
 modificationDate: "10/16/2023"
+_title: The ContentProcessor class | MonoGame Content Pipeline Extension Tutorial Series
+_description: Let's take a look at the ContentProcessor class.
 ---
 
 # The `ContentProcessor`
-The job of the `ContentProcessor` is to process the content that was imported by the `ContentImporter` and transform it in anyway necessary before sending it to the `ContentWriter` to be written to an `.xnb` file.  
+The job of the `ContentProcessor` is to process the content that was imported by the `ContentImporter` and transform it in anyway necessary before sending it to the `ContentWriter` to be written to an `.xnb` file.
 
 ## The Anatomy of a `ContentProcessor`
 Let's take a look at the anatomy of a `ContentProcessor` by taking a look at the `JsonContentProcessor` class.  If you open this file, you will see the following:
@@ -47,7 +49,7 @@ The next part we'll look at is the `ContentProcessorAttribute` that decorates th
 [ContentProcessor(DisplayName = "Processor1")]
 ```
 
-This attribute **must** be added to the class that will serve as our content processor.  It only has the `DisplayName` property to set which allows us to set the display name shown for the processor inside the **MGCB Editor**.  
+This attribute **must** be added to the class that will serve as our content processor.  It only has the `DisplayName` property to set which allows us to set the display name shown for the processor inside the **MGCB Editor**.
 
 ### The `ContentProcessor` Declaration
 Next, let's take a look at the declaration of the class itself

@@ -1,5 +1,7 @@
 ---
 layout: landing
+_title: Game
+_description: Games developed by Christopher Whitley (Aristurtle)
 ---
 
 <div class="row">

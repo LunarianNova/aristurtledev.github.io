@@ -1,5 +1,8 @@
 ---
 layout: landing
+_title: Beats
+_description: A one button music rhythm game
+_ogImage: images/games/beats/game_preview.png
 ---
 
 <h1 align="center">

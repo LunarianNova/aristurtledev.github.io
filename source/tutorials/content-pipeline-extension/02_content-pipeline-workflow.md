@@ -1,5 +1,7 @@
 ---
 modificationDate: "10/16/2023"
+_title: Content Pipeline Workflow | MonoGame Content Pipeline Extension Tutorial Series
+_description: What is the content pipeline?
 ---
 
 # Content Pipeline Workflow

@@ -1,9 +1,11 @@
 ---
 modificationDate: "10/16/2023"
+_title: Create a MonoGame Game Library | MonoGame Content Pipeline Extension Tutorial Series
+_description: Let's create a MonoGame Game Library project for our ContentReader.
 ---
 
 ## Create a MonoGame Game Library
-For the next part of this tutorial, we will need to create a new **MonoGame Game Library** project and add it to our solution.  
+For the next part of this tutorial, we will need to create a new **MonoGame Game Library** project and add it to our solution.
 
 A **MonoGame Game Library** project is just a **C# Class Library** project that comes pre-configured with the necessary NuGets used to reference MonoGame types, as well as a few other directories and files that make it simple to create a library of reusable code between your various MonoGame projects.
 

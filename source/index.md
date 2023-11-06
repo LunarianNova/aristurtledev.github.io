@@ -1,5 +1,6 @@
 ---
 layout: landing
+_title: Aristurtle
 ---
 
 <h1 align="center">

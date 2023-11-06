@@ -1,5 +1,7 @@
 ---
 modificationDate: "10/16/2023"
+_title: Create the MonoGame Content Pipeline Extension Project | MonoGame Content Pipeline Extension Tutorial Series
+_description: Creating a MonoGame Content Pipeline Extension project.
 ---
 
 # Create the MonoGame Content Pipeline Extension Project

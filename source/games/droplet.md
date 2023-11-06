@@ -1,5 +1,8 @@
 ---
 layout: landing
+_title: Droplet
+_description: Small, tiny, insignificant droplet.  Dream big, but not too big.
+_ogImage: images/games/droplet/game_preview.png
 ---
 
 <h1 align="center">
@@ -7,8 +10,6 @@ layout: landing
 Droplet
 
 > [!VIDEO https://www.youtube.com/embed/UmCM3mFo3XA?si=bpMWGAEDgzeJdmw6]
-
-A one button music rhythm game
 
 </h1>
 

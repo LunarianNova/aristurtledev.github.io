@@ -1,5 +1,7 @@
 ---
 modificationDate: "10/16/2023"
+_title: Conclusion | MonoGame Content Pipeline Extension Tutorial Series
+_description: Wrap up of the MonoGame content pipeline extension tutorial.
 ---
 
 # Conclusion

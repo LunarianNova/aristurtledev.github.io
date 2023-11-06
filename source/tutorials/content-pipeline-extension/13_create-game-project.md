@@ -1,5 +1,7 @@
 ---
 modificationDate: "10/16/2023"
+_title: Create Game Project | MonoGame Content Pipeline Extension Tutorial Series
+_description: Let's create a game project to test our new extension with.
 ---
 
 # Create Game Project
@@ -8,7 +10,7 @@ The final thing we need to cover is how to add the **MonoGame Content Pipeline E
 ## Create a MonoGame Project
 We need a game project now to test our content pipeline extension and make sure it's working.  Creating a new MonoGame game project should already be familiar for most, but we'll go through the process anyway.
 
-In Visual Studio, click the **File > New > Project** menu item to open the **Create a new project** window.  From here choose one of the MonoGame templates.  For this tutorial, I am going to choose the **MonoGame Cross Platform Desktop Project** template.  
+In Visual Studio, click the **File > New > Project** menu item to open the **Create a new project** window.  From here choose one of the MonoGame templates.  For this tutorial, I am going to choose the **MonoGame Cross Platform Desktop Project** template.
 
 ![Create MonoGame Game project](~/images/tutorials/monogame-tutorials/content-pipeline-extension/create-new-game-project.png)
 
@@ -77,7 +79,7 @@ namespace ExampleGame
 This is a really simple class that just has an `int ID` property and two `float` properties for the X and Y position of the model.
 
 ## Create a ContentTypeReader For Our Example Model
-One of the tricky things when dealing with loading JSON content is how we wrote the `JsonContentTypeReader` class.  The class uses the generic `<T>` parameter, which is going to make it difficult for the `Content.Load<T>()` method to choose the correct reader. 
+One of the tricky things when dealing with loading JSON content is how we wrote the `JsonContentTypeReader` class.  The class uses the generic `<T>` parameter, which is going to make it difficult for the `Content.Load<T>()` method to choose the correct reader.
 
 To alleviate this specifically for the JSON importer, we need to create a new **ContentTypeReader** in our game class specifically for the `ExampleModel`.  To do this, create a new class file called **ExampleModelReader.cs** in the game project and add the following code to it:
 
@@ -91,7 +93,7 @@ namespace ExampleGame
 ```
 
 > [!NOTE]
-> Creating the additional reader class in out game file is unique to this tutorial situation since we're loading JSON content which can be deserialized to one of many different types. 
+> Creating the additional reader class in out game file is unique to this tutorial situation since we're loading JSON content which can be deserialized to one of many different types.
 >
 > In a typical Content Pipeline Extension scenario, your content type that you load would only deserialize to one specific type.
 

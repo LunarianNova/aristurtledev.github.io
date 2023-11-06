@@ -1,5 +1,7 @@
 ---
 modificationDate: "10/16/2023"
+_title: The ContentWriter class | MonoGame Content Pipeline Extension Tutorial Series
+_description: Let's take a look at the ContentWriter class.
 ---
 
 # The `ContentWriter`
@@ -21,7 +23,7 @@ namespace JsonContentPipelineExtension
     {
         protected override void Write(ContentWriter output, TInput value)
         {
-            
+
         }
 
         public override string GetRuntimeReader(TargetPlatform targetPlatform)
@@ -35,7 +37,7 @@ namespace JsonContentPipelineExtension
 This is the basic foundation of a `ContentWriter`.  So let's break it down into specific parts, discuss what they are, and why they matter.
 
 ### Using Aliases
-At this point, seeing the **using aliases** should be familiar. 
+At this point, seeing the **using aliases** should be familiar.
 
 ```cs
 using TInput = System.String;
@@ -64,7 +66,7 @@ From this we can see that we are inheriting from the `ContentTypeWRiter<T>` clas
 In our specific case we have specified tha the type is `TInput`, which is the alias for `System.String`.  This means our writer expects a string value as input.
 
 ### The `Write(ContentWriter, TInput)` Method
-This method is where all of the writing to the `.xnb` file happens.  The first parameter given is a `ContentWriter` instance, which is a derived class from the standard `BinaryWriter`.  So it provides you with the typical `BinaryWriter` methods to write common value types like `int`, `float`, `double`, `bool`, `string`, etc, but you will also have some common MonoGame specific types that can be written as well like `Color` and `Vector2`.  
+This method is where all of the writing to the `.xnb` file happens.  The first parameter given is a `ContentWriter` instance, which is a derived class from the standard `BinaryWriter`.  So it provides you with the typical `BinaryWriter` methods to write common value types like `int`, `float`, `double`, `bool`, `string`, etc, but you will also have some common MonoGame specific types that can be written as well like `Color` and `Vector2`.
 
 The second parameter is the `TInput` parameter which is the input passed to the writer from the processor.  We use the values of this input with the `ContentWriter` to write them to the `.xnb` file
 
@@ -73,14 +75,14 @@ The second parameter is the `TInput` parameter which is the input passed to the 
 
 
 > [!NOTE]
-> The instance of the `ContentWriter` that is given as a parameter here is created internally within the framework.  When it is created, it writes an initial header to the `.xnb` file that is being created that includes a signature to validate it as an `.xnb` file as well as meta data that specifies the `ContentTypeReader` to use when loading the `.xnb` file at runtime.  
+> The instance of the `ContentWriter` that is given as a parameter here is created internally within the framework.  When it is created, it writes an initial header to the `.xnb` file that is being created that includes a signature to validate it as an `.xnb` file as well as meta data that specifies the `ContentTypeReader` to use when loading the `.xnb` file at runtime.
 >
 > Due to this small header information that is written, sometimes the `.xnb` file you create may be sightly larger than the original input file.
 
 ### The `GetRuntimeReader(TargetPlatform)` Method.
 This method is probably the one method that will cause you the most grief.  The reason being is because the return value from this method has to be exactly correct.  If this is not correct, then your content will build fine, but will not load at runtime.
 
-Recall that I mentioned in the note above that the `ContentWriter` writes a small header ot the `.xnb` file, and that part of that header is the `ContentTypeReader` to use when loading the `.xnb` file at runtime?  Well, this method is where it gets that information from.  
+Recall that I mentioned in the note above that the `ContentWriter` writes a small header ot the `.xnb` file, and that part of that header is the `ContentTypeReader` to use when loading the `.xnb` file at runtime?  Well, this method is where it gets that information from.
 
 The return value for this needs to be the **fully-qualified type path** of the `ContentTypeReader` that will be used to read the content.  A **fully-qualified type path** is a string formatted at `[Type Path], [Assembly Name]`.
 

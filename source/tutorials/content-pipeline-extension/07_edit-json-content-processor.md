@@ -1,5 +1,7 @@
 ---
 modificationDate: "10/16/2023"
+_title: Edit the JsonContentProcessor | MonoGame Content Pipeline Extension Tutorial Series
+_description: Updating our JsonContentProcessor to process the results of the import.
 ---
 
 # Edit the `JsonContentProcessor`
@@ -20,7 +22,7 @@ There are quite a few changes made here so let's go over what we're doing.
 7. Finally we create an instance of the `JsonContentProcessorResult` and set the appropriate property values and return it.
 
 ## Next Steps
-That's it for our JSON processor.  Remember, the job of the `ContentProcessor` is to process the content of the file assets given to it by the `ContentImporter` and prepare it to be written to disk for the `ContentWriter` 
+That's it for our JSON processor.  Remember, the job of the `ContentProcessor` is to process the content of the file assets given to it by the `ContentImporter` and prepare it to be written to disk for the `ContentWriter`
 
 On the next page, we'll go over the anatomy of a `ContentWriter` class.
 

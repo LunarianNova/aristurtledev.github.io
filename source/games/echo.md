@@ -1,5 +1,8 @@
 ---
 layout: landing
+_title: Echo
+_description: You wake up and find yourself trapped inside a room of a ruined structure.  The ceiling is descending, and you have no way to climb out.
+_ogImage: images/games/echo/game_preview.png
 ---
 
 <h1 align="center">
@@ -43,7 +46,7 @@ Echo was developed for Ludum Dare 42, with the theme "Running out of space". In 
     </div>
     <div class="col-12 col-md-4">
         <img src="/images/games/echo/screenshot_03.png" />
-    </div>        
+    </div>
 </div>
 
 

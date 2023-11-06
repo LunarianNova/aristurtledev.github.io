@@ -1,5 +1,8 @@
 ---
 layout: landing
+_title: Ophidian
+_description: Arcade puzzle game inspired by class snake games.
+_ogImage: images/games/ophidian/game_preview.png
 ---
 <h1 align="center">
 
@@ -75,5 +78,5 @@ Challenge Mode features levels designed for players to navigate the ophidian thr
     </div>
     <div class="col-12 col-md-4">
         <img src="/images/games/ophidian/screenshot_10.png" />
-    </div>                    
+    </div>
 </div>

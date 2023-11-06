@@ -26,6 +26,7 @@
     ],
     "output": "../artifacts/_site",
     "globalMetadata": {
+      "_title": "Aristurtle",
       "_appTitle": "Aristurtle",
       "_appName": "Aristurtle",
       "_appLogoPath": "images/logo.svg",
