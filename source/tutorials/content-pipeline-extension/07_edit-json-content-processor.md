@@ -1,6 +1,7 @@
 ---
 modificationDate: "10/16/2023"
 _title: Edit the JsonContentProcessor | MonoGame Content Pipeline Extension Tutorial Series
+_slug: tutorials/content-pipeline-extension/07_edit-json-content-processor
 _description: Updating our JsonContentProcessor to process the results of the import.
 ---
 

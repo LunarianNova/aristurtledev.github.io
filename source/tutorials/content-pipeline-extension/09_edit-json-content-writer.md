@@ -1,6 +1,7 @@
 ---
 modificationDate: "10/16/2023"
 _title: Edit the JsonContentTypeWriter | MonoGame Content Pipeline Extension Tutorial Series
+_slug: tutorials/content-pipeline-extension/09_edit-json-content-writer
 _description: Updating our JsonContentTypeWriter to write the results of the processor.
 ---
 

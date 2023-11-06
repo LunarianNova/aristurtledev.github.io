@@ -1,6 +1,7 @@
 ---
 modificationDate: "10/16/2023"
 _title: Edit the JsonContentImporter | MonoGame Content Pipeline Extension Tutorial Series
+_slug: tutorials/content-pipeline-extension/05_edit-json-content-importer
 _description: Updating our JsonContentImporter to import the contents of a JSON file.
 ---
 

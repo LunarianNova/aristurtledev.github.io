@@ -1,6 +1,7 @@
 ---
 modificationDate: "10/18/2023"
 _title: Conclusion | Collision Detection Tutorial Series
+_slug: tutorials/collision-detection/04_conclusion
 _description: Wrap up of the collision detection tutorial
 _ogImage: images/tutorials/collision-detection/axis-aligned-boxes.png
 ---

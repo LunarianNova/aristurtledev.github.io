@@ -1,6 +1,7 @@
 ---
 modificationDate: "10/16/2023"
 _title: The ContentWriter class | MonoGame Content Pipeline Extension Tutorial Series
+_slug: tutorials/content-pipeline-extension/08_the-content-writer
 _description: Let's take a look at the ContentWriter class.
 ---
 

@@ -1,6 +1,7 @@
 ---
 modificationDate: "10/16/2023"
 _title: Introduction | MonoGame Content Pipeline Extension Tutorial Series
+_slug: tutorials/content-pipeline-extension/01_introduction
 _description: In this tutorial series, we do a deep dive into creating an extension for the MonoGame Content Pipeline.
 ---
 

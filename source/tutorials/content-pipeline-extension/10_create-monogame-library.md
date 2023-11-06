@@ -1,6 +1,7 @@
 ---
 modificationDate: "10/16/2023"
 _title: Create a MonoGame Game Library | MonoGame Content Pipeline Extension Tutorial Series
+_slug: tutorials/content-pipeline-extension/10_create-monogame-library
 _description: Let's create a MonoGame Game Library project for our ContentReader.
 ---
 

@@ -10,10 +10,31 @@
       <meta http-equiv="refresh" content="0;URL='{{redirect_url}}'">
     {{/redirect_url}}
     {{^redirect_url}}
-      <title>{{#_title}}{{_title}}{{/_title}}{{^_title}}{{>partials/title}}{{/_title}} {{#_appTitle}}| {{_appTitle}} {{/_appTitle}}</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="{{#_title}}{{_title}}{{/_title}}{{^_title}}{{>partials/title}}{{/_title}} {{#_appTitle}}| {{_appTitle}} {{/_appTitle}}">
-      {{#_description}}<meta name="description" content="{{_description}}">{{/_description}}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="{{#_title}}{{_title}}{{/_title}}{{^_title}}{{>partials/title}}{{/_title}} {{#_appTitle}}| {{_appTitle}} {{/_appTitle}}">
+
+    <!-- HTML Meta Tags -->
+    <title>{{#_title}}{{_title}}{{/_title}}{{^_title}}{{>partials/title}}{{/_title}} {{#_appTitle}}| {{_appTitle}} {{/_appTitle}}</title>
+    {{#_description}}<meta name="description" content="{{_description}}">{{/_description}}
+
+    <!-- Facebook Meta Tags -->
+    <meta name="og:url" content="https://aristurtle.net/{{_slug}}.html"
+    <meta name="og:type" content="website">
+    <meta name="og:title" content="{{#_title}}{{_title}}{{/_title}}{{^_title}}{{>partials/title}}{{/_title}} {{#_appTitle}}| {{_appTitle}} {{/_appTitle}}">
+    <meta name="og:description" content="{{_description}}">
+    <meta name="og:image" content="https://aristurtle.net/{{_ogImage}}">
+
+    <!-- Twtiter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="aristurtle.net">
+    <meta property="twitter:url" content="https://aristurtle.net/{{_slug}}.html">
+    <meta name="twitter:title" content="{{#_title}}{{_title}}{{/_title}}{{^_title}}{{>partials/title}}{{/_title}} {{#_appTitle}}| {{_appTitle}} {{/_appTitle}}">
+    <meta name="twitter:description" content="{{_description}}">
+    <meta name="twitter:image" content="https://aristurtle.net/{{_ogImage}}">
+
+    <!-- Discord Meta Tags -->
+    <meta name="theme-color" content="{{_themeColor}}">
+
       <link rel="icon" href="{{_rel}}{{{_appFaviconPath}}}{{^_appFaviconPath}}favicon.ico{{/_appFaviconPath}}">
       <link rel="stylesheet" href="{{_rel}}public/docfx.min.css">
       <link rel="stylesheet" href="{{_rel}}public/main.css">
@@ -36,12 +57,6 @@
       <meta name="loc:changeTheme" content="{{__global.changeTheme}}">
       <meta name="loc:copy" content="{{__global.copy}}">
       <meta name="loc:downloadPdf" content="{{__global.downloadPdf}}">
-      <meta name="og:title" content="{{#_title}}{{_title}}{{/_title}}{{^_title}}{{>partials/title}}{{/_title}} {{#_appTitle}}| {{_appTitle}} {{/_appTitle}}">
-      <meta name="og:type" content="photo">
-      <meta name="og:image" content="https://aristurtle.net/{{_ogImage}}">
-      <meta name="og:description" content="{{_description}}">
-      <meta name="theme-color" content="{{_themeColor}}">
-      <meta name="twitter:card" content="summary_large_image"
     {{/redirect_url}}
 
     <!-- Matomo -->

@@ -1,6 +1,7 @@
 ---
 modificationDate: "10/16/2023"
 _title: Create Game Project | MonoGame Content Pipeline Extension Tutorial Series
+_slug: tutorials/content-pipeline-extension/13_create-game-project
 _description: Let's create a game project to test our new extension with.
 ---
 

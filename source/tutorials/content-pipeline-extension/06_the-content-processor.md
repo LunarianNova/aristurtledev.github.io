@@ -1,6 +1,7 @@
 ---
 modificationDate: "10/16/2023"
 _title: The ContentProcessor class | MonoGame Content Pipeline Extension Tutorial Series
+_slug: tutorials/content-pipeline-extension/06_the-content-processor
 _description: Let's take a look at the ContentProcessor class.
 ---
 

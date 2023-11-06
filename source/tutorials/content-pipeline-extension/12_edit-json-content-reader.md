@@ -1,6 +1,7 @@
 ---
 modificationDate: "10/16/2023"
 _title: Edit the JsonContentTypeReader | MonoGame Content Pipeline Extension Tutorial Series
+_slug: tutorials/content-pipeline-extension/12_edit-json-content-reader
 _description: Updating our JsonContentTypeReader to read the xnb file.
 ---
 

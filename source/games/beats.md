@@ -2,6 +2,7 @@
 layout: landing
 _title: Beats
 _description: A one button music rhythm game
+_slug: games/beats
 _ogImage: images/games/beats/game_preview.png
 ---
 

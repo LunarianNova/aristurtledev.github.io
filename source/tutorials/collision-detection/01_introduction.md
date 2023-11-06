@@ -1,6 +1,7 @@
 ---
 modificationDate: "10/18/2023"
 _title: Introduction | Collision Detection Tutorial Series
+_slug: tutorials/collision-detection/01_introduction
 _description: In this tutorial series, we're going to discuss two different methods of collision detection used in 2D games
 _ogImage: images/tutorials/collision-detection/axis-aligned-boxes.png
 ---

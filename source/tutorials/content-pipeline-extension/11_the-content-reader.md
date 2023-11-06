@@ -1,6 +1,7 @@
 ---
 modificationDate: "10/16/2023"
 _title: The ContentTypeReader class | MonoGame Content Pipeline Extension Tutorial Series
+_slug: tutorials/content-pipeline-extension/11_the-content-reader
 _description: Let's take a look at the ContentTypeReader class.
 ---
 

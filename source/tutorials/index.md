@@ -1,5 +1,6 @@
 ---
 _title: MonoGame Tutorials
+_slug: tutorials/index
 _description: A collection of tutorials I have written for MonoGame.
 ---
 # Tutorials

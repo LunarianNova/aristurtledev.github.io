@@ -1,6 +1,7 @@
 ---
 modificationDate: "10/18/2023"
 _title: Circle Collision | Collision Detection Tutorial Series
+_slug: tutorials/collision-detection/03_circle_collision
 _description: Not every object in a game can or should be defined as rectangular.  Sometimes we need to use a circle.
 _ogImage: images/tutorials/collision-detection/axis-aligned-boxes.png
 ---

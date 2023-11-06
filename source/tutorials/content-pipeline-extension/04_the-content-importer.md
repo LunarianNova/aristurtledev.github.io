@@ -1,6 +1,7 @@
 ---
 modificationDate: "10/16/2023"
 _title: The ContentImporter class | MonoGame Content Pipeline Extension Tutorial Series
+_slug: tutorials/content-pipeline-extension/04_the-content-importer
 _description: Let's take a look at the ContentImporter class.
 ---
 
