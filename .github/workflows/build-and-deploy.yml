@@ -7,30 +7,30 @@ on:
         branches:
             - 'main'
 
+permissions:
+    contents: write
+
 jobs:
     build:
         runs-on: ubuntu-latest
         steps:
+
             - name: Clone Repository
               uses: actions/checkout@v2
+
             - name: Setup .NET SDK
-              uses: actions/setup-dotnet@v3
+              uses: actions/setup-dotnet@v4
               with:
                 dotnet-version: '8.0.x'
+
             - name: Restore dotnet tools
               run: dotnet tool restore
+
             - name: Run Build
               run: dotnet docfx ./source/docfx.json
-            - name: Upload To Server
-              uses: easingthemes/ssh-deploy@main
+
+            - name: Deploy
+              uses: JamesIves/github-pages-deploy-action@v4
               with:
-                SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-                ARGS: "-avh -i"
-                SOURCE: "artifacts/_site/"
-                REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-                REMOTE_USER: ${{ secrets.REMOTE_USER }}
-                TARGET: ${{ secrets.REMOTE_TARGET }}
-
-
-
-
+                folder: artifacts/_site
+                clean: true
