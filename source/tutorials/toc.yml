@@ -6,6 +6,9 @@
 #   - name: Scenes Tutorial
 #     href: scenes/01_introduction.md
 
+- name: Building 2D Games With MonoGame
+  href: building_2d_games/index.md
+
 - name: Physics Category
   items:
   - name: Collision Detection
