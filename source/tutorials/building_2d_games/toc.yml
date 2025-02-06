@@ -17,3 +17,5 @@
   href: 07_the_sprite_class/
 - name: "08: The AnimatedSprite Class"
   href: 08_the_animatedsprite_class/
+  - name: "09: Handling Input"
+  href: 09_handling_input/  
