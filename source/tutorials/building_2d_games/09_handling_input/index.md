@@ -7,7 +7,8 @@ When you play a game, you need ways to control what's happening; using a keyboar
 
 - [**Keyboard**](xref:Microsoft.Xna.Framework.Input.Keyboard): Detects which keys are being pressed.
 - [**Mouse**](xref:Microsoft.Xna.Framework.Input.Mouse): Tracks mouse movement, button clicks, and scroll wheel use.
-- [**GamePad**](xref:Microsoft.Xna.Framework.Input.GamePad): Manages controller input like button presses and joystick movement.
+- [**GamePad**](xref:Microsoft.Xna.Framework.Input.GamePad): Manages controller input like button presses and thumbstick movement.
+- [**TouchPanel**](xref:Microsoft.Xna.Framework.Input.TouchPanel): Manages touch input on devices with a touch panel such as mobile phones and tablets.
 
 > [!NOTE]
 > MonoGame also supports touch and accelerometer input for mobile devices, however this tutorial focuses on desktop input handling using keyboard, mouse, and gamepad controls.
@@ -25,18 +26,23 @@ The keyboard is often the primary input device for PC games, used for everything
 The [**KeyboardState**](xref:Microsoft.Xna.Framework.Input.KeyboardState) struct contains methods that can be used to determine if a keyboard key is currently down or up:
 
 | Method                                                                                                                | Description                                                              |
-|-----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | [**IsKeyDown(Keys)**](xref:Microsoft.Xna.Framework.Input.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys)) | Returns `true` if the specified key is down; otherwise, returns `false`. |
 | [**IsKeyUp(Keys)**](xref:Microsoft.Xna.Framework.Input.KeyboardState.IsKeyUp(Microsoft.Xna.Framework.Input.Keys))     | Returns `true` if the specified key is up; otherwise, returns `false`.   |
 
 For example, if we wanted to see if the Space key is down, you could use the following:
 
 ```cs
-if(Keyboard.GetState().IsKeyDown(Keys.Space))
+KeyboardState keyboardState = Keyboard.GetState();
+
+if(keyboardState.IsKeyDown(Keys.Space))
 {
     // The space key is down, so do something.
 }
 ```
+
+> [!TIP]
+> Notice we store the keyboard state in a variable instead of calling [**Keyboard.GetState**](xref:Microsoft.Xna.Framework.Input.Keyboard.GetState) multiple times. This is more efficient and ensures consistent input checking within a single frame.
 
 ### Implementing Keyboard Input
 
@@ -75,11 +81,8 @@ Let's implement keyboard controls to move our slime sprite around the screen.  O
     }
     ```
 
-    > [!TIP]
-    > Notice we store the keyboard state in a variable instead of calling [**Keyboard.GetState**](xref:Microsoft.Xna.Framework.Input.Keyboard.GetState) multiple times. This is more efficient and ensures consistent input checking within a single frame.
-
-    > [!NOTE]
-    > Remember that the Y-axis increases downward in MonoGame's coordinate system. This is why we subtract from Y to move up and add to Y to move down.
+    > [!IMPORTANT]
+    > Why are we subtracting from the Y position when moving up instead of adding?  Recall from [Chapter 05](../05_working_with_textures/index.md#drawing-a-texture) that MonoGame uses a coordinate system where the Y value **increases** moving down.  So in order to move **up** the screen, we need to reduce the Y value.
 
 3. Finally, in [**Draw**](xref:Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)), update the position of the slime when it is rendered by using the `_slimePosition` value:
 
@@ -98,7 +101,7 @@ The mouse is often the secondary input device for PC games, used for various act
 The [**MouseState**](xref:Microsoft.Xna.Framework.Input.MouseState) struct contains properties that can be used to determine the state of the mouse buttons, the mouse position, and the scroll wheel value:
 
 | Property                                                                               | Type                                                              | Description                                                                                                             |
-|----------------------------------------------------------------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| -------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | [**LeftButton**](xref:Microsoft.Xna.Framework.Input.MouseState.LeftButton)             | [**ButtonState**](xref:Microsoft.Xna.Framework.Input.ButtonState) | Returns the state of the left mouse button.                                                                             |
 | [**MiddleButton**](xref:Microsoft.Xna.Framework.Input.MouseState.MiddleButton)         | [**ButtonState**](xref:Microsoft.Xna.Framework.Input.ButtonState) | Returns the state of the middle mouse button.  This is often the button when pressing the scroll wheel down as a button |
 | [**Position**](xref:Microsoft.Xna.Framework.Input.MouseState.Position)                 | [**Point**](xref:Microsoft.Xna.Framework.Point)                   | Returns the position of the mouse cursor relative to the bounds of the game window.                                     |
@@ -118,7 +121,9 @@ Unlike keyboard input which uses [**IsKeyDown(Keys)**](xref:Microsoft.Xna.Framew
 For example, if we wanted to see if the left mouse button is down, you could use the following
 
 ```cs
-if(Mouse.GetState().LeftButton == ButtonState.Pressed)
+MouseState mouseState = Mouse.GetState();
+
+if(mouseState.LeftButton == ButtonState.Pressed)
 {
     // The left button is down, so do something.
 }
@@ -169,14 +174,14 @@ Running the game now, you can move the bat sprite around by clicking the left mo
 
 ## Gamepad Input
 
-Gamepads are often used as a primary input for a game or an alternative for keyboard and mouse controls.  MonoGame provides the [**GamePad**](xref:Microsoft.Xna.Framework.Input.GamePad) class to handle gamepad input, making it easy to detect which buttons are pressed and the value of the joysticks. Calling [**GamePad.GetState**](xref:Microsoft.Xna.Framework.Input.GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex)) will retrieve the state of the gamepad as a [**GamePadState**](xref:Microsoft.Xna.Framework.Input.GamePadState) struct.  Since multiple gamepads can be connected, you will need to supply a [**PlayerIndex**](xref:Microsoft.Xna.Framework.PlayerIndex) value to specify which gamepad state to retrieve.
+Gamepads are often used as a primary input for a game or an alternative for keyboard and mouse controls.  MonoGame provides the [**GamePad**](xref:Microsoft.Xna.Framework.Input.GamePad) class to handle gamepad input, making it easy to detect which buttons are pressed and the value of the thumbsticks. Calling [**GamePad.GetState**](xref:Microsoft.Xna.Framework.Input.GamePad.GetState(Microsoft.Xna.Framework.PlayerIndex)) will retrieve the state of the gamepad as a [**GamePadState**](xref:Microsoft.Xna.Framework.Input.GamePadState) struct.  Since multiple gamepads can be connected, you will need to supply a [**PlayerIndex**](xref:Microsoft.Xna.Framework.PlayerIndex) value to specify which gamepad state to retrieve.
 
 ### GamePadState Struct
 
-The [**GamePadState**](xref:Microsoft.Xna.Framework.Input.GamePadState) struct and properties that can be used to get the state of the buttons, dpad, triggers, and joysticks:
+The [**GamePadState**](xref:Microsoft.Xna.Framework.Input.GamePadState) struct and properties that can be used to get the state of the buttons, dpad, triggers, and thumbsticks:
 
 | Property                                                                       | Type                                                                            | Description                                                                                                                                                                                                                        |
-|--------------------------------------------------------------------------------|---------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**Buttons**](xref:Microsoft.Xna.Framework.Input.GamePadState.Buttons)         | [**GamePadButtons**](xref:Microsoft.Xna.Framework.Input.GamePadButtons)         | Returns a struct that identifies which buttons on the controller are pressed.                                                                                                                                                      |
 | [**DPad**](xref:Microsoft.Xna.Framework.Input.GamePadState.DPad)               | [**GamePadDPad**](xref:Microsoft.Xna.Framework.Input.GamePadDPad)               | Returns a struct that identifies which directions on the DPad are pressed.                                                                                                                                                         |
 | [**IsConnected**](xref:Microsoft.Xna.Framework.Input.GamePadState.IsConnected) | `bool`                                                                          | Returns a value that indicates whether the controller is connected.                                                                                                                                                                |
@@ -188,7 +193,7 @@ The [**GamePadState**](xref:Microsoft.Xna.Framework.Input.GamePadState) struct a
 The [**GamePadState.Buttons**](xref:Microsoft.Xna.Framework.Input.GamePadState.Buttons) property returns a [**GamePadButtons**](xref:Microsoft.Xna.Framework.Input.GamePadButtons) struct that can be used to identify which buttons on the controller are pressed.  This struct contains the following properties:
 
 | Property                                                                             | Type                                                              | Description                                   |
-|--------------------------------------------------------------------------------------|-------------------------------------------------------------------|-----------------------------------------------|
+| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------- | --------------------------------------------- |
 | [**A**](xref:Microsoft.Xna.Framework.Input.GamePadButtons.A)                         | [**ButtonState**](xref:Microsoft.Xna.Framework.Input.ButtonState) | Returns the state of the A button             |
 | [**B**](xref:Microsoft.Xna.Framework.Input.GamePadButtons.B)                         | [**ButtonState**](xref:Microsoft.Xna.Framework.Input.ButtonState) | Returns the state of the B button             |
 | [**Back**](xref:Microsoft.Xna.Framework.Input.GamePadButtons.Back)                   | [**ButtonState**](xref:Microsoft.Xna.Framework.Input.ButtonState) | Returns the state of the Back button          |
@@ -203,11 +208,20 @@ The [**GamePadState.Buttons**](xref:Microsoft.Xna.Framework.Input.GamePadState.B
 
 > [!NOTE]
 > Recall from [Chapter 01](../01_what_is_monogame/index.md) that MonoGame is a implementation the XNA API.  Since XNA was originally created for making games on Windows PC and Xbox 360, the names of the gamepad buttons match those of an Xbox 360 controller.
+>
+> | Front                                                      | Back                                                     |
+> |------------------------------------------------------------|----------------------------------------------------------|
+> | Xbox                                                       |                                                          |
+> | ![Front Of Controller](./images/xbox-controller-front.svg) | ![Back Of Controller](./images/xbox-controller-back.svg) |
+> | Playstation                                                |                                                          |
+> | ![Front Of Controller](./images/ps-controller-front.svg)   | ![Back Of Controller](./images/ps-controller-back.svg)   |
 
 Like with the [mouse input](#mousestate-struct), each of these buttons are represented by a [**ButtonState**](xref:Microsoft.Xna.Framework.Input.ButtonState) enum value.  For instance, if you wanted to check if the A button is being pressed you could do the following:
 
 ```cs
-if(GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed)
+GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+
+if(gamePadState.Buttons.A == ButtonState.Pressed)
 {
     // Button A is pressed, do something.
 }
@@ -218,7 +232,7 @@ if(GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed)
 The [**DPad**](xref:Microsoft.Xna.Framework.Input.GamePadState.DPad)  property returns a [**GamePadDPad**](xref:Microsoft.Xna.Framework.Input.GamePadDPad) struct that can be used to identify which DPad buttons on the controller are pressed. This struct contains the following properties:
 
 | Property                                                         | Type                                                              | Description                                 |
-|------------------------------------------------------------------|-------------------------------------------------------------------|---------------------------------------------|
+| ---------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------- |
 | [**Down**](xref:Microsoft.Xna.Framework.Input.GamePadDPad.Down)  | [**ButtonState**](xref:Microsoft.Xna.Framework.Input.ButtonState) | Returns the state of the DPad Down button.  |
 | [**Left**](xref:Microsoft.Xna.Framework.Input.GamePadDPad.Down)  | [**ButtonState**](xref:Microsoft.Xna.Framework.Input.ButtonState) | Returns the state of the DPad Left button.  |
 | [**Right**](xref:Microsoft.Xna.Framework.Input.GamePadDPad.Down) | [**ButtonState**](xref:Microsoft.Xna.Framework.Input.ButtonState) | Returns the state of the DPad Right button. |
@@ -227,7 +241,9 @@ The [**DPad**](xref:Microsoft.Xna.Framework.Input.GamePadState.DPad)  property r
 Like with the [Buttons](#buttons), these also return a [**ButtonState**](xref:Microsoft.Xna.Framework.Input.ButtonState) enum value to represent the state of the DPad button.  For instance, if you wanted to check if the DPad up button is being pressed, you could do the following:
 
 ```cs
-if(GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed)
+GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+
+if(gamePadState.DPad.Down == ButtonState.Pressed)
 {
     // DPad down is pressed, do something.
 }
@@ -238,7 +254,7 @@ if(GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed)
 The [**ThumbSticks**](xref:Microsoft.Xna.Framework.Input.GamePadState.ThumbSticks) property returns a [**GamePadThumbSticks**](xref:Microsoft.Xna.Framework.Input.GamePadThumbSticks) struct that can be used to retrieve the values of the left and right thumbsticks.  This struct contains the following properties:
 
 | Property                                                                 | Type                                                | Description                                    |
-|--------------------------------------------------------------------------|-----------------------------------------------------|------------------------------------------------|
+| ------------------------------------------------------------------------ | --------------------------------------------------- | ---------------------------------------------- |
 | [**Left**](xref:Microsoft.Xna.Framework.Input.GamePadThumbSticks.Left)   | [**Vector2**](xref:Microsoft.Xna.Framework.Vector2) | The direction the left thumbstick is pressed.  |
 | [**Right**](xref:Microsoft.Xna.Framework.Input.GamePadThumbSticks.Right) | [**Vector2**](xref:Microsoft.Xna.Framework.Vector2) | The direction the right thumbstick is pressed. |
 
@@ -250,20 +266,25 @@ The thumbstick values are represented as a [**Vector2**](xref:Microsoft.Xna.Fram
 For example, if you wanted to move a sprite using the left thumbstick, you could do the following
 
 ```cs
-Vector2 leftStick = GamePad.GetState(PlayerIndex.One).Thumbsticks.Left;
+GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+
+Vector2 leftStick = gamePadState.Thumbsticks.Left;
 leftStick.Y *= -1.0f;
+
 sprite.Position += leftStick;
 ```
 
 > [!IMPORTANT]
-> When the Y-Axis is fully pushed downward, its value is `-1.0f`.  Recall from [Chapter 05](../05_working_with_textures/index.md#drawing-a-texture) that MonoGame uses a coordinate system where the Y values **increase** moving down. This is directly opposite of the value represented by the thumbstick.  To resolve this, the common approach is to multiply the Y value of the thumbstick by `-1.0f`.  This is why it is done in the example above.
+> Notice that we inverted the y-axis value of the thumbstick by multiplying it by `-1.0f`. This is necessary because the thumbstick y-axis values range from `-1.0f` (down) to `1.0f` (up).  The y-axis of the screen coordinates in MonoGame **increases** downward, as we saw in [Chapter 05](../05_working_with_textures/index.md#drawing-a-texture) and in the [Implementing Keyboard Input](#implementing-keyboard-input) section above.
+>
+> This inversion aligns the thumbstick's y-axis value with the screen movement.
 
 #### Triggers
 
 The [**Triggers**](xref:Microsoft.Xna.Framework.Input.GamePadState.Triggers) property returns a [**GamePadTriggers**](xref:Microsoft.Xna.Framework.Input.GamePadTriggers) struct that can be used to retrieve the values of the left and right triggers. This struct contains the following properties:
 
 | Property                                                              | Type    | Description                    |
-|-----------------------------------------------------------------------|---------|--------------------------------|
+| --------------------------------------------------------------------- | ------- | ------------------------------ |
 | [**Left**](xref:Microsoft.Xna.Framework.Input.GamePadTriggers.Left)   | `float` | The value of the left trigger. |
 | [**Right**](xref:Microsoft.Xna.Framework.Input.GamePadTriggers.Right) | `float` | The value of the left trigger. |
 
@@ -279,10 +300,10 @@ float acceleration = GamePad.GetState(PlayerIndex.One).Triggers.Right;
 
 The [**GamePadState**](xref:Microsoft.Xna.Framework.Input.GamePadState) struct also contains two methods that can be used to get information about the device's inputs as either being up or down:
 
-| Method                                                                                                                           | Description                                                                                                                                                                                                                                                                                                           |
-|----------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**IsButtonDown(Buttons)**](xref:Microsoft.Xna.Framework.Input.GamePadState.IsButtonDown(Microsoft.Xna.Framework.Input.Buttons)) | Returns a value that indicates whether the specified button is down.  Multiple [**Buttons**](xref:Microsoft.Xna.Framework.Input.Buttons) values can be given using the bitwise OR `|` operator.  When multiple buttons are given, the return value indicates if all buttons specified are down, not just one of them. |
-| [**IsButtonUp(Buttons)**](xref:Microsoft.Xna.Framework.Input.GamePadState.IsButtonUp(Microsoft.Xna.Framework.Input.Buttons))     | Returns a value that indicates whether the specified button is up.  Multiple [**Buttons**](xref:Microsoft.Xna.Framework.Input.Buttons) values can be given using the bitwise OR `|` operator.  When multiple buttons are given, the return value indicates if all buttons specified are up, not just one of them.     |
+| Method                                                                                                                           | Description                                                                                                                                                                         |
+| -------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**IsButtonDown(Buttons)**](xref:Microsoft.Xna.Framework.Input.GamePadState.IsButtonDown(Microsoft.Xna.Framework.Input.Buttons)) | Returns a value that indicates whether the specified button is down.  Multiple [**Buttons**](xref:Microsoft.Xna.Framework.Input.Buttons) values can be given using the bitwise OR ` | ` operator.  When multiple buttons are given, the return value indicates if all buttons specified are down, not just one of them. |
+| [**IsButtonUp(Buttons)**](xref:Microsoft.Xna.Framework.Input.GamePadState.IsButtonUp(Microsoft.Xna.Framework.Input.Buttons))     | Returns a value that indicates whether the specified button is up.  Multiple [**Buttons**](xref:Microsoft.Xna.Framework.Input.Buttons) values can be given using the bitwise OR `   | ` operator.  When multiple buttons are given, the return value indicates if all buttons specified are up, not just one of them.   |
 
 You can use the [**IsButtonDown(Buttons)**](xref:Microsoft.Xna.Framework.Input.GamePadState.IsButtonDown(Microsoft.Xna.Framework.Input.Buttons)) and [**IsButtonUp(Buttons)**](xref:Microsoft.Xna.Framework.Input.GamePadState.IsButtonUp(Microsoft.Xna.Framework.Input.Buttons)) methods to get the state of all buttons, including the DPad.  The following is a complete list of all of the [**Buttons**](xref:Microsoft.Xna.Framework.Input.Buttons) enum values:
 
@@ -315,12 +336,14 @@ You can use the [**IsButtonDown(Buttons)**](xref:Microsoft.Xna.Framework.Input.G
 
 
 > [!CAUTION]
-> While you can use these methods to get the state of any of these button inputs, the state will only tell you if it is being pressed or released.  For the actual joystick values and trigger values, you would need to use the properties instead.
+> While you can use these methods to get the state of any of these button inputs, the state will only tell you if it is being pressed or released.  For the actual thumbstick values and trigger values, you would need to use the properties instead.
 
 For example, if we wanted to check if the A button on the the first gamepad is pressed, you could use the following:
 
 ```cs
-if(GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.A))
+GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+
+if(gamePadState.IsButtonDown(Buttons.A))
 {
     // The A button is pressed, do something.
 }
@@ -334,6 +357,7 @@ Let's implement gamepad controls as an alternative method of moving the slime sp
 
 ```cs
 GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+
 _slimePos.X += gamePadState.ThumbSticks.Left.X * MOVEMENT_SPEED;
 _slimePos.Y -= gamePadState.ThumbSticks.Left.Y * MOVEMENT_SPEED;
 ```
@@ -365,6 +389,165 @@ else
 
 Running the game now, when you press the A button, the slime sprite will move slightly faster and you can feel the vibration. Try it out!
 
+## TouchPanel Input
+
+For mobile devices such as Android/iOS phones and tablets, the primary input device is the touch panel screen.  Touching a location on the screen is similar to clicking a location on your computer with a mouse.  MonoGame provides the [**TouchPanel**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel) class to handle touch input.  
+
+The [**TouchPanel**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel) class offers two ways of retrieving information about touch input:
+
+- [**TouchPanel.GetState**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.GetState) retrieves a [**TouchCollection**](xref:Microsoft.Xna.Framework.Input.Touch.TouchCollection) struct that contains [**TouchLocation**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation) values for each point of touch on the touch panel.
+- [**TouchPanel.ReadGesture**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.ReadGesture) retrieves a [**GestureSample**](xref:Microsoft.Xna.Framework.Input.Touch.GestureSample) struct that contains information about recent gestures that have been performed like a vertical or horizontal drag across the screen.
+
+### TouchCollection
+
+When calling [**TouchPanel.GetState**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.GetState) a [**TouchCollection**](xref:Microsoft.Xna.Framework.Input.Touch.TouchCollection) struct is returned.  This collection contains a [**TouchLocation**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation) value for each point of touch.  
+
+#### TouchLocation
+
+Each [**TouchLocation**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation) value in a touch collection contains the following properties 
+
+| Property                                                                        | Type                                                                                  | Description                                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [**Id**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation.Id)             | `int`                                                                                 | The id of the touch location.                                                                   |
+| [**Position**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation.Position) | [**Vector2**](xref:Microsoft.Xna.Framework.Vector2)                                   | The position of the touch location.                                                             |
+| [**Pressure**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation.Pressure) | `float`                                                                               | The amount of pressure applied at the touch location. **(Only available for Android devices.)** |
+| [**State**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation.State)       | [**TouchLocationState**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocationState) | The current state of the touch location.                                                        |
+
+The important properties of the location are the [**Position**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation.Position) and the [**State**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation.State) The position property will tell us the location of the touch event, and the state can be one of the following values:
+
+| State                                                                        | Description                                                               |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [**Invalid**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation.State)  | This touch location position is invalid.                                  |
+| [**Moved**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation.State)    | This touch location position was updated or pressed at the same position. |
+| [**Pressed**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation.State)  | This touch location was pressed.                                          |
+| [**Released**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation.State) | This touch location was released.                                         |
+
+When the state is moved or pressed, then we know that location on the touch panel is being touched.  So we can capture it and use it like the following:
+
+```cs
+TouchCollection touchCollection = TouchPanel.GetState();
+
+foreach(TouchLocation touchLocation in touchCollection)
+{
+    if(touchLocation.State == TouchLocationState.Pressed || touchLocation.State == TouchLocationState.Moved)
+    {
+        // The the location at touchLocation.Position is currently being pressed,
+        // so we can act on that information.
+    }
+}
+```
+
+> [!NOTE]
+> Unlike mouse input which only tracks a single point, [**TouchPanel**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel) supports multiple simultaneous touch points. The [**TouchCollection**](xref:Microsoft.Xna.Framework.Input.Touch.TouchCollection) contains all active touch points, which is why we loop through them in the sample above.
+
+The state of a touch location progresses through the states typically in order of:
+
+- [**Pressed**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation.State): Initial contact with the screen.
+- [**Moved**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation.State) : Touch point moved while maintaining contact.
+- [**Released**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation.State): Contact with screen ended.
+- [**Invalid**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation.State) : Touch data is invalid (using when tracking data is lost).
+
+### GestureSample
+
+When calling [**TouchPanel.ReadGesture**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.ReadGesture) a [**GestureSample**](xref:Microsoft.Xna.Framework.Input.Touch.GestureSample) struct containing the information about recent gestures that have been performed is returned.  The [**GestureSample**](xref:Microsoft.Xna.Framework.Input.Touch.GestureSample) struct contains the following properties:
+
+| Property                                                                              | Type                                                                    | Description                                                                    |
+| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [**Delta**](xref:Microsoft.Xna.Framework.Input.Touch.GestureSample.Delta)             | [**Vector2**](xref:Microsoft.Xna.Framework.Vector2)                     | Gets the delta information about the first touch-point in the gesture sample.  |
+| [**Delta2**](xref:Microsoft.Xna.Framework.Input.Touch.GestureSample.Delta2)           | [**Vector2**](xref:Microsoft.Xna.Framework.Vector2)                     | Gets the delta information about the second touch-point in the gesture sample. |
+| [**GestureType**](xref:Microsoft.Xna.Framework.Input.Touch.GestureSample.GestureType) | [**GestureType**](xref:Microsoft.Xna.Framework.Input.Touch.GestureType) | Gets the type of the gesture.                                                  |
+| [**Position**](xref:Microsoft.Xna.Framework.Input.Touch.GestureSample.Position)       | [**Vector2**](xref:Microsoft.Xna.Framework.Vector2)                     | Gets the position of the first touch-point in the gesture sample.              |
+| [**Position2**](xref:Microsoft.Xna.Framework.Input.Touch.GestureSample.Position2)     | [**Vector2**](xref:Microsoft.Xna.Framework.Vector2)                     | Gets the position of the second touch-point in the gesture sample.             |
+
+> [!NOTE]
+> Gestures have two delta properties and two position properties.  This is because some gestures require multiple touch inputs to perform, such as performing a pinch to zoom in or out.  You would need the location of both touch points to determine the correct zoom to apply during the gesture.
+
+To determine what type of gesture is performed, we can get that from the [**GestureType**](xref:Microsoft.Xna.Framework.Input.Touch.GestureSample.GestureType) property which will be one of the following values:
+
+| Gesture Type                                                               | Description                                                                                     |
+| -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [**DoubleTap**](xref:Microsoft.Xna.Framework.Input.Touch.GestureType)      | The user double tapped the device twice which is always preceded by a Tap gesture.              |
+| [**DragComplete**](xref:Microsoft.Xna.Framework.Input.Touch.GestureType)   | States completion of a drag gesture (VerticalDrag, HorizontalDrag, or FreeDrag).                |
+| [**Flick**](xref:Microsoft.Xna.Framework.Input.Touch.GestureType)          | States that a touch was combined with  a quick swipe.                                           |
+| [**FreeDrag**](xref:Microsoft.Xna.Framework.Input.Touch.GestureType)       | The user touched a point and the performed a free-form drag.                                    |
+| [**Hold**](xref:Microsoft.Xna.Framework.Input.Touch.GestureType)           | The user touched a single point for approximately one second.                                   |
+| [**HorizontalDrag**](xref:Microsoft.Xna.Framework.Input.Touch.GestureType) | The user touched the screen and performed either a left-to-right or right-to-left drag gesture. |
+| [**None**](xref:Microsoft.Xna.Framework.Input.Touch.GestureType)           | No gesture.                                                                                     |
+| [**Pinch**](xref:Microsoft.Xna.Framework.Input.Touch.GestureType)          | The user converged or diverged two touch-points on the screen which is like a two-finger drag.  |
+| [**PinchComplete**](xref:Microsoft.Xna.Framework.Input.Touch.GestureType)  | An in-progress pinch gesture was completed.                                                     |
+| [**Tap**](xref:Microsoft.Xna.Framework.Input.Touch.GestureType)            | The user touched a single point.                                                                |
+| [**VerticalDrag**](xref:Microsoft.Xna.Framework.Input.Touch.GestureType)   | The user touched the screen and performed either a top-to-bottom or bottom-to-top drag gesture. |
+
+> [!IMPORTANT]
+> Before gestures can be detected, they have to be enabled using [**TouchPanel.EnabledGestures**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.EnabledGestures).  This can be done in [**Game.Initialize**](xref:Microsoft.Xna.Framework.Game.Initialize) like the following:
+>
+> ```cs
+> protected override void Initialize()
+> {
+>     base.Initialize();
+>
+>    // Enable gestures we want to handle
+>    TouchPanel.EnabledGestures = 
+>        GestureType.Tap |
+>        GestureType.HorizontalDrag |
+>        GestureType.VerticalDrag;
+> }
+
+The following is an example of using a gesture to detect horizontal and vertical drags:
+
+```cs
+while(TouchPanel.IsGestureAvailable)
+{
+    GestureSample gesture = TouchPanel.ReadGesture();
+
+    if(gesture.GestureType == GestureType.HorizontalDrag)
+    {
+        // A horizontal drag from left-to-right or right-to-left occurred.
+        // You can use the Delta property to determine how much movement
+        // occurred during the swipe.
+        float xDragAmount = gesture.Delta.X;
+
+        // Now do something with that information.
+    }
+
+    if(gesture.GestureType == GestureType.VerticalDrag)
+    {
+        // A vertical drag from top-to-bottom or bottom-to-top occurred.
+        // You can use the Delta property to determine how much movement
+        // occurred during the swipe.
+        float yDragAmount = gesture.Delta.Y;
+
+        // Now do something with that information.
+    }
+}
+```
+
+> [!IMPORTANT]
+> Notice above that we use a `while` loop with [**TouchPanel.IsGestureAvailable**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.IsGestureAvailable) as the condition for the loop.  The reason we do this is because when a user performs a gesture, such as a horizontal drag across the screen, very quickly, what can often occurs is a series of multiple small drag gestures are registered and queued.  
+> 
+> Each time [**TouchPanel.ReadGesture**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.ReadGesture) is called, it will dequeue the next gesture.  So to ensure that we handle the complete gesture, we loop the gesture queue until there are none left. 
+
+### Implementing TouchPanel Input (Optional)
+
+> [!NOTE]
+> This section is optional. This tutorial does not go into detail on creating mobile projects where a touch screen would be available for input.  However, the following code is implemented as a reference.
+
+Let's implement touch controls to move the bat sprite around the screen to the point that the screen is touched, similar to what we did for mouse controls in the [Implementing Mouse Input](#implementing-mouse-input) section above.  Open *Game1.cs* and perform the following:
+
+1. In [**Update**](xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)), check for a touch location and move the bat sprite to that location if a touch occurs.  Add the following just before the `base.Update` call:
+
+```cs
+TouchCollection touchCollection = TouchPanel.GetState();
+
+if(touchCollection.Count > 0)
+{
+    TouchLocation touchLocation = touchCollection[0];
+    _batSprite.Position = touchLocation.Position;
+}
+```
+
+If you have your development environment setup for mobile development, running the game now, you can touch the screen to move the bat to the point that was touched.
+
 ## Conclusion
 
 In this chapter, you learned how to:
@@ -372,6 +555,7 @@ In this chapter, you learned how to:
 - Handle keyboard input to detect key presses.
 - Handle mouse input including button clicks and cursor position.
 - Work with gamepad controls including buttons, thumbsticks, and vibration.
+- Understand touch input for mobile devices including touch points and gestures.
 - Implement movement controls using different input methods.
 - Consider controller-specific details like coordinate systems and analog vs digital input.
 
