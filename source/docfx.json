@@ -20,7 +20,8 @@
     "resource": [
       {
         "files": [
-          "**/images/**"
+          "**/images/**",
+          "**/videos/**"
         ]
       }
     ],

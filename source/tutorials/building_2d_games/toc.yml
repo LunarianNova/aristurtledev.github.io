@@ -21,3 +21,5 @@
   href: 09_handling_input/
 - name: "10: Input Management"
   href: 10_input_management/
+- name: "11: Collision Detection"
+  href: 11_collision_detection/
