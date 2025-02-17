@@ -32,7 +32,7 @@ Before we start implementing collision detection, let's discuss what collision d
        - Simpler check for overlap than rectangles.
 
     > [!NOTE]
-    > These shapes are popular because they're simple to work with and cover most gameplay needs.  
+    > These shapes are popular because they're simple to work with and cover most gameplay needs.
 
 3. Complex Polygon Checks: For games needing precise collision detection, you can use more complex shapes. However, these are more complicated to implement and generally unnecessary for most 2D games.
 
@@ -118,7 +118,7 @@ Using this, let's modify our game code to check for collision between the slime 
             (int)_slime.Width,
             (int)_slime.Height
         );
-        
+
         Rectangle batBounds = new Rectangle
         (
             (int)_batPosition.X,
@@ -169,7 +169,7 @@ Running the game now, you can move the slime sprite around and anytime it collid
 
 ## The Circle Struct
 
-For some objects, a circle might better represent their collision area.  MonoGame does not have a `Circle` struct to represent a circle like it does with [**Rectangle**](xref:Microsoft.Xna.Framework.Rectangle).  Before we can discuss circle collision, we will need to create our own.  
+For some objects, a circle might better represent their collision area.  MonoGame does not have a `Circle` struct to represent a circle like it does with [**Rectangle**](xref:Microsoft.Xna.Framework.Rectangle).  Before we can discuss circle collision, we will need to create our own.
 
 In the *MonoGameLibrary* project, add a new file named *Circle.cs*.  Add the following code as the foundation of the `Circle` struct:
 
@@ -181,12 +181,12 @@ namespace MonoGameLibrary;
 
 public readonly struct Circle : IEquatable<Circle>
 {
-    
+
 }
 ```
 
 > [!NOTE]
-> Notice that the struct will implement [`IEquatable<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1).  When creating value types like this, it is recommended to implement `IEquatable<T>` because it has better performance and can help avoid boxing.  
+> Notice that the struct will implement [`IEquatable<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1).  When creating value types like this, it is recommended to implement `IEquatable<T>` because it has better performance and can help avoid boxing.
 >
 > For more information on recommended design guidelines for structs, see https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/struct.
 
@@ -560,7 +560,7 @@ Let's implement bounce collision response by modifying our game so the bat moves
     {
         // Generate a random angle
         float angle = (float)(Random.Shared.NextDouble() * Math.PI * 2);
-        
+
         // Convert angle to a direction vector
         float x = (float)Math.Cos(angle);
         float y = (float)Math.Sin(angle);
@@ -584,7 +584,7 @@ Let's implement bounce collision response by modifying our game so the bat moves
     {
         // Calculate the new position of the bat based on the velocity
         Vector2 newPosition = _batPosition + _batVelocity;
-    
+
         // Get the bounds of the screen as a rectangle
         Rectangle screenBounds = new Rectangle(
             0,
@@ -592,7 +592,7 @@ Let's implement bounce collision response by modifying our game so the bat moves
             GraphicsDevice.PresentationParameters.BackBufferWidth,
             GraphicsDevice.PresentationParameters.BackBufferHeight
         );
-    
+
         // Get the bounds of the bat as a rectangle
         Rectangle batBounds = new Rectangle(
             (int)newPosition.X,
@@ -600,7 +600,7 @@ Let's implement bounce collision response by modifying our game so the bat moves
             (int)_bat.Width,
             (int)_bat.Height
         );
-    
+
         // if the bat is not contained within the bounds of the screen, then we
         // perform our collision response and bounce (reflect) it off the screen
         // edge that it is closest too
@@ -611,15 +611,15 @@ Let's implement bounce collision response by modifying our game so the bat moves
             float distanceRight = Math.Abs(screenBounds.Right - batBounds.Right);
             float distanceTop = Math.Abs(screenBounds.Top - batBounds.Top);
             float distanceBottom = Math.Abs(screenBounds.Bottom - batBounds.Bottom);
-    
+
             // Determine which edge is the closest edge
             float minDistance = Math.Min(
                 Math.Min(distanceLeft, distanceRight),
                 Math.Min(distanceTop, distanceBottom)
             );
-    
+
             Vector2 normal;
-    
+
             if (minDistance == distanceLeft)
             {
                 // The bat is closest to the left edge, so get the left edge normal
@@ -632,7 +632,7 @@ Let's implement bounce collision response by modifying our game so the bat moves
             {
                 // The bat is closest to the right edge, so get the right edge normal
                 // and move the new position so that the right edge of the bat will
-                // be flush with the right edge of the screen.            
+                // be flush with the right edge of the screen.
                 normal = -Vector2.UnitX;
                 newPosition.X = screenBounds.Right - _bat.Width;
             }
@@ -652,11 +652,11 @@ Let's implement bounce collision response by modifying our game so the bat moves
                 normal = -Vector2.UnitY;
                 newPosition.Y = screenBounds.Bottom - _bat.Height;
             }
-    
+
             // Reflect the velocity about the normal
-            _batVelocity = Vector2.Reflect(_batVelocity, normal);        
+            _batVelocity = Vector2.Reflect(_batVelocity, normal);
         }
-    
+
         // Set the new position of the bat
         _batPosition = newPosition;
     }
@@ -668,7 +668,7 @@ Let's implement bounce collision response by modifying our game so the bat moves
 5. In [**Update**](xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)), call the new `UpdateBatMovement` method just after the `_bat.Update(gameTime)` call:
 
     ```cs
-    UpdateBatMovement();    
+    UpdateBatMovement();
     ```
 
 6. Finally, in [**Update**](xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)), update the collision response when the slime and bat collide so that it spawns the bat in a new random position and assigns a random velocity:
@@ -727,7 +727,7 @@ Let's review what you accomplished in this chapter:
 - Created a Circle struct and implemented circle-based collision
 - Explored three types of collision responses:
   - Blocking: Preventing objects from overlapping
-  - Triggering: Causing events when objects collide  
+  - Triggering: Causing events when objects collide
   - Bouncing: Reflecting objects off surfaces
 
 In the next chapter, we'll start exploring audio to add sound effects when a collision occurs and background music to our game.
