@@ -17,7 +17,27 @@ Let's start by understanding the basics of collision detection and the different
 
 ## Understanding Collision Detection
 
-Before we start implementing collision detection, let's discuss what collision detection actually is.  In 2D games, collision detection involves checking if two shapes overlap.  The most common shapes used are rectangles and circles due to their simplicity, ease of representation, and that they cover most use cases.  In more complex scenarios, polygons can be used but are more complicated to represent and determine collision for.
+Before we start implementing collision detection, let's discuss what collision detection actually is. In 2D games, collision detection involves checking if two objects interact with each other in some way. There are several approaches to detecting collisions, ranging from simple to complex:
+
+1. Distance Checks: The simplest form - checking if objects are within a certain range of each other. This is useful when you only need to know if objects are "near" each other, like detecting if an enemy is close enough to chase the player.
+
+2. Simple Shape Based Checks: Checking if two shapes overlap. The most common and simple shapes used are:
+   - Rectangles:
+        - Great for walls, platforms, and most game objects.
+        - Easy to visualize and debug.
+        - Works well with tile-based games.
+   - Circles:
+       - Better for round objects like balls and coins.
+       - More accurate for rotating objects.
+       - Simpler check for overlap than rectangles.
+
+    > [!NOTE]
+    > These shapes are popular because they're simple to work with and cover most gameplay needs.  
+
+3. Complex Polygon Checks: For games needing precise collision detection, you can use more complex shapes. However, these are more complicated to implement and generally unnecessary for most 2D games.
+
+> [!TIP]
+> Start with the simplest collision detection that meets your needs. If distance checks work for your game mechanic, there's no need to implement more complex shape-based collision. Similarly, rectangle collision is usually sufficient for most 2D games.
 
 ### Collision Detection vs Collision Response
 
@@ -29,36 +49,21 @@ Often times when talking about collision detection, the term is used to mean bot
 
 We'll explore implementing these responses throughout this chapter.
 
-### Choosing Collision Shapes
-
-When deciding which collision shape to use, consider:
-
-- Rectangle Collision:
-  - Best for objects with straight edges (platforms, walls).
-  - Efficient for large numbers of objects.
-  - Easy to visualize and debug.
-  - Works well with tile-based games.
-
-- Circle Collision:
-  - Better for round objects (balls, coins).
-  - More accurate for rotating objects.
-  - Simpler for continuous collision detection.
-  - Natural for radius-based interactions.
-
-> [!TIP]
-> Start with rectangle collision unless you have a specific need for circle collision. Rectangles are simpler to work with and perform better in most cases.
-
 ## Rectangle Collision
 
 The most basic form of collision detection uses rectangles, often called *bounding boxes* because they bound (or contain) the game object.  Typically for rectangles we use what is called *Axis-Aligned Bounding Box* (AABB) detection.  In order to use AABB detection, the axes of the rectangle must be aligned with the axes of the screen.  That's just a fancy way of saying the rectangles can't be rotated.
 
 For example, look at Figure 11-1 below.  The axes of the rectangle on the left are aligned with the axes of the screen, however the axes of the rectangle on the right are not.
 
-<figure><img src="./images/aabb-vs-non-aabb.svg" alt="Figure 11-1: Axis-Aligned Bounding Box versus Not Axis-Aligned Bounding Box."><figcaption><p><strong>Figure 11-1: Axis-Aligned Bounding Box versus Not Axis-Aligned Bounding Box.</strong></p></figcaption></figure>
+| ![Figure 11-1: Axis-Aligned Bounding Box versus Not Axis-Aligned Bounding Box](./images/aabb-vs-non-aabb.svg) |
+| :---: |
+| **Figure 11-1: Axis-Aligned Bounding Box versus Not Axis-Aligned Bounding Box** |
 
 If two bounding boxes were to overlap, like in Figure 11-2 below, then we would say they are colliding:
 
-<figure><img src="./images/aabb-collision-example.svg" alt="Figure 11-2: Two axis-aligned bounding boxes colliding."><figcaption><p><strong>Figure 11-2: Two axis-aligned bounding boxes colliding</strong></p></figcaption></figure>
+| ![Figure 11-2: Two axis-aligned bounding boxes colliding](./images/aabb-collision-example.svg) |
+| :---: |
+| **Figure 11-2: Two axis-aligned bounding boxes colliding** |
 
 MonoGame provides the [**Rectangle**](xref:Microsoft.Xna.Framework.Rectangle) struct which represents a rectangle by its position (X,Y) and size (Width,Height). The following table shows some of the properties of the [**Rectangle**](xref:Microsoft.Xna.Framework.Rectangle) struct:
 
@@ -113,7 +118,7 @@ Using this, let's modify our game code to check for collision between the slime 
             (int)_slime.Width,
             (int)_slime.Height
         );
-
+        
         Rectangle batBounds = new Rectangle
         (
             (int)_batPosition.X,
@@ -158,11 +163,13 @@ This change performs the following:
 
 Running the game now, you can move the slime sprite around and anytime it collides with the bat sprite, both will change to a red tint.  You can click to move the bat to a different position to see that its bounding box updates with its position.
 
-<figure><video width="100%" autoplay loop muted><source type="video/webm" src="./videos/slime-bat-collision.webm"></video><figcaption><p><strong>Figure 11-3: The slime and bat sprite changing colors when colliding.</strong></p></figcaption></figure>
+| ![Figure 11-3: The slime and bat sprite changing colors when colliding](./videos/slime-bat-collision.webm) |
+| :---: |
+| **Figure 11-3: The slime and bat sprite changing colors when colliding** |
 
 ## The Circle Struct
 
-For some objects, a circle might better represent their collision area.  MonoGame does not have a `Circle` struct to represent a circle like it does with [**Rectangle**](xref:Microsoft.Xna.Framework.Rectangle).  Before we can discuss circle collision, we will need to create our own.
+For some objects, a circle might better represent their collision area.  MonoGame does not have a `Circle` struct to represent a circle like it does with [**Rectangle**](xref:Microsoft.Xna.Framework.Rectangle).  Before we can discuss circle collision, we will need to create our own.  
 
 In the *MonoGameLibrary* project, add a new file named *Circle.cs*.  Add the following code as the foundation of the `Circle` struct:
 
@@ -174,12 +181,12 @@ namespace MonoGameLibrary;
 
 public readonly struct Circle : IEquatable<Circle>
 {
-
+    
 }
 ```
 
 > [!NOTE]
-> Notice that the struct will implement [`IEquatable<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1).  When creating value types like this, it is recommended to implement `IEquatable<T>` because it has better performance and can help avoid boxing.
+> Notice that the struct will implement [`IEquatable<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1).  When creating value types like this, it is recommended to implement `IEquatable<T>` because it has better performance and can help avoid boxing.  
 >
 > For more information on recommended design guidelines for structs, see https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/struct.
 
@@ -398,7 +405,9 @@ Now that we know how to determine the distance between the center of two circles
 1. If the distance is greater than or equal to the sum of the radii, then the circles do not overlap
 2. If the distance is less than the sum of the radii, then the circles do overlap.
 
-<figure><img src="./images/circle-collision.svg" alt="Figure 11-4: Circle collision showing how distance between centers determines overlap."><figcaption><p><strong>Figure 11-4: Circle collision showing how distance between centers determines overlap.</strong></p></figcaption></figure>
+| ![Figure 11-4: Circle collision showing how distance between centers determines overlap](./images/circle-collision.svg) |
+| :---: |
+| **Figure 11-4: Circle collision showing how distance between centers determines overlap** |
 
 > [!NOTE]
 > In Figure 11-4 above, we can see from the two circles in the upper-left corner that the distance is equal to the sum of the radii.  This means they are **touching** but not overlapping. Remember, to overlap, the distance must be less than the sum of the radii.
@@ -476,7 +485,9 @@ These changes perform the following
 
 Running the game now, if you attempt to move the slime onto the bat, you'll see that the slime will be blocked from doing so.
 
-<figure><video width="100%" autoplay loop muted><source type="video/webm" src="./videos/blocking-collision-example.webm"></video><figcaption><p><strong>Figure 11-5: An example of blocking collision response; the slime is unable to move over the bat.</strong></p></figcaption></figure>
+| ![Figure 11-5: An example of blocking collision response; the slime is unable to move over the bat](./videos/blocking-collision-example.webm) |
+| :---: |
+| **Figure 11-5: An example of blocking collision response; the slime is unable to move over the bat** |
 
 ### Trigger Collision Response
 
@@ -514,7 +525,9 @@ if (CollisionCheck())
 
 When you run the game and move the slime into the bat, you'll see the bat instantly teleport to a new random position on the screen:
 
-<figure><video width="100%" autoplay loop muted><source type="video/webm" src="./videos/trigger-collision-example.webm"></video><figcaption><p><strong>Figure 11-6: An example of trigger collision response; The bat moves to a random location on the screen when the slime collides with it.</strong></p></figcaption></figure>
+| ![Figure 11-6: An example of trigger collision response; The bat moves to a random location on the screen when the slime collides with it](./videos/trigger-collision-example.webm) |
+| :---: |
+| **Figure 11-6: An example of trigger collision response; The bat moves to a random location on the screen when the slime collides with it** |
 
 ### Bounce Collision Response
 
@@ -523,7 +536,9 @@ For games that need objects to bounce off each other (like in Pong), we need to 
 1. The incoming vector (the direction something is moving).
 2. The normal vector (the direction perpendicular to the surface).
 
-<figure><img src="./images/reflection-diagram.svg" alt="Figure 11-7: Vector reflection showing how an incoming vector reflects off a surface based on its normal vector."><figcaption><p><strong>Figure 11-7: Vector reflection showing how an incoming vector reflects off a surface based on its normal vector.</strong></p></figcaption></figure>
+| ![Figure 11-7: Vector reflection showing how an incoming vector reflects off a surface based on its normal vector](./images/reflection-diagram.svg) |
+| :---: |
+| **Figure 11-7: Vector reflection showing how an incoming vector reflects off a surface based on its normal vector** |
 
 As shown in the diagram above, when an incoming vector hits a surface, it reflects at the same angle ($\theta$) relative to the normal vector.
 
@@ -545,7 +560,7 @@ Let's implement bounce collision response by modifying our game so the bat moves
     {
         // Generate a random angle
         float angle = (float)(Random.Shared.NextDouble() * Math.PI * 2);
-
+        
         // Convert angle to a direction vector
         float x = (float)Math.Cos(angle);
         float y = (float)Math.Sin(angle);
@@ -569,7 +584,7 @@ Let's implement bounce collision response by modifying our game so the bat moves
     {
         // Calculate the new position of the bat based on the velocity
         Vector2 newPosition = _batPosition + _batVelocity;
-
+    
         // Get the bounds of the screen as a rectangle
         Rectangle screenBounds = new Rectangle(
             0,
@@ -577,7 +592,7 @@ Let's implement bounce collision response by modifying our game so the bat moves
             GraphicsDevice.PresentationParameters.BackBufferWidth,
             GraphicsDevice.PresentationParameters.BackBufferHeight
         );
-
+    
         // Get the bounds of the bat as a rectangle
         Rectangle batBounds = new Rectangle(
             (int)newPosition.X,
@@ -585,7 +600,7 @@ Let's implement bounce collision response by modifying our game so the bat moves
             (int)_bat.Width,
             (int)_bat.Height
         );
-
+    
         // if the bat is not contained within the bounds of the screen, then we
         // perform our collision response and bounce (reflect) it off the screen
         // edge that it is closest too
@@ -596,15 +611,15 @@ Let's implement bounce collision response by modifying our game so the bat moves
             float distanceRight = Math.Abs(screenBounds.Right - batBounds.Right);
             float distanceTop = Math.Abs(screenBounds.Top - batBounds.Top);
             float distanceBottom = Math.Abs(screenBounds.Bottom - batBounds.Bottom);
-
+    
             // Determine which edge is the closest edge
             float minDistance = Math.Min(
                 Math.Min(distanceLeft, distanceRight),
                 Math.Min(distanceTop, distanceBottom)
             );
-
+    
             Vector2 normal;
-
+    
             if (minDistance == distanceLeft)
             {
                 // The bat is closest to the left edge, so get the left edge normal
@@ -617,7 +632,7 @@ Let's implement bounce collision response by modifying our game so the bat moves
             {
                 // The bat is closest to the right edge, so get the right edge normal
                 // and move the new position so that the right edge of the bat will
-                // be flush with the right edge of the screen.
+                // be flush with the right edge of the screen.            
                 normal = -Vector2.UnitX;
                 newPosition.X = screenBounds.Right - _bat.Width;
             }
@@ -637,11 +652,11 @@ Let's implement bounce collision response by modifying our game so the bat moves
                 normal = -Vector2.UnitY;
                 newPosition.Y = screenBounds.Bottom - _bat.Height;
             }
-
+    
             // Reflect the velocity about the normal
-            _batVelocity = Vector2.Reflect(_batVelocity, normal);
+            _batVelocity = Vector2.Reflect(_batVelocity, normal);        
         }
-
+    
         // Set the new position of the bat
         _batPosition = newPosition;
     }
@@ -653,7 +668,7 @@ Let's implement bounce collision response by modifying our game so the bat moves
 5. In [**Update**](xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)), call the new `UpdateBatMovement` method just after the `_bat.Update(gameTime)` call:
 
     ```cs
-    UpdateBatMovement();
+    UpdateBatMovement();    
     ```
 
 6. Finally, in [**Update**](xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)), update the collision response when the slime and bat collide so that it spawns the bat in a new random position and assigns a random velocity:
@@ -680,11 +695,24 @@ Let's implement bounce collision response by modifying our game so the bat moves
 
 Running the game now, you'll see the bat moving automatically and bouncing off the screen edges. When the slime collides with it, the bat will teleport to a random location and start moving in a new random direction:
 
-<figure><video width="100%" autoplay loop muted><source type="video/webm" src="./videos/bounce-collision-example.webm"></video><figcaption><p><strong>Figure 11-7: An example of bounce collision response; The bat bounces off screen edges and gets a new velocity when respawning.</strong></p></figcaption></figure>
+| ![Figure 11-7: An example of bounce collision response; The bat bounces off screen edges and gets a new velocity when respawning](./videos/bounce-collision-example.webm) |
+| :---: |
+| **Figure 11-7: An example of bounce collision response; The bat bounces off screen edges and gets a new velocity when respawning** |
 
-## See Also
+## Optimizing Collision Performance
 
-One collision detection method we did not discuss in this tutorial is called *Separating Axis Therom* (SAT).  SAT is used for more complex collision detection scenarios such as non-AABB rectangle, polygons vs polygons, and polygons vs circles.  If you are interested in further reading about this, please see the following articles as a good starting point
+When checking for collisions between multiple objects, testing every object against every other object (often called brute force checking) becomes inefficient as your game grows. Brute force checking can be calculated as $(n * (n - 1)) / 2$ where $n$ is the total number of objects.  For example, if you have 100 objects in your game, that's $(100 * 99) / 2 = 4950$ collision checks every frame.  To improve performance, we can use a two-phase approach:
+
+1. Broad Phase: A quick, simple check to rule out objects that definitely aren't colliding.
+2. Narrow Phase: A more precise check only performed on objects that passed the broad phase.
+
+For our simple game with just two objects, this optimization isn't necessary. However, as you develop more complex games, implementing a broad-phase check can significantly improve performance.  Later in this tutorial series we will implement an algorithm called spatial hashing to perform broad phase checks.
+
+## Separating Axis Theorem
+
+One collision detection method we did not discuss in this tutorial is called *Separating Axis Therom* (SAT).  SAT is used for more complex collision detection scenarios between objects such as rotated rectangles or *convex* polygons.  There are also performance considerations to consider when using SAT.
+
+Implementing SAT is out-of-scope for this tutorial. If you are interested in further reading about this, please see the following articles as a good starting point
 
 - [Separating Axis Theorem (SAT) Explanation](https://www.sevenson.com.au/actionscript/sat/).
 - [Collision Detection Using the Separating Axis Theorem](https://gamedevelopment.tutsplus.com/tutorials/collision-detection-using-the-separating-axis-theorem--gamedev-169) by Kah Shiu Chong.
@@ -699,7 +727,7 @@ Let's review what you accomplished in this chapter:
 - Created a Circle struct and implemented circle-based collision
 - Explored three types of collision responses:
   - Blocking: Preventing objects from overlapping
-  - Triggering: Causing events when objects collide
+  - Triggering: Causing events when objects collide  
   - Bouncing: Reflecting objects off surfaces
 
 In the next chapter, we'll start exploring audio to add sound effects when a collision occurs and background music to our game.
