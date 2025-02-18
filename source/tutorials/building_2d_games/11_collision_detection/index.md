@@ -66,7 +66,7 @@ float circle2Radius = 5;
 // c^2 = 3^2 + 4^2
 // c^2 = 9 + 16
 // c^2 = 25
-float distanceSquared = Vector2.DistanceSquared(circle1Position, circle2Position); 
+float distanceSquared = Vector2.DistanceSquared(circle1Position, circle2Position);
 
 // r^2 = (5 + 5)^2
 // r^2 = (10)^2
@@ -76,7 +76,7 @@ int radiiSquared = (circle1Radius + circle2Radius) * (circle1Radius + circle2Rad
 // They do not overlap since 100 is not less than 25
 if(radii < distanceSquared)
 {
-    
+
 }
 ```
 
@@ -213,7 +213,7 @@ Rectangle blockingBounds = new Rectangle(
 );
 
 // Detect if they are colliding
-if(spriteBounds.Intersects(blockingBounds)) 
+if(spriteBounds.Intersects(blockingBounds))
 {
     // Respond by not allowing the sprite to move by setting
     // the location back to the previous location.
@@ -255,7 +255,7 @@ Rectangle screenBounds = new Rectangle(
 );
 
 // Detect if the sprite is contained within the bounds of the screen
-if(!screenBounds.Contains(spriteBounds)) 
+if(!screenBounds.Contains(spriteBounds))
 {
     // Respond by not allowing the sprite to move to move outside the screen
     // bounds by setting the location back to the previous location.
@@ -380,7 +380,7 @@ if(!screenBounds.Contains(batBounds))
     }
 
     // Reflect the velocity about the normal
-    _batVelocity = Vector2.Reflect(_ballVelocity, normal); 
+    _batVelocity = Vector2.Reflect(_ballVelocity, normal);
 }
 
 // Set the new position of the ball
@@ -401,7 +401,7 @@ For our simple game with just two objects, this optimization isn't necessary. Ho
 
 ## The Circle Struct
 
-For our game, we are going to implement circle based collision detection.   MonoGame does not have a `Circle` struct to represent a circle like it does with [**Rectangle**](xref:Microsoft.Xna.Framework.Rectangle).  Before we can perform circle collision, we will need to create our own. 
+For our game, we are going to implement circle based collision detection.   MonoGame does not have a `Circle` struct to represent a circle like it does with [**Rectangle**](xref:Microsoft.Xna.Framework.Rectangle).  Before we can perform circle collision, we will need to create our own.
 
 In the *MonoGameLibrary* project, add a new file named *Circle.cs*.  Add the following code as the foundation of the `Circle` struct:
 
@@ -413,12 +413,12 @@ namespace MonoGameLibrary;
 
 public readonly struct Circle : IEquatable<Circle>
 {
-    
+
 }
 ```
 
 > [!NOTE]
-> Notice that the struct will implement [`IEquatable<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1).  When creating value types like this, it is recommended to implement `IEquatable<T>` because it has better performance and can help avoid boxing.  
+> Notice that the struct will implement [`IEquatable<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1).  When creating value types like this, it is recommended to implement `IEquatable<T>` because it has better performance and can help avoid boxing.
 >
 > For more information on recommended design guidelines for structs, see [Struct Design - Framework Design Guidelines | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/struct)
 
@@ -660,28 +660,28 @@ Open the *Game1.cs* file and perform the following:
 
 3. Finally, after creating the bounding rectangle for the circle, add the following to perform a distance based collision check:
 
-```cs
-// Use distance based checks to determine if the slime is within the
-// bounds of the game screen, and if it's outside that screen edge,
-// move it back inside.
-if(slimeBounds.Left < screenBounds.Left)
-{
-    _slimePosition.X = screenBounds.Left;
-}
-else if(slimeBounds.Right > screenBounds.Right)
-{
-    _slimePosition.X = screenBounds.Right - _slime.Width;
-}
+    ```cs
+    // Use distance based checks to determine if the slime is within the
+    // bounds of the game screen, and if it's outside that screen edge,
+    // move it back inside.
+    if(slimeBounds.Left < screenBounds.Left)
+    {
+        _slimePosition.X = screenBounds.Left;
+    }
+    else if(slimeBounds.Right > screenBounds.Right)
+    {
+        _slimePosition.X = screenBounds.Right - _slime.Width;
+    }
 
-if(slimeBounds.Top < screenBounds.Top)
-{
-    _slimePosition.Y = screenBounds.Top;
-}
-else if(slimeBounds.Bottom > screenBounds.Bottom)
-{
-    _slimePosition.Y = screenBounds.Bottom - _slime.Height;
-}
-```
+    if(slimeBounds.Top < screenBounds.Top)
+    {
+        _slimePosition.Y = screenBounds.Top;
+    }
+    else if(slimeBounds.Bottom > screenBounds.Bottom)
+    {
+        _slimePosition.Y = screenBounds.Bottom - _slime.Height;
+    }
+    ```
 
 Running the game now, try moving the slime outside the edges of the game window.  You'll see that it's now being prevented from doing so:
 
@@ -704,12 +704,12 @@ Next, let's modify the game so that the bat moves automatically and bounces off 
     {
         // Generate a random angle
         float angle = (float)(Random.Shared.NextDouble() * Math.PI * 2);
-    
+
         // Convert angle to a direction vector
         float x = (float)Math.Cos(angle);
         float y = (float)Math.Sin(angle);
         Vector2 direction = new Vector2(x, y);
-    
+
         // Multiply the direction vector by the movement speed
         _batVelocity = direction * MOVEMENT_SPEED;
     }
@@ -743,7 +743,7 @@ Next, let's modify the game so that the bat moves automatically and bounces off 
 
     ```cs
     Vector2 normal = Vector2.Zero;
-    
+
     // Use distance based checks to determine if the bat is within the
     // bounds of the game screen, and if it's outside that screen edge,
     // reflect it about the screen edge normal
@@ -757,7 +757,7 @@ Next, let's modify the game so that the bat moves automatically and bounces off 
         normal.X = -Vector2.UnitX.X;
         newBatPosition.X = screenBounds.Right - _bat.Width;
     }
-    
+
     if (batBounds.Top < screenBounds.Top)
     {
         normal.Y = Vector2.UnitY.Y;
