@@ -1,9 +1,9 @@
 ---
-title: "Chapter 11: Collision Detection"
+title: "Chapter 13: Collision Detection"
 description: "Learn how to implement collision detection between game objects and handle collision responses like blocking, triggering events, and bouncing."
 ---
 
-In [Chapter 10](../10_input_management/index.md), you learned how to manage player input to control game objects. However, for objects in your game to interact with each other, collecting items, hitting obstacles, or triggering events, you need to detect when these objects come into contact. This is accomplished through collision detection.
+In [Chapter 12](../12_input_management/index.md), you learned how to manage player input to control game objects. However, for objects in your game to interact with each other, collecting items, hitting obstacles, or triggering events, you need to detect when these objects come into contact. This is accomplished through collision detection.
 
 In this chapter you will:
 
@@ -66,7 +66,7 @@ float circle2Radius = 5;
 // c^2 = 3^2 + 4^2
 // c^2 = 9 + 16
 // c^2 = 25
-float distanceSquared = Vector2.DistanceSquared(circle1Position, circle2Position);
+float distanceSquared = Vector2.DistanceSquared(circle1Position, circle2Position); 
 
 // r^2 = (5 + 5)^2
 // r^2 = (10)^2
@@ -76,7 +76,7 @@ int radiiSquared = (circle1Radius + circle2Radius) * (circle1Radius + circle2Rad
 // They do not overlap since 100 is not less than 25
 if(radii < distanceSquared)
 {
-
+    
 }
 ```
 
@@ -97,8 +97,8 @@ MonoGame provides the [**Rectangle**](xref:Microsoft.Xna.Framework.Rectangle) st
 
 | Property                                                    | Type  | Description                                                                                                                                                                          |
 |-------------------------------------------------------------|-------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Bottom**](xref:Microsoft.Xna.Framework.Rectangle.Bottom) | `int` | Returns the y-coordinate location of the bottom edge of the rectangle.  This is equal to [**Rectangle.Y](xref:Microsoft.Xna.Framework.Rectangle.Y) plus the height of the rectangle. |
-| [**Left**](xref:Microsoft.Xna.Framework.Rectangle.Left)     | `int` | Returns the x-coordinate location of the left edge of the rectangle.  This is equal to [**Rectangle.X**](Microsoft.Xna.Framework.Rectangle.X).                                       |
+| [**Bottom**](xref:Microsoft.Xna.Framework.Rectangle.Bottom) | `int` | Returns the y-coordinate location of the bottom edge of the rectangle.  This is equal to [**Rectangle.Y**](xref:Microsoft.Xna.Framework.Rectangle.Y) plus the height of the rectangle. |
+| [**Left**](xref:Microsoft.Xna.Framework.Rectangle.Left)     | `int` | Returns the x-coordinate location of the left edge of the rectangle.  This is equal to [**Rectangle.X**](xref:Microsoft.Xna.Framework.Rectangle.X).                                       |
 | [**Right**](xref:Microsoft.Xna.Framework.Rectangle.Right)   | `int` | Returns the x-coordinate location of the right edge of the rectangle.  This is equal to [**Rectangle.X**](xref:Microsoft.Xna.Framework.Rectangle.X) plus the width of the rectangle. |
 | [**Top**](xref:Microsoft.Xna.Framework.Rectangle.Top)       | `int` | Returns the y-coordinate location of the top edge of the rectangle. This is equal to [**Rectangle.Y**](xref:Microsoft.Xna.Framework.Rectangle.Y).                                    |
 
@@ -184,8 +184,9 @@ A blocking collision response is the most basic response which just prevents the
 
 1. Store the location of an object calculating the new location to move it to.
 2. Check if it is overlapping an object at the new location:
-  - If it is overlapping, then set the position to the the position before it was moved.
-  - If it is not overlapping, set the position to the new calculated position.
+
+- If it is overlapping, then set the position to the the position before it was moved.
+- If it is not overlapping, set the position to the new calculated position.
 
 For example:
 
@@ -213,7 +214,7 @@ Rectangle blockingBounds = new Rectangle(
 );
 
 // Detect if they are colliding
-if(spriteBounds.Intersects(blockingBounds))
+if(spriteBounds.Intersects(blockingBounds)) 
 {
     // Respond by not allowing the sprite to move by setting
     // the location back to the previous location.
@@ -226,7 +227,7 @@ _spriteLocation = newLocation;
 Sometimes, instead of preventing an object from moving onto another object, we want to ensure an object remains contained within a certain bounding area. MonoGame also provides the [**Rectangle.Contains**](xref:Microsoft.Xna.Framework.Rectangle.Contains(Microsoft.Xna.Framework.Rectangle)) method that we can use to determine this.  [**Rectangle.Contains**](xref:Microsoft.Xna.Framework.Rectangle.Contains(Microsoft.Xna.Framework.Rectangle)) can check if any of the following are completely contained within the bounds of the rectangle;
 
 - [**Point**](xref:Microsoft.Xna.Framework.Point)
-- [**Rectangle**](xref:Microsof.Xna.Framework.Rectangle)
+- [**Rectangle**](xref:Microsoft.Xna.Framework.Rectangle)
 - [**Vector2**](xref:Microsoft.Xna.Framework.Vector2)
 
 For example, if we wanted to perform a blocking collision response that ensure a sprite remained contained within the bounds of the game screen:
@@ -255,7 +256,7 @@ Rectangle screenBounds = new Rectangle(
 );
 
 // Detect if the sprite is contained within the bounds of the screen
-if(!screenBounds.Contains(spriteBounds))
+if(!screenBounds.Contains(spriteBounds)) 
 {
     // Respond by not allowing the sprite to move to move outside the screen
     // bounds by setting the location back to the previous location.
@@ -380,7 +381,7 @@ if(!screenBounds.Contains(batBounds))
     }
 
     // Reflect the velocity about the normal
-    _batVelocity = Vector2.Reflect(_ballVelocity, normal);
+    _batVelocity = Vector2.Reflect(_ballVelocity, normal); 
 }
 
 // Set the new position of the ball
@@ -413,12 +414,12 @@ namespace MonoGameLibrary;
 
 public readonly struct Circle : IEquatable<Circle>
 {
-
+    
 }
 ```
 
 > [!NOTE]
-> Notice that the struct will implement [`IEquatable<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1).  When creating value types like this, it is recommended to implement `IEquatable<T>` because it has better performance and can help avoid boxing.
+> Notice that the struct will implement [`IEquatable<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1).  When creating value types like this, it is recommended to implement `IEquatable<T>` because it has better performance and can help avoid boxing.  
 >
 > For more information on recommended design guidelines for structs, see [Struct Design - Framework Design Guidelines | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/struct)
 
@@ -672,7 +673,7 @@ Open the *Game1.cs* file and perform the following:
     {
         _slimePosition.X = screenBounds.Right - _slime.Width;
     }
-
+    
     if(slimeBounds.Top < screenBounds.Top)
     {
         _slimePosition.Y = screenBounds.Top;
@@ -704,12 +705,12 @@ Next, let's modify the game so that the bat moves automatically and bounces off 
     {
         // Generate a random angle
         float angle = (float)(Random.Shared.NextDouble() * Math.PI * 2);
-
+    
         // Convert angle to a direction vector
         float x = (float)Math.Cos(angle);
         float y = (float)Math.Sin(angle);
         Vector2 direction = new Vector2(x, y);
-
+    
         // Multiply the direction vector by the movement speed
         _batVelocity = direction * MOVEMENT_SPEED;
     }
@@ -743,7 +744,7 @@ Next, let's modify the game so that the bat moves automatically and bounces off 
 
     ```cs
     Vector2 normal = Vector2.Zero;
-
+    
     // Use distance based checks to determine if the bat is within the
     // bounds of the game screen, and if it's outside that screen edge,
     // reflect it about the screen edge normal
@@ -757,7 +758,7 @@ Next, let's modify the game so that the bat moves automatically and bounces off 
         normal.X = -Vector2.UnitX.X;
         newBatPosition.X = screenBounds.Right - _bat.Width;
     }
-
+    
     if (batBounds.Top < screenBounds.Top)
     {
         normal.Y = Vector2.UnitY.Y;
@@ -797,7 +798,7 @@ Running the game now, you'll see the bat moving automatically and bouncing off t
 |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 |                       **Figure 11-6: The bat is assigned a random velocity and moves automatically, bouncing off the edges of the screen if it collides with them**                       |
 
-Finally, let's add a trigger response when the slime "eats" the bat, causing the bat to respawn at a random location on the screen with a new random velocity.  In [**Update**](xref:xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)) after we set the new position for the bat, add the following
+Finally, let's add a trigger response when the slime "eats" the bat, causing the bat to respawn at a random location on the screen with a new random velocity.  In [**Update**](xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)) after we set the new position for the bat, add the following
 
 ```cs
 if (slimeBounds.Intersects(batBounds))

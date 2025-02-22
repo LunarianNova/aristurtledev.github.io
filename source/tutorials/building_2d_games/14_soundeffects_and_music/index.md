@@ -1,9 +1,9 @@
 ---
-title: "Chapter 12: SoundEffects and Music"
+title: "Chapter 14: SoundEffects and Music"
 description: "Learn how to load and play sound effects and background music in MonoGame including managing audio volume, looping, and handling multiple sound effects at once."
 ---
 
-In [Chapter 11](../11_collision_detection/index.md), we implemented collision detection to enable interactions between game objects; the slime can now "eat" the bat, which respawns in a random location, while the bat bounces off screen edges. While these mechanics work visually, our game lacks an important element of player feedback: audio.
+In [Chapter 13](../13_collision_detection/index.md), we implemented collision detection to enable interactions between game objects; the slime can now "eat" the bat, which respawns in a random location, while the bat bounces off screen edges. While these mechanics work visually, our game lacks an important element of player feedback: audio.
 
 Audio plays a crucial role in game development by providing immediate feedback for player actions and creating atmosphere. Sound effects alert players when events occur (like collisions or collecting items), while background music helps establish mood and atmosphere.
 
@@ -60,7 +60,7 @@ The key characteristics of sound effects are:
 
 ### Music
 
-The [**Song**](xref:Microsoft.Xna.Framework.Audio.Song) class handles longer audio pieces like background music.  The key characteristics of songs are:
+The [**Song**](xref:Microsoft.Xna.Framework.Media.Song) class handles longer audio pieces like background music.  The key characteristics of songs are:
 
 - Streamed from storage rather than loaded into memory.
 - Only one song can be played at a time.
@@ -91,7 +91,7 @@ Adding audio files can be done through the content pipeline, just like we did fo
 The processor that are available for audio files file:
 
 - **Sound Effects**: Processes the audio file as a [**SoundEffect**](xref:Microsoft.Xna.Framework.Audio.SoundEffect).  This is  automatically selected for *.wav* files.
-- **Soung**: Processes the audio file as a [**Song**](xref:Microsoft.Xna.Framework.Audio.Song).  This is automatically selected for *.mp3*, *.ogg*, and *.wma* files.
+- **Soung**: Processes the audio file as a [**Song**](xref:Microsoft.Xna.Framework.Media.Song).  This is automatically selected for *.mp3*, *.ogg*, and *.wma* files.
 
 | ![Figure 12-2: MGCB Editor properties panel showing Sound Effect content processor settings for .wav files** | **Figure 12-3: MGCB Editor properties panel showing Song content processor settings for .mp3 files](./images/sound-effect-properties.png) | ![Figure 12-3: MGCB Editor properties panel showing Song content processor settings for .mp3 files](./images/song-properties.png) |
 | :---: | :---: |
@@ -110,7 +110,7 @@ SoundEffect soundEffect = Content.Load<SoundEffect>("soundEffect");
 
 ### Loading Music
 
-Loading music is similar, only we specify the [**Song**](xref:Microsoft.Xna.Framework.Audio.Song) type instead. 
+Loading music is similar, only we specify the [**Song**](xref:Microsoft.Xna.Framework.Media.Song) type instead. 
 
 ```cs
 Song song = Content.Load<Song>("song");
@@ -182,7 +182,7 @@ MediaPlayer.Play(_backgroundMusic);
 ```
 
 > [!IMPORTANT]
-> While [**SoundEffect**](xref:Microsoft.Xna.Framework.Audio.SoundEffect) instances can be played simultaneously, trying to play a new [**Song**](xref:Microsoft.Xna.Framework.Audio.Song) while another is playing will stop the current song in the best case, and in the worst case cause a crash on some platforms.  In the example above, the state of the media player is checked first before we tell it to play a song.  Checking the state first and stopping it manually if it is playing is best practice to prevent potential crashes.
+> While [**SoundEffect**](xref:Microsoft.Xna.Framework.Audio.SoundEffect) instances can be played simultaneously, trying to play a new [**Song**](xref:Microsoft.Xna.Framework.Media.Song) while another is playing will stop the current song in the best case, and in the worst case cause a crash on some platforms.  In the example above, the state of the media player is checked first before we tell it to play a song.  Checking the state first and stopping it manually if it is playing is best practice to prevent potential crashes.
 
 ## Audio Management
 
@@ -614,17 +614,17 @@ Next, let's implement the `AudioManager` game component that was created in our 
 6. Update `HandleKeyboardInput` to add new inputs to control the audio manager:
 
     ```cs
-    if (InputManager.Keyboard.WasKeyJustPressed(Keys.M))
+    if (_input.Keyboard.WasKeyJustPressed(Keys.M))
     {
         _audioManager.ToggleMute();
     }
     
-    if (InputManager.Keyboard.WasKeyJustPressed(Keys.OemPlus))
+    if (_input.Keyboard.WasKeyJustPressed(Keys.OemPlus))
     {
         _audioManager.IncreaseVolume(0.1f);
     }
     
-    if (InputManager.Keyboard.WasKeyJustPressed(Keys.OemMinus))
+    if (_input.Keyboard.WasKeyJustPressed(Keys.OemMinus))
     {
         _audioManager.DecreaseVolume(0.1f);
     }

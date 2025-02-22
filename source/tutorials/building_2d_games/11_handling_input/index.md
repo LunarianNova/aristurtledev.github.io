@@ -1,5 +1,5 @@
 ---
-title: "Chapter 09: Handling Input"
+title: "Chapter 11: Handling Input"
 description: "Learn how to handle keyboard, mouse, and gamepad input in MonoGame."
 ---
 
@@ -8,7 +8,7 @@ When you play a game, you need ways to control what's happening; using a keyboar
 - [**Keyboard**](xref:Microsoft.Xna.Framework.Input.Keyboard): Detects which keys are being pressed.
 - [**Mouse**](xref:Microsoft.Xna.Framework.Input.Mouse): Tracks mouse movement, button clicks, and scroll wheel use.
 - [**GamePad**](xref:Microsoft.Xna.Framework.Input.GamePad): Manages controller input like button presses and thumbstick movement.
-- [**TouchPanel**](xref:Microsoft.Xna.Framework.Input.TouchPanel): Manages touch input on devices with a touch panel such as mobile phones and tablets.
+- [**TouchPanel**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel): Manages touch input on devices with a touch panel such as mobile phones and tablets.
 
 Each of these input types has a `GetState` method that, when called, checks what is happening with that device at that moment. Think of it like taking a snapshot; when you call `GetState`, MonoGame looks at that exact moment to see which buttons are pressed, where the mouse is, or how the controller is being used.
 
@@ -82,7 +82,7 @@ Let's implement keyboard controls to move our slime sprite around the screen.  O
     ```
 
     > [!IMPORTANT]
-    > Why are we subtracting from the Y position when moving up instead of adding?  Recall from [Chapter 05](../05_working_with_textures/index.md#drawing-a-texture) that MonoGame uses a coordinate system where the Y value **increases** moving down.  So in order to move **up** the screen, we need to reduce the Y value.
+    > Why are we subtracting from the Y position when moving up instead of adding?  Recall from [Chapter 07](../07_working_with_textures/index.md#drawing-a-texture) that MonoGame uses a coordinate system where the Y value **increases** moving down.  So in order to move **up** the screen, we need to reduce the Y value.
 
 3. Next, in [**Update**](xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)), call the new `HandleKeyboardInput` method just before the call to `base.Update`:
 
@@ -152,7 +152,7 @@ Let's implement mouse controls to move the bat sprite around the screen to the p
     ```
 
     > [!IMPORTANT]
-    > Notice that we set the value of the bat position **after** the call to `base.Initialize`.  Recall from Chapter 03 in the [Content Loading](../03_the_game1_file/index.md#content-loading), that the [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent) method is called during the `base.Initialize()` call.  Since we are creating the slime sprite inside of [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent) we need to ensure it's been created before we can use the `Width` property of the slime to set the position of the bat in [**Initialize**](xref:Microsoft.Xna.Framework.Game.Initialize).
+    > Notice that we set the value of the bat position **after** the call to `base.Initialize`.  Recall from [Chapter 03](../03_the_game1_file/index.md#content-loading), that the [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent) method is called during the `base.Initialize()` call.  Since we are creating the slime sprite inside of [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent) we need to ensure it's been created before we can use the `Width` property of the slime to set the position of the bat in [**Initialize**](xref:Microsoft.Xna.Framework.Game.Initialize).
     >
     > We could have just as easily set the bat's position inside the [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent) method after creating the slime, but I wanted to demonstrate the importance of the call order relationship between [**Initialize**](xref:Microsoft.Xna.Framework.Game.Initialize) and [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent)
 
@@ -290,7 +290,7 @@ sprite.Position += leftStick;
 ```
 
 > [!IMPORTANT]
-> Notice that we inverted the y-axis value of the thumbstick by multiplying it by `-1.0f`. This is necessary because the thumbstick y-axis values range from `-1.0f` (down) to `1.0f` (up).  The y-axis of the screen coordinates in MonoGame **increases** downward, as we saw in [Chapter 05](../05_working_with_textures/index.md#drawing-a-texture) and in the [Implementing Keyboard Input](#implementing-keyboard-input) section above.
+> Notice that we inverted the y-axis value of the thumbstick by multiplying it by `-1.0f`. This is necessary because the thumbstick y-axis values range from `-1.0f` (down) to `1.0f` (up).  The y-axis of the screen coordinates in MonoGame **increases** downward, as we saw in [Chapter 07](../07_working_with_textures/index.md#drawing-a-texture) and in the [Implementing Keyboard Input](#implementing-keyboard-input) section above.
 >
 > This inversion aligns the thumbstick's y-axis value with the screen movement.
 
@@ -655,7 +655,7 @@ In the next chapter, we'll learn how to track previous input states to handle si
     <details>
     <summary>Question 7 Answer</summary>
     
-    > Touch input can handle multiple simultaneous touch points through the [**TouchCollection**](Microsoft.Xna.Framework.Input.Touch.TouchCollection), while mouse input only tracks a single cursor position. This allows touch input to support features like multi-touch gestures that aren't possible with a mouse.
+    > Touch input can handle multiple simultaneous touch points through the [**TouchCollection**](xref:Microsoft.Xna.Framework.Input.Touch.TouchCollection), while mouse input only tracks a single cursor position. This allows touch input to support features like multi-touch gestures that aren't possible with a mouse.
     </details><br />
 
 8. What are the different states a [**TouchLocation**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation) can have and what do they indicate?
