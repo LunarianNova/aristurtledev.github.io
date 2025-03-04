@@ -45,6 +45,14 @@
       "modern",
       "templates/aristurtle"
     ],
+    "markdownEngineProperties": {
+        "markdigExtensions": [
+          "Abbreviations",
+          "Figures",
+          "CustomContainers"
+
+        ]
+      },
     "postProcessors": [],
     "keepFileLink": false,
     "disableGitFeatures": true
