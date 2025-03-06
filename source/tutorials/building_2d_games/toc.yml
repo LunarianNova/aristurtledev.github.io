@@ -29,3 +29,5 @@
   href: 13_collision_detection/
 - name: "14: Sound Effects and Music"
   href: 14_soundeffects_and_music/
+- name: "15: The MonoGame Services Container"
+  href: 15_service_container
