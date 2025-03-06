@@ -22,9 +22,7 @@ In this chapter, we'll build off of the `Sprite` class we created in [Chapter 09
 
 Before we can create animated sprites, we need a way to manage animation data. Let's create an `Animation` class to encapsulate this information. In the *Graphics* directory within the *MonoGameLibrary* project, add a new file named *Animation.cs* with this initial structure:
 
-|                     Animation.cs                      |
-|:-----------------------------------------------------:|
-| [!code-csharp[](./snippets/animation.cs#declaration)] |
+[!code-csharp[](./snippets/animation.cs#declaration)]
 
 ### Animation Properties
 
