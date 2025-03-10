@@ -17,7 +17,12 @@ Let's start by understanding how text rendering works in MonoGame.
 
 ## Understanding SpriteFonts
 
-MonoGame processes fonts through the content pipeline to create a texture atlas of font characters.  Preprocessing the font characters into a texture atlas improves performance when rendering text since it removes texture swapping for each character rendered.
+MonoGame processes fonts through the content pipeline to create a texture atlas of font characters.  MonoGame uses the texture atlas approach rather than directly using system fonts for several important reasons:
+
+- **Cross-platform Compatibility**: System fonts cannot be guaranteed to exist on all platforms.
+- **Consistency**: Ensures that the text appears the same across all platforms.
+- **GPU Rendering**: Graphics cards do not understand font formats directly; they can only render textures.
+- **Performance**: Pre-rendering the glyphs to a texture atlas allow for faster rendering at runtime with no texture swapping.
 
 A [**SpriteFont**](xref:Microsoft.Xna.Framework.Graphics.SpriteFont) in MonoGame consists of:
 
@@ -25,7 +30,7 @@ A [**SpriteFont**](xref:Microsoft.Xna.Framework.Graphics.SpriteFont) in MonoGame
 2. Data that tracks the position, size, and spacing of each character.
 3. Kerning information for adjusting spacing between specific character pairs.
 
-The texture atlas approach means fonts are rendered as sprites, using the same [**SpriteBatch**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch) system you learned about for drawing textures.
+The texture atlas approach means fonts are rendered as sprites, using the same [**SpriteBatch**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch) system you learned about for drawing textures.  When you draw text, MonoGame is actually drawing small portions of the texture atlas for each character assembled together to form complete words and sentences.
 
 ## Creating a SpriteFont Description
 
@@ -39,6 +44,8 @@ This will create a default SpriteFont Description file that look something like 
 
 [!code-xml[](./snippets/spritefont_description.spritefont)]
 
+When creating a SpriteFont Description for your game, you'll need to make several important decisions about font selection, size, formatting, and licensing. The following sections will guide you through customizing the SpriteFont Description using these considerations.
+
 ### Customizing the SpriteFont
 
 The SpriteFont Description file allows you to customize various aspects of how the font will be processed and appear in your game. Here are the key elements you can modify:
@@ -46,6 +53,9 @@ The SpriteFont Description file allows you to customize various aspects of how t
 #### FontName
 
 The `<FontName>` element specifies which font to use. By default, it references "Arial".  When a font name is specified just by name like this, it is required that the font be installed on the system where the content is built.
+
+> [!IMPORTANT]
+> MonoGame recommends changing the default Arial font if you are targeting any platforms other than Windows. Arial is a legacy from XNA and is only guaranteed to be available in Windows builds.  As an alternative, MonoGame recommends using [Roboto](https://fonts.google.com/specimen/Roboto).
 
 Alternatively, for better portability across development environments, it's recommended instead to directly reference a TrueType (.ttf) or OpenType (.otf) font file.  To do this
 
@@ -62,7 +72,23 @@ Alternatively, for better portability across development environments, it's reco
 
 #### Size
 
-The `<Size>` element controls the font size in points. For pixel fonts, keeping this at a small value preserves the crisp pixel look. For smoother, anti-aliased fonts, you might want a larger value.
+The `<Size>` element controls the font size in points. While it might seem straightforward, font sizing requires consideration and can be dependent on several factors.  When choosing a font size, consider:
+
+- **Resolution impact**: Fonts that look good at 1080p may appear too small at 4K or too large at 720p.
+- **Font style**: Pixel fonts look best with small sizes to preserve crispness.
+- **Use case**: Different UI elements may require different sizes for proper hierarchy.
+
+You may want to create multiple SpriteFont Description files for different use cases in your game such as:
+
+- A larger font for headings and titles.
+- A medium-sized font for standard UI elements.
+- A smaller font for detailed information.
+
+Creating multiple SpriteFont Description files, however, can remove some of the benefits of fonts being a texture atlas since you will now have multiple atlases for each size. You'll also now have multiple assets to manage both as asset files and references in code.
+
+An alternative approach is to create a single SpriteFont Description with a larger than needed size font, then scale it down during runtime in the game. This approach allows you to maintain the single SpriteFont Description file and single texture atlas, however, the size of the texture atlas will now be larger.
+
+There are tradeoffs to each approach and you should choose the one that works best for your game.
 
 #### Spacing
 
@@ -71,6 +97,9 @@ The `<Spacing>` element adjusts the space between characters. The default value 
 #### UseKerning
 
 The `<UseKerning>` element determines whether to use kerning information from the font. Kerning adjusts the spacing between specific pairs of characters for more visually pleasing results. For most fonts, you'll want to leave this as `true`.
+
+> [!NOTE]
+> While kerning typically improves text appearance, some fonts (including Arial) may not respond optimally to kerning adjustments. If you notice unusual character spacing with a particular font, try setting this value to `false`.
 
 #### Style
 
