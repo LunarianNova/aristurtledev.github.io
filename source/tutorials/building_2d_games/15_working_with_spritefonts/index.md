@@ -3,7 +3,7 @@ title: "Chapter 15: Working with SpriteFonts"
 description: "Learn how to create and use SpriteFonts to render text in your MonoGame project, including loading custom fonts and controlling text appearance."
 ---
 
-In [Chapter 07](../07_working_with_textures/index.md), you learned how to load and render textures to display sprites in your game. While images are essential for visual elements, most games also need text for things like scores, player instructions, dialogue, and UI elements. MonoGame provides the [**SpriteFont**](xref:Microsoft.Xna.Framework.Graphics.SpriteFont) class to handle text rendering, which works together with the familiar [**SpriteBatch**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch) we've already been using for drawing textures.
+In [Chapter 06](../06_working_with_textures/index.md), you learned how to load and render textures to display sprites in your game. While images are essential for visual elements, most games also need text for things like scores, player instructions, dialogue, and UI elements. MonoGame provides the [**SpriteFont**](xref:Microsoft.Xna.Framework.Graphics.SpriteFont) class to handle text rendering, which works together with the familiar [**SpriteBatch**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch) we've already been using for drawing textures.
 
 In this chapter, you will:
 
@@ -84,11 +84,12 @@ You may want to create multiple SpriteFont Description files for different use c
 - A medium-sized font for standard UI elements.
 - A smaller font for detailed information.
 
-Creating multiple SpriteFont Description files, however, can remove some of the benefits of fonts being a texture atlas since you will now have multiple atlases for each size. You'll also now have multiple assets to manage both as asset files and references in code.
-
-An alternative approach is to create a single SpriteFont Description with a larger than needed size font, then scale it down during runtime in the game. This approach allows you to maintain the single SpriteFont Description file and single texture atlas, however, the size of the texture atlas will now be larger.
-
-There are tradeoffs to each approach and you should choose the one that works best for your game.
+> [!TIP]
+> Creating multiple SpriteFont Description files, however, can remove some of the benefits of fonts being a texture atlas since you will now have multiple atlases for each size. You'll also now have multiple assets to manage both as asset files and references in code.
+>
+> An alternative approach is to create a single SpriteFont Description with a larger than needed size font, then scale it down during runtime in the game. This approach allows you to maintain the single SpriteFont Description file and single texture atlas, however, the size of the texture atlas will now be larger.
+>
+> There are tradeoffs to each approach and you should choose the one that works best for your game.
 
 #### Spacing
 
@@ -117,7 +118,7 @@ For most games, the default range is sufficient.
 
 ## Loading a SpriteFont Description
 
-To load  a SpritFont Description, we use the [**ContentManager.Load**](xref:xref:Microsoft.Xna.Framework.Content.ContentManager.Load%60%601(System.String)) method with the [**SpriteFont**](xref:Microsoft.Xna.Framework.Graphics.SpriteFont) type:
+To load  a SpritFont Description, we use the [**ContentManager.Load**](xref:Microsoft.Xna.Framework.Content.ContentManager.Load%60%601(System.String)) method with the [**SpriteFont**](xref:Microsoft.Xna.Framework.Graphics.SpriteFont) type:
 
 ```cs
 // Loading a SpriteFont Description using the content pipeline
@@ -144,7 +145,7 @@ Just like with texture rendering, there are more advanced overloads that give yo
 [!code-csharp[](./snippets/drawstring_full.cs)]
 
 > [!NOTE]
-> Many of these parameters (`rotation`, `origin`, `scale`, `effects`, and `layerDepth`) work exactly the same way as they do for texture rendering, as explained in [Chapter 07](../07_working_with_textures/index.md). If you need a refresher on how these parameters affect rendering, refer back to that chapter.
+> Many of these parameters (`rotation`, `origin`, `scale`, `effects`, and `layerDepth`) work exactly the same way as they do for texture rendering, as explained in [Chapter 06](../06_working_with_textures/index.md). If you need a refresher on how these parameters affect rendering, refer back to that chapter.
 
 ## Calculating Text Dimensions
 
@@ -181,9 +182,9 @@ First, we'll need to create a SpriteFont Definition.  Open the *Content.mgcb* co
 3. Select *SpriteFont Description (.spritefont)* from the options.
 4. Name the file *gameFont.spritefont* and click *Create*.
 
-| ![Figure 8-1: The gameFont.spritefont file created in the MGCB Editor](./images/font_added.png) |
+| ![Figure 15-1: The gameFont.spritefont file created in the MGCB Editor](./images/font_added.png) |
 |:-----------------------------------------------------------------------------------------------:|
-|             **Figure 8-1: The gameFont.spritefont file created in the MGCB Editor**             |
+|             **Figure 15-1: The gameFont.spritefont file created in the MGCB Editor**             |
 
 ### Download the Font File
 
@@ -206,19 +207,23 @@ The key changes here are:
 
 Finally, open the *Game1.cs* file and make the following changes:
 
-[!code-csharp[](./snippets/game1.cs?highlight=41-45,105-106,234-235,378-379)]
+[!code-csharp[](./snippets/game1.cs?highlight=39-43,54-61,90-91,220-221,360-361)]
 
 The key changes made are:
 
 1. The `_font` field was added to store the SpriteFont Description when loaded.
-1. The `_score` field was added to track the player's score.
-1. In [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent), the font is loaded using the content manager.
-1. In [**Update**](xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)), the player's score is increased by `100` each time the slime eats the bat.
-1. In [**Draw**](xref:Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)), the score is drawn to the top-left of the screen using the sprite batch.
+2. The `_score` field was added to track the player's score.
+3. In [**Initialize**](xref:Microsoft.Xna.Framework.Game.Initialize)
+   1. The height of the rendered font is measured
+   2. The initial slime position is placed 10px below where the score text will be rendered.
+   3. The initial bat position is updated to be 10px below where the score text will be rendered.
+4. In [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent), the font is loaded using the content manager.
+5. In [**Update**](xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)), the player's score is increased by `100` each time the slime eats the bat.
+6. In [**Draw**](xref:Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)), the score is drawn to the top-left of the screen using the sprite batch.
 
-| ![Figure 8-2: The game with score displayed in the top-left corner](./videos/score.webm) |
+| ![Figure 15-2: The game with score displayed in the top-left corner](./videos/gameplay.webm) |
 |:----------------------------------------------------------------------------------------:|
-|           **Figure 8-2: The game with score displayed in the top-left corner**           |
+|           **Figure 15-2: The game with score displayed in the top-left corner**           |
 
 ## Conclusion
 
