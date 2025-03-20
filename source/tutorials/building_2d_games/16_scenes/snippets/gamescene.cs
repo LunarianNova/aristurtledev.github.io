@@ -113,12 +113,7 @@ public class GameScene : Scene
         CheckGamePadInput();
 
         // Create a bounding rectangle for the screen
-        Rectangle screenBounds = new Rectangle(
-            0,
-            0,
-            Core.GraphicsDevice.PresentationParameters.BackBufferWidth,
-            Core.GraphicsDevice.PresentationParameters.BackBufferHeight
-        );
+        Rectangle screenBounds = Core.GraphicsDevice.PresentationParameters.Bounds;
 
         // Creating a bounding circle for the slime
         Circle slimeBounds = new Circle(
@@ -202,8 +197,8 @@ public class GameScene : Scene
         {
             // Divide the width  and height of the screen into equal columns and
             // rows based on the width and height of the bat.
-            int totalColumns = Core.GraphicsDevice.PresentationParameters.BackBufferWidth / (int)_bat.Width;
-            int totalRows = Core.GraphicsDevice.PresentationParameters.BackBufferHeight / (int)_bat.Height;
+            int totalColumns = screenBounds.Width / (int)_bat.Width;
+            int totalRows = screenBounds.Height / (int)_bat.Height;
 
             // Choose a random row and column based on the total number of each
             int column = Random.Shared.Next(0, totalColumns);
