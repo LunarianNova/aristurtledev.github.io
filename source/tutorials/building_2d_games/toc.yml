@@ -25,11 +25,13 @@
   href: 11_input_management/
 - name: "12: Collision Detection"
   href: 12_collision_detection/
-- name: "13: Sound Effects and Music"
-  href: 13_soundeffects_and_music/
-- name: "14: Audio Controller"
-  href: 14_audio_controller/
-- name: "15: Working with SpriteFonts"
-  href: 15_working_with_spritefonts/
-- name: "16: Scenes"
-  href: 16_scenes/
+- name: "13: Working with Tilemaps"
+  href: 13_working_with_tilemaps
+- name: "14: Sound Effects and Music"
+  href: 14_soundeffects_and_music/
+- name: "15: Audio Controller"
+  href: 15_audio_controller/
+- name: "16: Working with SpriteFonts"
+  href: 16_working_with_spritefonts/
+- name: "17: Scenes"
+  href: 17_scenes/
