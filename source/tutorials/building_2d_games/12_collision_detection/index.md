@@ -296,7 +296,7 @@ If you run the game right now and move the slime around, you'll notice a few iss
 
 Let's update our game to implement these changes using collision detection and response. Open *Game1.cs* and make the following changes:
 
-[!code-csharp[](./snippets/game1.cs?highlight=1,5,25-29,40-45,79-179,184-196,296-297)]
+[!code-csharp[](./snippets/game1.cs?highlight=1,5,25-29,40-45,81-181,186-198,298-299)]
 
 The key changes made here are:
 
@@ -348,7 +348,7 @@ Let's review what you accomplished in this chapter:
   - Implemented bouncing behavior for the bat.
   - Created a trigger response when the slime "eats" the bat.
 
-In the next chapter, we'll start exploring audio to add sound effects when a collision occurs and background music to our game.
+In the next chapter, we'll explore using tilesets and tilemaps to create tile based environments for our game.
 
 ## Test Your Knowledge
 

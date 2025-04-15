@@ -177,14 +177,15 @@ First, we'll explore creating the texture atlas and defining the texture regions
 The key changes in this implementation are:
 
 1. The `_logo` field was removed.
-2. The `FramesPerSecondCounter` component that was added in the constructor was removed.
-3. Added  `TextureRegion` members for the slime and bat sprites.
-4. In [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent):
+2. Added  `TextureRegion` members for the slime and bat sprites.
+3. In [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent):
     - Removed loading the logo texture.
     - Created a `TextureAtlas` with the atlas texture.
     - Added regions for both the slime and the bat.
     - Retrieved the regions using their names.
-5. Updated [**Draw**](xref:Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)) to render both sprites, using the slime's `Width` property to position the bat.
+4. Updated [**Draw**](xref:Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)) to:
+   - Draw the slime at a scale factor of 4.
+   - Draw the bat 10 pixels to the right of the bat based on the slime's `Width` property, at a scale of 4
 
 Running the game now shows both sprites in the upper-left corner:
 
