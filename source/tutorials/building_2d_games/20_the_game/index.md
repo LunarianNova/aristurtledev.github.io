@@ -69,7 +69,7 @@ This controller provides methods for each game action (moving in four directions
 
 By implementing an abstraction layer such as this class, it offers benefits such as:
 
-1. **Abstraction**: It seperates game actions from physical inputs, making code more readable and maintainable.
+1. **Abstraction**: It separates game actions from physical inputs, making code more readable and maintainable.
 2. **Consolidation**: All input handling is unified in one place, rather than spread across multiple methods.
 3. **Extensibility**: Adding a new input device or changing key bindings only requires changes in one place.
 4. **Clarity**: game code expresses intent clearly with methods like `MoveUp` instead of device specific checks like `keyboard.WasKeyJustPressed(Keys.Up)`.
@@ -246,6 +246,10 @@ With all of these components in place, our Dungeon Slime game is now a complete 
 
 Let's see how it all looks and plays:
 
+| ![Figure 20-1: Gameplay demonstration of the completed Dungeon Slime game showing the snake-like slime growing as it eats bats and a game over when colliding with the wall ](./videos/gameplay.webm) |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|             **Figure 20-1: Gameplay demonstration of the completed Dungeon Slime game showing the snake-like slime growing as it eats bats and a game over when colliding with the wall**             |
+
 1. The game starts with a single slime segment in the center of the screen.
 2. The player controls the direction of the slime by using keyboard arrow or WASD keys, or by using a game pad DPad or left thumbstick.
 3. The slime moves at regular intervals, creating a grid-based movement pattern.
@@ -277,21 +281,21 @@ However the learning doesn't stop here.  In the next chapter, we will look at po
 
 1. How does the slime chain grow when the slime eats a bat?
 
-  :::question-answer
-  When the slime eats a bat, a new segment is added at the end of the chain.  This is done by getting the current tail segment, creating a new segment positioned behind it (using the `ReverseDirection` value), and adding it to the slime segments list.  This creates the growing snake effect where the chain gets longer with each bat consumed.
-  :::
+   :::question-answer
+   When the slime eats a bat, a new segment is added at the end of the chain.  This is done by getting the current tail segment, creating a new segment positioned behind it (using the `ReverseDirection` value), and adding it to the slime segments list.  This creates the growing snake effect where the chain gets longer with each bat consumed.
+   :::
 
 2. How does [**Vector2.Dot**](xref:Microsoft.Xna.Framework.Vector2.Dot(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)) work and how is it used to validate the direction changes.
 
-  :::question-answer
-  [**Vector2.Dot**](xref:Microsoft.Xna.Framework.Vector2.Dot(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)) calculates the dot product of two given vectors which results in a value that defines how much to vectors point in the same direction:
+    :::question-answer
+   [**Vector2.Dot**](xref:Microsoft.Xna.Framework.Vector2.Dot(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)) calculates the dot product of two given vectors which results in a value that defines how much to vectors point in the same direction:
 
-  - A positive value indicates they are pointing in the same direction.
-  - A negative value indicates they are pointing in opposite directions
-  - A zero value indicates they are perpendicular
+   - A positive value indicates they are pointing in the same direction.
+   - A negative value indicates they are pointing in opposite directions.
+   - A zero value indicates they are perpendicular.
 
-  By calculating the dot product between the potential new direction and the current direction, we can determine if the player is trying to move in a direction that would cause the slime to collide with the neck segment.
-  :::
+    By calculating the dot product between the potential new direction and the current direction, we can determine if the player is trying to move in a direction that would cause the slime to collide with the neck segment.
+    :::
 
 3. How is a visual smooth movement achieved when drawing even though the movement of the slime chain happens at timed intervals?
 
