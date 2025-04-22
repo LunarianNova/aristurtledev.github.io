@@ -41,6 +41,8 @@
   href: 19_user_interface_fundamentals/
 - name: "20: Implementing UI with Gum"
   href: 20_implementing_ui_with_gum
+- name: "21: Customizing Gum UI"
+  href: "20_customizing_gum_ui"
 - name: "22: The Game"
   href: 22_the_game/
 - name: "23: Input Buffering"
