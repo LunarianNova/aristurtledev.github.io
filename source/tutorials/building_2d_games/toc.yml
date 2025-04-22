@@ -37,9 +37,11 @@
   href: 17_scenes/
 - name: "18: Texture Sampling"
   href: 18_texture_sampling/
-- name: "19: User Interface"
-  href: 19_user_interface/
-- name: "20: The Game"
-  href: 20_the_game/
-- name: "21: Input Buffering"
-  href: 21_input_buffering
+- name: "19: User Interface Fundamentals"
+  href: 19_user_interface_fundamentals/
+- name: "20: Implementing UI with Gum"
+  href: 20_implementing_ui_with_gum
+- name: "22: The Game"
+  href: 22_the_game/
+- name: "23: Input Buffering"
+  href: 23_input_buffering
