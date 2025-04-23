@@ -35,10 +35,10 @@ public class Game1 : Core
         TextureAtlas atlas = new TextureAtlas(atlasTexture);
 
         // add the slime region to the atlas.
-        atlas.AddRegion("slime", 0, 0, 20, 20);
+        atlas.AddRegion("slime", 0, 0, 80, 80);
 
         // add the bat region to the atlas.
-        atlas.AddRegion("bat", 20, 0, 20, 20);
+        atlas.AddRegion("bat", 0, 80, 80, 80);
 
         // retrieve the slime region from the atlas.
         _slime = atlas.GetRegion("slime");
@@ -67,11 +67,11 @@ public class Game1 : Core
         // Begin the sprite batch to prepare for rendering.
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-        // Draw the slime texture region at a scale of 4.0
-        _slime.Draw(SpriteBatch, Vector2.Zero, Color.White, 0.0f, Vector2.One, 4.0f, SpriteEffects.None, 0.0f);
+        // Draw the slime texture region.
+        _slime.Draw(SpriteBatch, Vector2.One, Color.White);
 
-        // Draw the bat texture region 10px to the right of the slime at a scale of 4.0
-        _bat.Draw(SpriteBatch, new Vector2(_slime.Width * 4.0f + 10, 0), Color.White, 0.0f, Vector2.One, 4.0f, SpriteEffects.None, 1.0f);
+        // Draw the bat texture region 10px to the right of the slime.
+        _bat.Draw(SpriteBatch, new Vector2(_slime.Width + 10, 0), Color.White);
 
         // Always end the sprite batch when finished.
         SpriteBatch.End();

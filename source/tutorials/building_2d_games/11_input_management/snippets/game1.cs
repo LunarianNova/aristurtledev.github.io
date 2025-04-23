@@ -40,20 +40,15 @@ public class Game1 : Core
 
         // Create the slime animated sprite from the atlas.
         _slime = atlas.CreateAnimatedSprite("slime-animation");
-        _slime.Scale = new Vector2(4.0f, 4.0f);
 
         // Create the bat animated sprite from the atlas.
         _bat = atlas.CreateAnimatedSprite("bat-animation");
-        _bat.Scale = new Vector2(4.0f, 4.0f);
 
         base.LoadContent();
     }
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
-
         // Update the slime animated sprite.
         _slime.Update(gameTime);
 
@@ -113,11 +108,11 @@ public class Game1 : Core
         if (gamePadOne.IsButtonDown(Buttons.A))
         {
             speed *= 1.5f;
-            gamePadOne.SetVibration(1.0f, TimeSpan.FromSeconds(1));
+            GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
         }
         else
         {
-            gamePadOne.StopVibration();
+            GamePad.SetVibration(PlayerIndex.One, 0.0f, 0.0f);
         }
 
         // Check thumbstick first since it has priority over which gamepad input
