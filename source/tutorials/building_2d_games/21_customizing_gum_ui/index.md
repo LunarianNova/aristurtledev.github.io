@@ -106,7 +106,7 @@ Before we create our custom components, we need to update the game's resources t
 
 ### Update the Texture Atlas
 
-Before we can start, we first need to update the texture atlas for the game. This new texture atlas includes:
+Before we can start, we first need to update the *atlas.png* texture atlas file for the game. This new version of the texture atlas includes:
 
 - The characters for the font, generated using Bitmap Font Generator (BMFont)
 - The sprites for the UI components we will create
@@ -127,7 +127,7 @@ While MonoGame natively uses [**SpriteFont**](xref:Microsoft.Xna.Framework.Graph
 
 First, download the *.fnt* file by right-clicking the following link and saving it as *04b_30.fnt* in the game project's *Content/fonts* directory:
 
-- ![04b_30.fnt](./files/04b_30.fnt)
+- [04b_30.fnt](./files/04b_30.fnt)
 
 Next, add this font file to your content project using the MGCB Editor:
 
@@ -197,11 +197,7 @@ The most distinctive feature of our animated button is its ability to change app
 
 Each animation frame specifies the coordinates within our texture atlas to display:
 
-[!code-csharp[](./snippets/animatedbutton.cs?start=62&end=74)]
-
-[!code-csharp[](./snippets/animatedbutton.cs?start=76&end=95)]
-
-[!code-csharp[](./snippets/animatedbutton.cs?start=97&end=102)]
+[!code-csharp[](./snippets/animatedbutton.cs?start=62&end=102)]
 
 #### States and Categories
 
@@ -209,15 +205,9 @@ In Gum, each control type has a specific category name that identifies its state
 
 [!code-csharp[](./snippets/animatedbutton.cs?start=104&end=107)]
 
-Within this category,w e define how the button appears in different states by creating `StateSave` objects with specific state names:
+Within this category, we define how the button appears in different states by creating `StateSave` objects with specific state names:
 
-[!code-csharp[](./snippets/animatedbutton.cs?start=109&end=117)]
-
-[!code-csharp[](./snippets/animatedbutton.cs?start=119&end=128)]
-
-[!code-csharp[](./snippets/animatedbutton.cs?start=130&end=134)]
-
-[!code-csharp[](./snippets/animatedbutton.cs?start=136&end=140)]
+[!code-csharp[](./snippets/animatedbutton.cs?start=109&end=140)]
 
 Each state's `Apply` action defines what visual changes occur when the state becomes active.  In our case, we switch between animation chains to create the desired visual effect.
 
@@ -249,7 +239,7 @@ Create a new file named *OptionsSlider.cs* in the *UI* folder with the following
 
 [!code-csharp[](./snippets/optionsslider.cs)]
 
-The `OptionsSlider` is more complex than then `AnimatedButton` because it contains more visual elements.  Let's examine the key aspects of this implementation:
+The `OptionsSlider` is more complex than then [`AnimatedButton`](#the-animatedbutton-class) because it contains more visual elements.  Let's examine the key aspects of this implementation:
 
 #### Slider Components
 
@@ -299,7 +289,7 @@ First, open the *TitleScene.cs* file in the game project and add the following u
 
 [!code-csharp[](./snippets/titlescene/usings.cs?highlight=2)]
 
-Next, update both the `_optionsButton` and the `_optionsBackButton` fields to be of our new `AnimatedButton` type, and add a new field to store a reference to the texture atlas in.
+Next, update both the `_optionsButton` and the `_optionsBackButton` fields to be of our new [`AnimatedButton`](#the-animatedbutton-class) type, and add a new field to store a reference to the texture atlas in.
 
 [!code-csharp[](./snippets/titlescene/fields.cs?highlight=3-11)]
 
@@ -307,14 +297,14 @@ Next, in the `LoadContent` method, we need to update it so that it loads the tex
 
 [!code-csharp[](./snippets/titlescene/loadcontent.cs?highlight=15-16)]
 
-Next, update the `CreateTitlePanel` method so that instead of using the default Gum `Button` Forms controls it now uses our custom `AnimatedButton` control and remove the explicit setting of the `Visual.Width` property since this is managed by the `AnimatedButton` now:
+Next, update the `CreateTitlePanel` method so that instead of using the default Gum `Button` Forms controls it now uses our custom [`AnimatedButton`](#the-animatedbutton-class) control and remove the explicit setting of the `Visual.Width` property since this is managed by the [`AnimatedButton`](#the-animatedbutton-class) now:
 
 [!code-csharp[](./snippets/titlescene/createtitlepanel.cs?highlight=8,16)]
 
 Finally, update the `CreateOptionsPanel` method so that:
 
 - It uses a `TextRuntime` to display the text "OPTIONS" using the bitmap font
-- Instead of using the default Gum `Button` and `Slider` Forms controls, it now uses our custom `AnimatedButton` and `OptionsSlider` controls.
+- Instead of using the default Gum `Button` and `Slider` Forms controls, it now uses our custom [`AnimatedButton`](#the-animatedbutton-class) and [`OptionsSlider`](#the-optionsslider-class) controls.
 - Both the `musicSlider` and `sfxSlider` have been given `Name` and `Text` properties.
 
 [!code-csharp[](./snippets/titlescene/createoptionspanel.cs?highlight=8-15,17-19,31-33,45)]
@@ -325,7 +315,7 @@ Next, open the *GameScene.cs* file in the game project and add the following usi
 
 [!code-csharp[](./snippets/gamescene/usings.cs?highlight=2,4)]
 
-Next, update the `_resumeButton` field to be of our new `AnimatedButton` type and add a field to store a reference to the texture atlas in.
+Next, update the `_resumeButton` field to be of our new [`AnimatedButton`](#the-animatedbutton-class) type and add a field to store a reference to the texture atlas in.
 
 [!code-csharp[](./snippets/gamescene/fields.cs?highlight=5,10-12)]
 
@@ -335,9 +325,9 @@ Next, in the `LoadContent` method, we need to update it so that it stores the te
 
 Finally, update the `CreatePausePanel` method so that
 
-1. Instead of using a `ColoredRectangleRuntime` for the background of the pause panel, it now uses a `NineSliceRuntime` that uses the sprite from the texture atlas.
+1. Instead of using a [`ColoredRectangleRuntime`](#visual-elements) for the background of the pause panel, it now uses a [`NineSliceRuntime`](#visual-elements) that uses the sprite from the texture atlas.
 2. The `textInstance` is updated so that it uses the custom bitmap font file.
-3. The `_resumeButton` and `quiteButton` are updated to use our custom `AnimatedButton` control instead of the default Gum `Button` Forms control.
+3. The `_resumeButton` and `quiteButton` are updated to use our custom [`AnimatedButton`](#the-animatedbutton-class) control instead of the default Gum `Button` Forms control.
 
 [!code-csharp[](./snippets/gamescene/createpausepanel.cs?highlight=12-22,26-28,33,41)]
 
@@ -346,7 +336,7 @@ Finally, update the `CreatePausePanel` method so that
 When you run the game now, you'll see a dramatic improvement in the visual appearance of the UI:
 
 1. The buttons now use our custom animated background that pulses when focused.
-2. The sliders have a cleaner, mores stylized appearance with teh OFF and MAX labels.
+2. The sliders have a cleaner, mores stylized appearance with the OFF and MAX labels.
 3. All text uses our custom bitmap font.
 4. Visual feedback clearly indicates which element has focus.
 

@@ -17,7 +17,7 @@ Let's start by understanding what a user interface is and how it functions in ga
 
 ## Understanding Game User Interfaces
 
-A user interface in games serves a sa bridge between the player and the game's systems.  Well designed UIs help players navigate the game's mechanics, understand their current status, and make informed decisions.  For new game developers, understanding UI principles is crucial because even the most mechanically sound game can fail if players can' effectively interact with it.
+A user interface in games serves as a bridge between the player and the game's systems.  Well designed UIs help players navigate the game's mechanics, understand their current status, and make informed decisions.  For new game developers, understanding UI principles is crucial because even the most mechanically sound game can fail if players can't effectively interact with it.
 
 Game UIs consist of various visual elements that serve different purposes:
 
@@ -40,12 +40,12 @@ When designing and implementing game UI systems, developers must decide how UI e
 
 ## Parent-Child Relationships
 
-Parent-child relationships are part of many UI system. This relationship is implemented with UI elements containing other UI elements, creating a tree-like structure. This hierarchial approach mirrors how interface elements naturally group together in designs.
+Parent-child relationships are a part of many UI system. This relationship is implemented with UI elements containing other UI elements, creating a tree-like structure. This hierarchial approach mirrors how interface elements naturally group together in designs.
 
 For example, a settings panel might contain multiple buttons, labels, and sliders.  By making these elements children of the panel, they can be managed as a cohesive unit.  This organizational structure provides several significant advantages:
 
 - **Inheritance of Properties**: Child elements can automatically inherit certain properties from their parents.  For instance, if a parent element is hidden or disabled, all its children can be hidden or disabled as well. This cascading behavior simplifies state management across complex interfaces.
-- **Relative Positioning**: Child elements can be positioned relative to their parents rather than relative to the screen.  This means you can place elements within a contain and then move the entire container as a unit without having to update ach child's position individually.
+- **Relative Positioning**: Child elements can be positioned relative to their parents rather than relative to the screen.  This means you can place elements within a container and then move the entire container as a unit without having to update each child's position individually.
 - **Simplified State Management**:  Actions on parent elements can automatically propagate to their children.  For example, disabling a menu panel can automatically disable all buttons within it, preventing interaction with elements that should be active.
 - **Batch Operations**: Operations like drawing and updating can be performed on a parent element and automatically cascade to all children, reducing the need for repetitive code.
 - **Logical Grouping**: The hierarchy naturally models the conceptual grouping of UI elements, making the code structure more intuitive and easier to maintain.
@@ -100,7 +100,7 @@ Creating accessible user interfaces is an essential aspect of inclusive game des
 
 - **Color contrast**: Ensure sufficient contrast between text and backgrounds
 - **Use shapes**: Don't rely solely on color to convey important information; add shapes, patterns, or text labels as well.  For example, if displaying warning text, also use something such as the common warning sign ⚠️.
-- **Text size and scaling**: Allow players to adjust text size or implement a UI scaling option.  In Gum, this can be achieved by applying scaling factors to your UI elements or by having multiple font sizes available. Also, Gum provides font scaling support, although we do not cover this topic here.
+- **Text size and scaling**: Allow players to adjust text size or implement a UI scaling option.
 - **Internationalization (i18n)**: Consider how your UI might be interpreted across different cultures and regions. Number formatting can vary significantly - some regions use periods for thousands separators (1.000.000) while others use commas (1,000,000). Control symbolism also differs culturally; for example, on console controllers, the Cross button typically means "Select" in Western regions but "Cancel" in Japan, with Circle having the opposite meaning.
 
 ### Input Accessibility
