@@ -14,7 +14,15 @@ While the environment setup process is similar to the standard setup process for
 
 ## Installing the .NET SDK
 
-The first thing we need to do is install the .NET *Software Development Kit* (SDK). At the time of this writing, MonoGame targets the .NET 8.0 SDK. To install it, follow the instructions based on your operating system below
+The first thing we need to do is install the .NET *Software Development Kit* (SDK). At the time of this writing, MonoGame targets the .NET 8.0 SDK.
+
+> [!NOTE]
+> At the time of writing this tutorial, .NET 9.0 is released, however this tutorial still recommends installing .NET 8.0 for two reasons
+>
+> 1. .NET 8.0 is the current Long-Term Support (LTS) release of .NET. This means it receives security updates and bug fixes for 3 years, while Standard-Term Support (STS) releases like .NET 9.0 provide a shorter support window, typically around 18 months.  For more information see the [.NET and .NET Core official support policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core#cadence) page.
+> 2. MonoGame targets the LTS version of .NET, meaning it targets .NET 8.0, so we are using the same version for consistency.
+
+To install it, follow the instructions based on your operating system below
 
 ### [Windows](#tab/windows)
 
@@ -26,12 +34,13 @@ The first thing we need to do is install the .NET *Software Development Kit* (SD
 
 1. Open a web browser and navigate to https://dotnet.microsoft.com/en-us/download.
 2. Click the *Download .NET SDK x64 (Intel)* button start the download of the .NET SDK Installer
-3. Once the download finishes, run the installer.  
+3. Once the download finishes, run the installer.
 
-> [!NOTE]  
+> [!NOTE]
 > For the time being, MonoGame requires that you install the **Intel** version even if you are using an Apple Silicon (M1/M2) Mac. For Apple Silicon Macs, it also requires that [Rosetta](https://support.apple.com/en-us/HT211861) is enabled.
 
 ### [Linux](#tab/linux)
+
 1. Open a new *Terminal* window
 2. Enter the following command to install the .NET SDK
 
@@ -89,7 +98,7 @@ To install VSCode, follow the instructions for your operating system below:
 
 For C# development using VSCode, it's recommended to use the official *C# Dev Kit* extension provided by Microsoft. Installing this extension will add additional features to VSCode such as a project system and *Solution Explorer* for C# projects. It also provides code editing features such as syntax highlighting, code completion, code navigation, refactoring, NuGet package management, and debugging tools.
 
-> [!NOTE]  
+> [!NOTE]
 > The *Solution Explorer* panel is a hierarchial view provided by the C# Dev Kit extension that displays your solution structure similar  to Visual Studio's Solution Explorer.
 >
 > When you open a workspace in Visual Studio Code containing a .NET solution file (*.sln*), the *Solution Explorer* panel automatically appears and loads your solution.  From this panel, you can perform common operations like:
@@ -108,7 +117,7 @@ To install the C# Dev Kit extension, perform the following:
 3. Enter `C#` in the *Search Box*
 4. Click install for the *C# Dev Kit* extension.
 
-> [!NOTE]  
+> [!NOTE]
 > When you search `C#` in the *Extension Panel* you may notice there is the C# Dev Kit extension and a base standard C# extension. When installing the C# Dev Kit extension, the base extension will also be installed as a requirement.
 
 ## Installing the "MonoGame for VSCode" Extension
@@ -149,7 +158,7 @@ Open a new *Terminal* window and execute the following commands:
 
 ```sh
 sudo apt-get update && sudo apt-get install -y curl p7zip-full wine64
-wget -qO- https://monogame.net/downloads/net8_mgfxc_wine_setup.sh | bash  
+wget -qO- https://monogame.net/downloads/net8_mgfxc_wine_setup.sh | bash
 ```
 
 > [!NOTE]
@@ -191,7 +200,7 @@ Be amazed, the default MonoGame Cornflower Blue game window. You have just creat
 
 You can exit the game at any time by pressing the `Esc` key on your keyboard.
 
-> [!NOTE]  
+> [!NOTE]
 > Above, I mentioned that a loop is entered. This is commonly referred to as the *game loop*, which we'll discuss in more detail in the next chapter. The reason the application enters this loop is because game applications work differently than a traditional desktop application like your web browser.
 >
 > Desktop application are event based, meaning once loaded, the do not do much at all while waiting for input from the user, and then it response to that input event and redraws the window if needed based on the interaction.
