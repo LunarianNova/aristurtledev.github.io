@@ -38,7 +38,7 @@ Gum addresses these challenges with ready-made solutions, allowing us to focus o
 
 ## Gum Concepts
 
-Before we dive into implementation, let's explore the core concepts that Gum provides.  Gum simplifies UI development by providing read-made controls and layout systems that would otherwise require significant effort to build from scratch.
+Before we dive into implementation, let's explore the core concepts that Gum provides.  Gum simplifies UI development by providing ready-made controls and layout systems that would otherwise require significant effort to build from scratch.
 
 ### Understanding Gum's Structure
 
@@ -100,7 +100,7 @@ public class GameScene
 
 ### Anchoring
 
-In the previous chapter we discussed [anchoring](../19_user_interface_fundamentals/index.md#anchoring), a fundamental UI concept that allows you to position elements relative to specific reference points of their parents.  Gum supports anchoring of elements through the `Anchor()` method of their `Visual` property:
+In the previous chapter we discussed [anchoring](../19_user_interface_fundamentals/index.md#anchoring), a fundamental UI concept that allows you to position elements relative to specific reference points of their parents.  Gum supports anchoring of Forms controls through their `Anchor()` method.
 
 ```cs
 // Creating a panel and adding it to the root
@@ -110,7 +110,7 @@ mainMenuPanel.AddToRoot();
 // Creating a button and adding it as a child of the panel
 // anchored ot the bottom-left of the panel
 Button startButton = new Button();
-startButton.Visual.Anchor(Gum.Wireframe.Anchor.BottomLeft);
+startButton.Anchor(Gum.Wireframe.Anchor.BottomLeft);
 mainMenuPanel.AddChild(startButton);
 ```
 
@@ -130,7 +130,7 @@ Gum supports the following anchors:
 
 ### Docking
 
-In the previous chapter, we also discussed [docking](../19_user_interface_fundamentals/index.md#docking), a fundamental UI concept that adjusts an element's size to fill the available space.  Gum supports docking of elements through the `Dock()` method of their `Visual` property:
+In the previous chapter, we also discussed [docking](../19_user_interface_fundamentals/index.md#docking), a fundamental UI concept that adjusts an element's size to fill the available space.  Gum supports docking of Forms controls through their `Dock()` method.
 
 ```cs
 // Creating a panel and adding it to the root
@@ -138,7 +138,7 @@ Panel mainMenuPanel = new Panel();
 mainMenuPanel.AddToRoot();
 
 // Docking the panel to fill the entire root space
-mainMenuPanel.Visual.Dock(Gum.Wireframe.Dock.Fill);
+mainMenuPanel.Dock(Gum.Wireframe.Dock.Fill);
 ```
 
 Gum supports the following docs:
@@ -183,7 +183,7 @@ A common pattern is to set a panel's docking to `Fill`, which makes it span the 
 
 ```cs
 // Make the panel fill the entire screen
-mainMenuPanel.Visual.Dock(Gum.Wireframe.Dock.Fill);
+mainMenuPanel.Dock(Gum.Wireframe.Dock.Fill);
 ```
 
 This creates a consistent coordinate space for all child elements, allowing them to be positioned relative to the screen.
@@ -201,7 +201,7 @@ Buttons can be positioned using anchoring to create layouts that adapt to differ
 ```cs
 // Creating a button that is anchored to the bottom left.
 Button startButton = new Button;
-startButton.Visual.Anchor(Gum.Wireframe.Anchor.BottomLeft);
+startButton.Anchor(Gum.Wireframe.Anchor.BottomLeft);
 
 // Set the X and Y position so it is 20px from the left edge
 // and 20px from the bottom edge.
@@ -276,7 +276,7 @@ Gum allows you to customize visuals in two ways: through direct property assignm
 startButton.Visual.Width = 100;
 ```
 
-Direct property assignment works well for initial setup, such as positioning element sor setting their dimensions when first creating your UI.  However, when you need visual elements to respond to user interactions (like highlighting a button when it is focused), a different approach is required.
+Direct property assignment works well for initial setup, such as positioning elements or setting their dimensions when first creating your UI.  However, when you need visual elements to respond to user interactions (like highlighting a button when it is focused), a different approach is required.
 
 For these dynamic changes, Gum uses a system of **states** (implemented as `StateSave` objects).  Each Forms control maintains a collection of named states that are automatically applied in response to specific user interactions.  When a button becomes focused, for instance, Gum looks for an applies a  state named "Focused" to alter its appearance.
 
@@ -289,7 +289,7 @@ Now that we understand the UI concepts and how Gum will help implement them, let
 
 ### Adding the Gum NuGet Package
 
-Before we can use Gum in our project, we first need to add it using NuGet.  NuGet is a package manager for .NEt projects that allows you to add third-party libraries into your project, similar to how we [created and added our own class library](../04_creating_a_class_library/index.md).
+Before we can use Gum in our project, we first need to add it using NuGet.  NuGet is a package manager for .NET projects that allows you to add third-party libraries into your project, similar to how we [created and added our own class library](../04_creating_a_class_library/index.md).
 
 To add the Gum NuGet package to our game project, follow the instructions below based on your development environment:
 
@@ -301,7 +301,7 @@ To add the Gum NuGet package in Visual Studio Code:
 2. Choose *Add NuGet Package* from the context menu.
 3. Enter "Gum.MonoGame" in the *Add NuGet Package* search prompt and press Enter.
 4. When the search finishes, select the *Gum.MonoGame* package in the results
-5. When prompted for a version, choose the latest version ("2025.4.20.2" as of this writing").
+5. When prompted for a version, choose the latest version ("2025.4.23.1" as of this writing").
 
 #### [Visual Studio 2022](#tab/vs2022)
 
@@ -312,7 +312,7 @@ To Add the Gum NuGet package in Visual Studio 2022:
 3. In the NuGet Package Manager window, select the *Browse* tab if it is not already selected.
 4. In the search box, enter "Gum.MonoGame".
 5. Select the "Gum.MonoGame" package from the search results.
-6. Ensure the latest version is selected in the dropdown menu ("2025.4.20.2" as of this writing") and click the *Install* button.
+6. Ensure the latest version is selected in the dropdown menu ("2025.4.23.1" as of this writing") and click the *Install* button.
 
 #### [dotnet CLI](#tab/dotnetcli)
 
@@ -325,7 +325,7 @@ To add the Gum NuGet package using the dotnet CLI:
     dotnet add DungeonSlime.csproj package Gum.MonoGame
     ```
 
-This will install the latest version of the package, which is "2025.4.20.2" as of this writing.
+This will install the latest version of the package, which is "2025.4.23.1" as of this writing.
 
 ---
 
@@ -333,7 +333,7 @@ This will install the latest version of the package, which is "2025.4.20.2" as o
 > You can verify the package was successfully added by examining your *DungeonSlime.csproj* file, which should now contain a reference like:
 >
 > ```xml
-> <PackageReference Include="Gum.MonoGame" Version="2025.4.20.2" />
+> <PackageReference Include="Gum.MonoGame" Version="2025.4.23.1" />
 > ```
 
 ### Adding UI Sound Effect
@@ -366,9 +366,13 @@ First, open the *Game1.cs* file and add the following new using statements to th
 
 [!code-csharp[](./snippets/game1/usings.cs?highlight=3-5)]
 
-Next, update the [**Initialize**](xref:Microsoft.Xna.Framework.Game.Initialize) method to configure the Gum system:
+Next, add the following method to the `Game1` class to encapsulate the initializations of the Gum UI service:
 
-[!code-csharp[](./snippets/game1/initialize.cs?highlight=8-37)]
+[!code-csharp[](./snippets/game1/initializegum.cs)]
+
+Finally, update the [**Initialize**](xref:Microsoft.Xna.Framework.Game.Initialize) method to call the `InitializeGum` method we just created:
+
+[!code-csharp[](./snippets/game1/initialize.cs?highlight=8-9)]
 
 Let's examine each part of this initialization process:
 
@@ -380,7 +384,7 @@ Let's examine each part of this initialization process:
 2. **Content Loading**: Gum needs to be made aware of which content manager to use to load assets through the content pipeline.  By setting `GumService.Default.ContentLoader.XnaContentManager = Core.Content`, we tell Gum to use our game's content manager when loading assets.  By using the game's existing content manager, Gum also gets the benefit of the caching that the content manager performs when loading assets.
 3. **Input Configuration**:
    - By default, all Forms controls automatically respond to mouse and touch screen input devices.  We need to explicitly register keyboard and gamepad input devices by using th `FrameworkElement.KeyboardsForUiControl` and `Framework.GamePadsForUiControl` properties.
-   - By default, Forms controls will automatically respond to tab and shift-tab for navigation. By using the `FrameworkElement.TabKeyCombos` and `FrameworkElement.TabReverseKeyCombos` properties, we can add additional key combinations for tabbing.  Here map the Up arrow for reverse tabbing and the Down arrow for forward tabbing.  
+   - By default, Forms controls will automatically respond to tab and shift-tab for navigation. By using the `FrameworkElement.TabKeyCombos` and `FrameworkElement.TabReverseKeyCombos` properties, we can add additional key combinations for tabbing.  Here map the Up arrow for reverse tabbing and the Down arrow for forward tabbing.
 
    > [!TIP]
    > If you prefer different navigation keys, you can remove the built-in Tab/Shift+Tab navigation.
@@ -419,13 +423,13 @@ Our title panel includes two buttons positioned at the bottom corners of the scr
 > [!NOTE]
 > Notice how we use `Anchor` to position the buttons relative to the panel's edges, with the "Start" button anchored at the bottom left and the "Options" button anchored at the bottom right.  Then the positioning of the elements is adjusted relative to its anchor point.
 
-Each button registers a `Click` event handler to respond when the players selects it. Let's implement the vent handler method for these buttons next.  Add the following methods to the `TitleScene` class:
+Each button registers a `Click` event handler to respond when the players selects it. Let's implement the event handler method for these buttons next.  Add the following methods to the `TitleScene` class:
 
 [!code-csharp[](./snippets/titlescene/handlestartclicked.cs)]
 
 [!code-csharp[](./snippets/titlescene/handleoptionsclicked.cs)]
 
-These handlers are called when the `Click` event is triggered for each button.  The handler for the "Start" button changes to the game scene, while the handler for the options button toggles the visibility between the main menu and the options panel.
+These handlers are called when the `Click` event is raised for each button.  The handler for the "Start" button changes to the game scene, while the handler for the options button toggles the visibility between the main menu and the options panel.
 
 #### Creating the Options Panel
 
@@ -450,7 +454,7 @@ Now let's implement the event handlers for these controls
 These handlers update our audio settings in real-time as the player adjusts the sliders.
 
 > [!TIP]
-> Notice that for both sliders, we registered a method for the `ValueChangeCompleted` event.  This is so we can play the UI sound effect only when the player has finished adjusting the slider value. If we had instead played the UI sound effect in the `ValueChanged` event, then the UI sound effect would trigger constantly while the slider is being adjusted if they are using a mouse to drag it.
+> Notice that for both sliders, we registered a method for the `ValueChangeCompleted` event.  This is so we can play the UI sound effect only when the player has finished adjusting the slider value. If we had instead played the UI sound effect in the `ValueChanged` event, then the UI sound effect would trigger constantly while the slider is being adjusted if using a mouse to drag it.
 
 #### Initializing the UI
 
@@ -478,7 +482,7 @@ Finally, add Gum's drawing call to the end of the `Draw` method:
 
 [!code[](./snippets/titlescene/draw.cs?highlight=36)]
 
-With these changes, our UI system is now fully integrated into the scene's game loop.  Gum will update its controls during the `Update` method and draw them during the `Draw` method.  This produces a fully functional title screen with buttons that allows players to start the game or adjust audio settings.  
+With these changes, our UI system is now fully integrated into the scene's game loop.  Gum updates its controls in the `Update` method and draws them in the `Draw` method.  This produces a fully functional title screen with buttons that allows players to start the game or adjust audio settings.
 
 | ![Figure 20-1: Title screen with default Gum buttons](./images/title-unstyled.png) |
 | :--------------------------------------------------------------------------------: |
@@ -489,13 +493,14 @@ With these changes, our UI system is now fully integrated into the scene's game 
 
 ### Adding GameScene UI
 
-Now that we've setup the UI for the title scene, elt's add a pause menu to our game scene.  This UI wills tart invisible but will be shown when the player presses the escape key.  For consistency, we'll implement the UI for the game scene in the same order that we implemented the UI for the title scene.
+Now that we've setup the UI for the title scene, let's add a pause menu to our game scene.  This UI will start invisible but will be shown when the player presses the escape key.  For consistency, we'll implement the UI for the game scene in the same order that we implemented the UI for the title scene.
 
 First, open the *GameScene.cs* file in the game project and add the following using declarations to the top of the `GameScene` class.
 
 [!code-csharp[](./snippets/gamescene/usings.cs?highlight=2,7-9)]
 
 Next, add the following fields:
+
 [!code-csharp[](./snippets/gamescene/fields.cs)]
 
 #### Pausing the Game
@@ -504,11 +509,11 @@ To pause the game, first let's create a method that makes the pause panel visibl
 
 [!code-csharp[](./snippets/gamescene/pausegame.cs)]
 
-Next, update the `CheckKeyboardInput` method so that when the escape key is pressed, instead of returning to the title scene, we now pause the game:
+Next, update the `CheckKeyboardInput` method so that when the escape key is pressed, we pause the game instead of returning to the title scene:
 
 [!code-csharp[](./snippets/gamescene/checkkeyboardinput.cs?highlight=6-10)]
 
-Finally, update the `CheckGamePadInput` method so that when the start button is pressed, it pauses the game:
+Finally, update the `CheckGamePadInput` method so the game is paused when the start button is pressed:
 
 [!code-csharp[](./snippets/gamescene/checkgamepadinput.cs?highlight=6-10)]
 
@@ -544,7 +549,7 @@ Finally, add Gum's drawing call to the end fo the `Draw` method:
 
 [!code-csharp[](./snippets/gamescene/draw.cs?highlight=9-10)]
 
-WIth these changes, the pause menu is now fully integrated into the game scene's game loop.  Gum will update its controls during the `Update` method and draw them during the `Draw` method.  If the game is paused, as determined by the `IsVisible` property of the pause menu, then updating the actual game logic is skipped.
+WIth these changes, the pause menu is now fully integrated into the game scene's game loop.  Gum updates its controls during the `Update` method and draws them during the `Draw` method.  If the game is paused, as determined by the `IsVisible` property of the pause menu, then updating the actual game logic is skipped.
 
 | ![Figure 20-12: The pause menu during the game scene with default Gum buttons](./images/pause-unstyled.png) |
 | :---------------------------------------------------------------------------------------------------------: |
@@ -561,8 +566,8 @@ In this chapter, you've successfully implemented a functional UI system for our 
 - Handle user input from various input devices.
 - Create transitions between different UI screens.
 - Integrate the UI system with the game's scene architecture.
-  
-With this UI is now functional, you may have noticed that it uses Gum's default styling, which doesn't match our game's visual theme.  In the next chapter, we'll learn how to customize the appearance of our UI elements to create a cohesive visual style that complements our game's aesthetic.
+
+While this UI is now functional, you may have noticed that it uses Gum's default styling which doesn't match our game's visual theme.  In the next chapter, we'll learn how to customize the appearance of our UI elements to create a cohesive visual style that complements our game's aesthetic.
 
 ## Test Your Knowledge
 
@@ -573,7 +578,7 @@ With this UI is now functional, you may have noticed that it uses Gum's default 
 
     - **Forms**: Interactive UI elements like buttons, sliders, and panels that handle user input. They provide built-in functionality for common UI interactions.
     - **Visuals**: Display elements like TextRuntime, ColoredRectangleRuntime, and NineSliceRuntime that are used to render graphics. They have no built-in interaction behavior but can be customized visually.
-  
+
     Forms controls contain Visuals, accessible through the `Visual` property, creating a separation between functionality and presentation.
     :::
 
