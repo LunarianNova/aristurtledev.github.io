@@ -43,7 +43,7 @@
   href: 20_implementing_ui_with_gum
 - name: "21: Customizing Gum UI"
   href: "21_customizing_gum_ui"
-- name: "22: The Game"
-  href: 22_the_game/
+- name: "22: Completing the Game"
+  href: 22_completing_the_game/
 - name: "23: Input Buffering"
   href: 23_input_buffering
