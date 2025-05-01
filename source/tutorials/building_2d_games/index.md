@@ -52,7 +52,7 @@ The following conventions are used in this documentation.
 
 ### Inline Code Blocks
 
-`Inline code` blocks are used for methods, functions, and variable names when they are discussed within the body of a paragraph.
+`Inline code` blocks are used for methods, functions, and variable names when they are discussed within the paragraphs of text.  For example, when referring to a method such as `Foo` in a sentence,it will appear with this formatting.
 
 ### Code Blocks
 
@@ -61,7 +61,7 @@ The following conventions are used in this documentation.
 public void Foo() { }
 ```
 
-Code blocks are used to show code examples with syntax highlighting.
+Code blocks are used to show code examples with syntax highlight.  These appear as separated blocks rather than inline with text, allowing for multi-line examples and better readability of complete code snippets.
 
 ## MonoGame
 
