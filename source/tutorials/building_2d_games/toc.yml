@@ -44,6 +44,6 @@
 - name: "21: Customizing Gum UI"
   href: "21_customizing_gum_ui"
 - name: "22: Snake Game Mechanics"
-  href: tutorials/building_2d_games/22_snake_game_mechanics/
+  href: 22_snake_game_mechanics/
 - name: "23: Completing the Game"
-  href: tutorials/building_2d_games/23_completing_the_game/
+  href: 23_completing_the_game/
