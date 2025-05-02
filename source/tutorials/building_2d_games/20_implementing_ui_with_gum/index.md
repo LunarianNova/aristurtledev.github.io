@@ -3,7 +3,7 @@ title: "Chapter 20: Implementing UI with Gum"
 descrption: "Learn how to integrate and use the Gum UI framework to create functional menus, buttons, and sliders for your MonoGame projects."
 ---
 
-In the [previous chapter](../19_user_interface_fundamentals/index.md) we explored the fundamental concepts of user interface design. Now we're ready to put these principles into practice by implementing a UI system for our game. While it's possible to build a UI system from scratch, we'll take advantage of Gum, a specialized UI framework that simplifies many of the complex aspects of UI implementation.
+In the [previous chapter](../19_user_interface_fundamentals/index.md) we explored the fundamental concepts of user interface design. Now we're ready to put these principles into practice by implementing a UI system for our game. While it's possible to build a UI system from scratch, we will take advantage of Gum, a specialized UI framework that simplifies many of the complex aspects of UI implementation.
 
 In this chapter you will:
 
@@ -158,9 +158,9 @@ Gum supports the following docs:
 
 Gum provides two types of objects: **Forms** and **Visuals**.  Forms controls are typical interactive UI elements such as buttons, sliders, and text boxes that handle user interaction through mouse, gamepad, and keyboard inputs.  These controls come with built-in functionality; a button responds visually when focused, while a slider changes its value when clicked on its *track*.  By using these standardized components, you can maintain consistency throughout your UI implementation.
 
-All Forms controls provide customization through their `Visual` property, which serves as a gateway to modifying their appearance and layout. With this property, you can move, resize, restyle, and even completely replace visuals through code.  As we'll see when building our UI in the next chapter, this separation between functionality and presentation allows us to create consistent behaviors while adapting the visual style to match our game's aesthetic.
+All Forms controls provide customization through their `Visual` property, which serves as a gateway to modifying their appearance and layout. With this property, you can move, resize, restyle, and even completely replace visuals through code.  As we will see when building our UI in the next chapter, this separation between functionality and presentation allows us to create consistent behaviors while adapting the visual style to match our game's aesthetic.
 
-For now, let's examine some of the Forms control types we'll use in this chapter.
+For now, let's examine some of the Forms control types we will use in this chapter.
 
 #### Panel
 
@@ -281,11 +281,11 @@ Direct property assignment works well for initial setup, such as positioning ele
 For these dynamic changes, Gum uses a system of **states** (implemented as `StateSave` objects).  Each Forms control maintains a collection of named states that are automatically applied in response to specific user interactions.  When a button becomes focused, for instance, Gum looks for an applies a  state named "Focused" to alter its appearance.
 
 > [!NOTE]
-> In the next chapter during the customization pass, we'll create states to visually indicate when controls are focused, providing clear feedback to the player.
+> In the next chapter during the customization pass, we will create states to visually indicate when controls are focused, providing clear feedback to the player.
 
 ## Updating Our Game To Use Gum
 
-Now that we understand the UI concepts and how Gum will help implement them, let's integrate Gum into our game project.  We'll add the framework, initialize it, and prepare it for use in our scenes.  For now we will use the default styling in Gum to quickly iterate and build the UI and do a customization styling pass in the next chapter.
+Now that we understand the UI concepts and how Gum will help implement them, let's integrate Gum into our game project.  We will add the framework, initialize it, and prepare it for use in our scenes.  For now we will use the default styling in Gum to quickly iterate and build the UI and do a customization styling pass in the next chapter.
 
 ### Adding the Gum NuGet Package
 
@@ -338,7 +338,7 @@ This will install the latest version of the package, which is "2025.4.23.1" as o
 
 ### Adding UI Sound Effect
 
-To make our UI more responsive and engaging, we'll add audio feedback that plays when players interact with buttons and other UI elements. Sound effects provide immediate confirmation that an input has been recognized, creating a more engaging experience.
+To make our UI more responsive and engaging, we will add audio feedback that plays when players interact with buttons and other UI elements. Sound effects provide immediate confirmation that an input has been recognized, creating a more engaging experience.
 
 First, download the UI sound effect by right-clicking the following link and saving it as *ui.wav* in the game project's *Content/audio* folder:
 
@@ -384,7 +384,7 @@ Let's examine each part of this initialization process:
 2. **Content Loading**: Gum needs to be made aware of which content manager to use to load assets through the content pipeline.  By setting `GumService.Default.ContentLoader.XnaContentManager = Core.Content`, we tell Gum to use our game's content manager when loading assets.  By using the game's existing content manager, Gum also gets the benefit of the caching that the content manager performs when loading assets.
 3. **Input Configuration**:
    - By default, all Forms controls automatically respond to mouse and touch screen input devices.  We need to explicitly register keyboard and gamepad input devices by using th `FrameworkElement.KeyboardsForUiControl` and `Framework.GamePadsForUiControl` properties.
-   - By default, Forms controls will automatically respond to tab and shift-tab for navigation. By using the `FrameworkElement.TabKeyCombos` and `FrameworkElement.TabReverseKeyCombos` properties, we can add additional key combinations for tabbing.  Here map the Up arrow for reverse tabbing and the Down arrow for forward tabbing.  
+   - By default, Forms controls will automatically respond to tab and shift-tab for navigation. By using the `FrameworkElement.TabKeyCombos` and `FrameworkElement.TabReverseKeyCombos` properties, we can add additional key combinations for tabbing.  Here map the Up arrow for reverse tabbing and the Down arrow for forward tabbing.
 
    > [!TIP]
    > If you prefer different navigation keys, you can remove the built-in Tab/Shift+Tab navigation.
@@ -396,7 +396,7 @@ Let's examine each part of this initialization process:
    > FrameworkElement.TabReverseKeyCombos.Clear();
    > ```
 
-4. **UI Scaling**:  Gum allows us to independently scale the UI regardless of the resolution of the game.  Our game is set to a resolution of 1280x720, however as we'll see during the styling section later, the UI assets created were done at one-fourth the size to reduce the size of the texture atlas.  Here, we use the `GumService.Default.CanvasWidth` and `GumService.Default.CanvasHeight`  properties to set the canvas size to one-fourth that of our game's resolution. Then using by setting the `GumService.Default.Renderer.Camera.Zoom` property to four, we effectively make it render the UI at full resolution.
+4. **UI Scaling**:  Gum allows us to independently scale the UI regardless of the resolution of the game.  Our game is set to a resolution of 1280x720, however as we will see during the styling section later, the UI assets created were done at one-fourth the size to reduce the size of the texture atlas.  Here, we use the `GumService.Default.CanvasWidth` and `GumService.Default.CanvasHeight`  properties to set the canvas size to one-fourth that of our game's resolution. Then using by setting the `GumService.Default.Renderer.Camera.Zoom` property to four, we effectively make it render the UI at full resolution.
 
 Gum is now fully initialized and we can use it in our scenes to add UI to our game.
 
@@ -433,7 +433,7 @@ These handlers are called when the `Click` event is raised for each button.  The
 
 #### Creating the Options Panel
 
-Next, we'll create the options panel with sliders to adjust the volume for music and sound effects.  Add the following method to the `TitleScene` class:
+Next, we will create the options panel with sliders to adjust the volume for music and sound effects.  Add the following method to the `TitleScene` class:
 
 [!code-csharp[](./snippets/titlescene/createoptionspanel.cs)]
 
@@ -482,18 +482,18 @@ Finally, add Gum's drawing call to the end of the `Draw` method:
 
 [!code[](./snippets/titlescene/draw.cs?highlight=36)]
 
-With these changes, our UI system is now fully integrated into the scene's game loop.  Gum updates its controls in the `Update` method and draws them in the `Draw` method.  This produces a fully functional title screen with buttons that allows players to start the game or adjust audio settings.  
+With these changes, our UI system is now fully integrated into the scene's game loop.  Gum updates its controls in the `Update` method and draws them in the `Draw` method.  This produces a fully functional title screen with buttons that allows players to start the game or adjust audio settings.
 
 | ![Figure 20-1: Title screen with default Gum buttons](./images/title-unstyled.png) |
 | :--------------------------------------------------------------------------------: |
 |               **Figure 20-1: Title screen with default Gum buttons**               |
 
 > [!NOTE]
-> You may notice that the UI elements currently use Gum's default styling, which does not match our game's visual theme.  We'll explore customizing these controls to match our game's visual style in the next chapter.
+> You may notice that the UI elements currently use Gum's default styling, which does not match our game's visual theme.  We will explore customizing these controls to match our game's visual style in the next chapter.
 
 ### Adding GameScene UI
 
-Now that we've setup the UI for the title scene, let's add a pause menu to our game scene.  This UI will start invisible but will be shown when the player presses the escape key.  For consistency, we'll implement the UI for the game scene in the same order that we implemented the UI for the title scene.
+Now that we've setup the UI for the title scene, let's add a pause menu to our game scene.  This UI will start invisible but will be shown when the player presses the escape key.  For consistency, we will implement the UI for the game scene in the same order that we implemented the UI for the title scene.
 
 First, open the *GameScene.cs* file in the game project and add the following using declarations to the top of the `GameScene` class.
 
@@ -541,7 +541,7 @@ Next, update the `LoadContent` method to load the sound effect that will be used
 
 [!code-csharp[](./snippets/gamescene/loadcontent.cs?highlight=27-28)]
 
-Next, update the `Update` method to include Gum's update logic and to only update the game if it is not paused.  We'll use the visibility of the pause menu to determine if the game is paused or not:
+Next, update the `Update` method to include Gum's update logic and to only update the game if it is not paused.  We will use the visibility of the pause menu to determine if the game is paused or not:
 
 [!code-csharp[](./snippets/gamescene/update.cs?highlight=3-10)]
 
@@ -566,8 +566,8 @@ In this chapter, you've successfully implemented a functional UI system for our 
 - Handle user input from various input devices.
 - Create transitions between different UI screens.
 - Integrate the UI system with the game's scene architecture.
-  
-While this UI is now functional, you may have noticed that it uses Gum's default styling which doesn't match our game's visual theme.  In the next chapter, we'll learn how to customize the appearance of our UI elements to create a cohesive visual style that complements our game's aesthetic.
+
+While this UI is now functional, you may have noticed that it uses Gum's default styling which doesn't match our game's visual theme.  In the next chapter, we will learn how to customize the appearance of our UI elements to create a cohesive visual style that complements our game's aesthetic.
 
 ## Test Your Knowledge
 
@@ -578,7 +578,7 @@ While this UI is now functional, you may have noticed that it uses Gum's default
 
     - **Forms**: Interactive UI elements like buttons, sliders, and panels that handle user input. They provide built-in functionality for common UI interactions.
     - **Visuals**: Display elements like TextRuntime, ColoredRectangleRuntime, and NineSliceRuntime that are used to render graphics. They have no built-in interaction behavior but can be customized visually.
-  
+
     Forms controls contain Visuals, accessible through the `Visual` property, creating a separation between functionality and presentation.
     :::
 

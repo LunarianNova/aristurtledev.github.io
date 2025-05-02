@@ -208,7 +208,7 @@ In the *MonoGameLibrary* project, add a new file named *Circle.cs*.  Add the fol
 [!code-csharp[](./snippets/cirlce.cs#declaration)]
 
 > [!NOTE]
-> Notice that the struct will implement [`IEquatable<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1).  When creating value types like this, it is recommended to implement `IEquatable<T>` because it has better performance and can help avoid boxing.  
+> Notice that the struct will implement [`IEquatable<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1).  When creating value types like this, it is recommended to implement `IEquatable<T>` because it has better performance and can help avoid boxing.
 >
 > For more information on recommended design guidelines for structs, see [Struct Design - Framework Design Guidelines | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/struct)
 
@@ -348,7 +348,7 @@ Let's review what you accomplished in this chapter:
   - Implemented bouncing behavior for the bat.
   - Created a trigger response when the slime "eats" the bat.
 
-In the next chapter, we'll explore using tilesets and tilemaps to create tile based environments for our game.
+In the next chapter, we will explore using tilesets and tilemaps to create tile based environments for our game.
 
 ## Test Your Knowledge
 

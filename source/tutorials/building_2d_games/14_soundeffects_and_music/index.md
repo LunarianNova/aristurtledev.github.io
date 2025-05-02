@@ -124,7 +124,7 @@ Sound effects are played using the [**SoundEffect**](xref:Microsoft.Xna.Framewor
     [!code-csharp[](./snippets/play_soundeffect_instance.cs)]
 
 - Use [**SoundEffect.Play**](xref:Microsoft.Xna.Framework.Audio.SoundEffect.Play) for simple sound effects that you just want to play once.
-- Use [**SoundEffect.CreateInstance**](xref:Microsoft.Xna.Framework.Audio.SoundEffect.CreateInstance) when you need more control over the sound effect, like adjusting volume, looping, or managing multiple instances of the same sound.  
+- Use [**SoundEffect.CreateInstance**](xref:Microsoft.Xna.Framework.Audio.SoundEffect.CreateInstance) when you need more control over the sound effect, like adjusting volume, looping, or managing multiple instances of the same sound.
 
 [**SoundEffectInstance**](xref:Microsoft.Xna.Framework.Audio.SoundEffectInstance) contains several properties that can be used to control how the sound effect is played:
 
@@ -207,7 +207,7 @@ Let's review what you accomplished in this chapter:
   - Sound effects for bat bouncing and collection events.
 - Learned best practices for handling audio playback across different platforms.
 
-In the next chapter, we'll explore additional ways to manage audio by creating an audio controller module that will help with common tasks such as volume control, muting, and state management.
+In the next chapter, we will explore additional ways to manage audio by creating an audio controller module that will help with common tasks such as volume control, muting, and state management.
 
 ## Test Your Knowledge
 

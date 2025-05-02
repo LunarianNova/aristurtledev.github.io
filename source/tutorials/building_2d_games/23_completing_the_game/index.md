@@ -140,7 +140,7 @@ The `GameScene` class now contains the following key fields:
 - `_ui`: A reference to the game scene UI component.
 - `_state`: The current state of the game represented by the `GameState` enum.
 
-Now we'll add the various methods needed to complete the `GameScene` class. Add each section in the sequence presented below. This will build up the scene's functionality step by step.
+Now we will add the various methods needed to complete the `GameScene` class. Add each section in the sequence presented below. This will build up the scene's functionality step by step.
 
 > [!NOTE]
 > As with previous classes, you might encounter compiler errors until all sections are in place. These errors will be resolved once all components of the class have been added.
@@ -308,7 +308,7 @@ For our snake-style game, a buffer size of two is typically ideal - enough to ha
 
 ### Implementing Input Buffering in the Slime Class
 
-Let's modify our `Slime` class to include an input buffer system. First, we'll add the necessary fields to store our input queue.  In the *GameObjects* directory of the *DungeonSlime* project (your main game project), open the *Slime.cs* file and add the folliwing fields after the `_sprite` field:
+Let's modify our `Slime` class to include an input buffer system. First, we will add the necessary fields to store our input queue.  In the *GameObjects* directory of the *DungeonSlime* project (your main game project), open the *Slime.cs* file and add the folliwing fields after the `_sprite` field:
 
 [!code-csharp[](./snippets/slime/fields.cs)]
 
@@ -380,7 +380,7 @@ In this chapter, we have transformed our technical demo into a complete game by 
 - Added game state management to handle different gameplay conditions.
 - Enhanced player control through input buffering for more responsive gameplay
 - Connected all of the elements to create a complete playable game.
-  
+
 The refactoring process we undertook demonstrates an important game development principle: separating concerns into specialized components makes code more maintainable and easier to extend. The `Slime` class manages snake-like behavior, the `Bat` class handles movement and collision response, and the `GameSceneUI` class encapsulates all UI-related functionality.
 
 ## Test Your Knowledge
@@ -400,7 +400,7 @@ The refactoring process we undertook demonstrates an important game development 
     - Creates a clear flow between different game conditions
     - Simplifies conditional logic by using explicit states rather than multiple boolean flags
     - Makes the game's behavior more predictable and easier to debug
-  
+
     :::
 
 2. Why is it important to position the bat away from the slime after it's been eaten rather than at a completely random location?

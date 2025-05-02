@@ -54,7 +54,7 @@ To center content on the screen, we need to find the window's center point. We c
 
 [!code-csharp[](./snippets/draw_center_wrong.cs?highlight=9-16)]
 
-> [!TIP]  
+> [!TIP]
 > In the example above, we multiply the [**Vector2**](xref:Microsoft.Xna.Framework.Vector2) created by `0.5f` to halve the value instead of dividing it by `2.0f`. If you are not used to seeing this, it might seem strange at first, but it is actually an optimization technique. CPUs are able to perform multiplication operations much faster than division operations and reading `* 0.5f` is easily understood to be the same thing as `/ 2.0f` when reading.
 
 We have now set the position to half the window's dimensions, which should center the logo. Let's run the game to see the result.
@@ -91,7 +91,7 @@ This overload produces the same centered result but exposes all parameters that 
 | *origin*          | [**Vector2**](xref:Microsoft.Xna.Framework.Vector2)                      | The X and Y coordinate origin point of the texture when rendering. This will affect the offset of the texture when rendered as well being the origin in which the texture is rotated around and scaled from.                                                                                         |
 | *scale*           | `float`                                                                  | The amount to scale the image across the x- and y-axes. Specifying `1.0f` will render the image at its default size with no scaling.                                                                                                                                                                 |
 | *effects*         | [**SpriteEffects**](xref:Microsoft.Xna.Framework.Graphics.SpriteEffects) | A [**SpriteEffects**](xref:Microsoft.Xna.Framework.Graphics.SpriteEffects) enum value to that specifies if the texture should be rendered flipped across the horizontal axis, the vertical axis, or both axes.                                                                                       |
-| *layerDepth*      | `float`                                                                  | Specifies the depth at which the texture is rendered. Textures with a higher layer depth value are drawn on top of those with a lower layer depth value. **Note: This value will only apply when using `SpriteSortMode.FrontToBack` or `SpriteSortMode.BackToFront`. We'll cover this in a moment.** |
+| *layerDepth*      | `float`                                                                  | Specifies the depth at which the texture is rendered. Textures with a higher layer depth value are drawn on top of those with a lower layer depth value. **Note: This value will only apply when using `SpriteSortMode.FrontToBack` or `SpriteSortMode.BackToFront`. We will cover this in a moment.** |
 
 ### Rotation
 
@@ -105,7 +105,7 @@ Running the code now shows the rotated image, but not in the expected position:
 | :----------------------------------------------------------------------------------------------------------------------------------: |
 |                   **Figure 6-4: Attempting to draw the MonoGame logo rotated 90° and centered on the game window**                   |
 
-The reason the sprite did not rotate as expected is because of the `origin` parameter.  
+The reason the sprite did not rotate as expected is because of the `origin` parameter.
 
 ### Origin
 
@@ -135,7 +135,7 @@ By moving the sprite's origin point to its center, this not only corrects the po
 
 ### Scale
 
-The `scale` parameter specifies the amount of scaling to apply to the sprite when it is rendered.  The default value is `1.0f`, which can be read as "rendering the sprite at 1x the size".  Increasing this will scale up the size of the sprite and decreasing it will scale down the sprite.  
+The `scale` parameter specifies the amount of scaling to apply to the sprite when it is rendered.  The default value is `1.0f`, which can be read as "rendering the sprite at 1x the size".  Increasing this will scale up the size of the sprite and decreasing it will scale down the sprite.
 
 For this example, let's first reset the rotation back to `0.0f` (removing the 90° rotation we applied above) so we can clearly see the scaling effect.  Then we will set the scale of the logo sprite to `1.5f`
 
@@ -236,7 +236,7 @@ Which will produce the following result:
 
 ### Source Rectangle
 
-The `sourceRectangle` parameter specifies a specific boundary within the texture that should be rendered.  So far, we've just set this parameter to `null`, which specifies that the full texture should be rendered.  If we only wanted to render a portion of the texture as the sprite, we can set this parameter value.  
+The `sourceRectangle` parameter specifies a specific boundary within the texture that should be rendered.  So far, we've just set this parameter to `null`, which specifies that the full texture should be rendered.  If we only wanted to render a portion of the texture as the sprite, we can set this parameter value.
 
 For instance, take the logo image we've been using.  We can break it down into two distinct regions; the MonoGame icon and the MonoGame wordmark.
 
@@ -254,7 +254,7 @@ The following changes were made:
 
 - Two new [**Rectangle**](xref:Microsoft.Xna.Framework.Rectangle) values called `iconSourceRect` and `wordmarkSourceRect` that represent the boundaries of the MonoGame icon and wordmark regions within the logo texture were added.
 - The *sourceRectangle* parameter of the `_spriteBatch.Draw` was updated to use the new `iconSourceRect` value. **Notice that we are still telling it to draw the `_logo` for the *texture*, we've just supplied it with a source rectangle this time.**
-- The *origin* parameter was updated to use the width and height of the `iconSourceRect`. Since the overall dimensions of what we'll be rendering has changed due to supplying a source rectangle, the origin needs to be adjusted to those dimensions as well.
+- The *origin* parameter was updated to use the width and height of the `iconSourceRect`. Since the overall dimensions of what we will be rendering has changed due to supplying a source rectangle, the origin needs to be adjusted to those dimensions as well.
 - Finally, a second `_spriteBatch.Draw` call is made, this time using the `wordmarkSourceRect` as the source rectangle so that the wordmark is drawn.
 
 If you run the game now, you should see the following:
@@ -264,7 +264,7 @@ If you run the game now, you should see the following:
 |                   **Figure 6-15: The MonoGame icon and wordmark, from the logo texture, centered in the game window**                   |
 
 > [!NOTE]
-> Making use of the `sourceRectangle` parameter to draw different sprites from the same texture is optimization technique that we'll explore further in the next chapter.
+> Making use of the `sourceRectangle` parameter to draw different sprites from the same texture is optimization technique that we will explore further in the next chapter.
 
 ### Layer Depth
 
@@ -299,7 +299,7 @@ There are also two additional [**SpriteSortMode**](xref:Microsoft.Xna.Framework.
 
 The first is [**SpriteSortMode.Texture**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode.Texture).  This works similar to [**SpriteSortMode.Deferred**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode.Deferred) in that draw calls happen in the order they are made.  However, before the draw calls are made, they are sorted by texture.  This can be helpful when using multiple textures to reduce texture swapping, however it can have unintended results with layering if you're not careful.
 
-The second is [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode.Immediate).  When using this sort mode, when a draw call is made, it is immediately flushed to the GPU and rendered to the screen, ignoring the layer depth, instead of batched and drawn when [**SpriteBatch.End**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch.End) is called. Using this can cause performance issues and should only be used when necessary.  We'll discuss an example of using this in a later chapter when we discuss shaders, since with [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode.Immediate) you can adjust shader parameters for each individual draw call.
+The second is [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode.Immediate).  When using this sort mode, when a draw call is made, it is immediately flushed to the GPU and rendered to the screen, ignoring the layer depth, instead of batched and drawn when [**SpriteBatch.End**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch.End) is called. Using this can cause performance issues and should only be used when necessary.  We will discuss an example of using this in a later chapter when we discuss shaders, since with [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode.Immediate) you can adjust shader parameters for each individual draw call.
 
 ## Conclusion
 
@@ -314,7 +314,7 @@ Let's review what you accomplished in this chapter:
 - You used the `sourceRectangle` parameter to draw specific regions from a texture.
 - You explored sprite layering using the `layerDepth` parameter and different [**SpriteSortMode**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) options.
 
-In the next chapter, we'll take what we've learned about working with textures and learn techniques to optimize rendering to reduce texture swapping.
+In the next chapter, we will take what we've learned about working with textures and learn techniques to optimize rendering to reduce texture swapping.
 
 ## Test Your Knowledge
 
