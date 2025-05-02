@@ -45,7 +45,7 @@ The default constructor creates an empty sprite that can be configured later, wh
 
 ### Methods
 
-Finally, the `Sprite` class provides the following two methods:
+Finally, add the following two method to the `Sprite` class:
 
 [!code-csharp[](./snippets/sprite.cs#methods)]
 
@@ -54,7 +54,7 @@ Finally, the `Sprite` class provides the following two methods:
     > [!NOTE]
     > The origin needs to be set based on the width and height of the source texture region itself, regardless of the scale the sprite is rendered at.
 
-- `Draw`: Uses the `TextureRegion` property to submit the sprite for rendering using the properties of the sprite itself.  
+- `Draw`: Uses the `TextureRegion` property to submit the sprite for rendering using the properties of the sprite itself.
 
 ## Create Sprites With The TextureAtlas Class
 
@@ -82,14 +82,14 @@ The key changes in this implementation are:
   - Both the `_slime` and `_bat` sprites are given a scale of 4.0f.
 - In [**Draw**](xref:Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)), the draw calls were updated to use the `Sprite.Draw` method.
 
-Running the game now will produce the same result as in the previous chapter.  
+Running the game now will produce the same result as in the previous chapter.
 
 | ![Figure 8-1: The slime and bat sprites being rendered in the upper-left corner of the game window](./images/slime-and-bat-rendered.png) |
 |:----------------------------------------------------------------------------------------------------------------------------------------:|
 |                   **Figure 8-1: The slime and bat sprites being rendered in the upper-left corner of the game window**                   |
 
 > [!NOTE]
-> Notice how even though we increased the scale of both sprites, the bat sprite is still only 10px to the right of the bat.  This is because the `Width` property we created for the `Sprite` class takes into account the scale factor of the sprite as well.  
+> Notice how even though we increased the scale of both sprites, the bat sprite is still only 10px to the right of the bat.  This is because the `Width` property we created for the `Sprite` class takes into account the scale factor of the sprite as well.
 
 Try adjusting the various properties available for the slime and the bat sprites to see how they affect the rendering.
 
