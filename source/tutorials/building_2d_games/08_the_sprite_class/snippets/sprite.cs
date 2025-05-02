@@ -4,7 +4,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGameLibrary.Graphics;
 
-public class Sprite { }
+public class Sprite
+{
+
+}
 #endregion
 {
     #region members
@@ -62,7 +65,7 @@ public class Sprite { }
     public float LayerDepth { get; set; } = 0.0f;
 
     /// <summary>
-    /// Gets the width, in pixels, of this sprite. 
+    /// Gets the width, in pixels, of this sprite.
     /// </summary>
     /// <remarks>
     /// Width is calculated by multiplying the width of the source texture region by the x-axis scale factor.
