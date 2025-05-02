@@ -39,7 +39,6 @@ Let's break down what each of these fields is responsible for:
 
 - `s_scoreFormat`: A string format template used to display the player's score with leading zeros.
 - `_uiSoundEffect`: Stores the sound effect played for UI interactions like button clicks and focus changes.
-- `_overlay`: A semi-transparent overlay that darkens the game screen when a menu is displayed.
 - `_pausePanel`: The panel containing the UI elements shown when the game is paused.
 - `_resumeButton`: A reference to the resume button, allowing us to set focus on it when the pause panel is shown.
 - `_gameOverPanel`: The panel containing the UI elements shown when a game over occurs.
@@ -78,10 +77,6 @@ Next add the methods to create the various UI elements that are managed by the `
 [!code-csharp[](./snippets/gamesceneui/createscoretext.cs)]
 
 This method takes creates a `TextRuntime` element that we can use to display the player's score and returns it back.  After this method, add the following method:
-
-[!code-csharp[](./snippets/gamesceneui/createoverlay.cs)]
-
-This method creates a `ColoredRectangleRuntime` element that is semi-transparent and returns it back.  This will be used to dim the game when the pause and game over panels are shown.  After this method, add the following method:
 
 [!code-csharp[](./snippets/gamesceneui/createpausepanel.cs)]
 
