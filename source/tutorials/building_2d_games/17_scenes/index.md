@@ -173,7 +173,7 @@ Add the following override for the `LoadContent` method to the `TitleScene` clas
 - The [**SpriteFont**](xref:Microsoft.Xna.Framework.Graphics.SpriteFont) used to draw the "Dungeon" and "Slime" text is loaded using the scene's content manager.
 
 > [!TIP]
-> Recall from [Chapter 05](../05_content_pipeline/index.md#contentmanager-methods) that when a [**ContentManager**](xref:Microsoft.Xna.Framework.Content.ContentManager) loads an asset for the first time, it caches it internally and the subsequent calls to load that asset will return the cached one instead of performing another disk read.
+> Recall from [Chapter 05](../05_content_pipeline/index.md#contentmanager-methods) that when a [**ContentManager**](xref:Microsoft.Xna.Framework.Content.ContentManager) loads an asset for the first time, it caches it internally and the subsequent calls to load that asset will return the cached one instead of performing another disk read.  
 >
 > By using a global content manager here to load assets that are used in multiple scenes, when they loaded in a different scene later, the cached version is returned instead of having to do another disk read, making the content loading more efficient.
 
@@ -183,10 +183,10 @@ Add the following override for the `Update` method to the `TitleScene` class:
 
 [!code-csharp[](./snippets/titlescene.cs#update)]
 
-- A check is made to see if the enter key is pressed, and if so, the `Core` is told to change to the game scene.
+- A check is made to see if the enter key is pressed, and if so, the `Core` is told to change to the game scene.  
 
 > [!NOTE]
-> Your editor might show an error here since we haven't created the `GameScene` class yet.  We will create it in a moment after finishing the title scene.
+> Your editor might show an error here since we have not created the `GameScene` class yet.  We will create it in a moment after finishing the title scene.
 
 ##### Title Scene Draw
 
@@ -255,7 +255,7 @@ Add the following override for the `LoadContent` method to the `GameScene` class
 - The font is loaded using the global content manager since it is used in multiple scenes.
 
 > [!TIP]
-> Notice how we're following a consistent pattern across scenes: global assets are loaded with `Core.Instance.Content` while scene-specific assets are loaded with the scene's `Content` property.
+> Notice how we are following a consistent pattern across scenes: global assets are loaded with `Core.Instance.Content` while scene-specific assets are loaded with the scene's `Content` property.
 
 ##### Game Scene Update
 
@@ -323,7 +323,7 @@ In this chapter, you accomplished the following:
 - Created a `GameScene` that encapsulates the gameplay mechanics.
 - Refactored the main `Game1` class to be much simpler by using the scene system.
 
-The approach we've taken follows a common pattern in game development, where each scene has control over its own lifecycle and resources. This pattern simplify state management by isolating different game states from one another.  As your game grows in complexity, you could easily extend this system to include additional scenes like a pause menu or a game over screen.
+The approach we have taken follows a common pattern in game development, where each scene has control over its own lifecycle and resources. This pattern simplify state management by isolating different game states from one another.  As your game grows in complexity, you could easily extend this system to include additional scenes like a pause menu or a game over screen.
 
 In the next chapter, we will explore [**RenderTarget2D**](xref:Microsoft.Xna.Framework.Graphics.RenderTarget2D) and how we can use it to add different types of transitions when switching scenes.
 

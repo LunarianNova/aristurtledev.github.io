@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace MonoGameLibrary.Graphics;
 
-public class AnimatedSprite : Sprite
+public class AnimatedSprite : Sprite 
 {
 
 }

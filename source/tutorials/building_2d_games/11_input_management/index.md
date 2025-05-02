@@ -12,7 +12,7 @@ In this chapter you will:
 - Create a reusable input management system
 - Simplify handling input across multiple devices
 
-Let's start by understanding the concept of input state changes and how we can detect them.
+We will start by understanding the concept of input state changes and how we can detect them.
 
 ## Understanding Input States
 
@@ -21,11 +21,11 @@ When handling input in games, there are two key scenarios we need to consider:
 - An input is being held down (like holding a movement key).
 - An input was just pressed for one frame (like pressing a jump button).
 
-Let's look at the difference using keyboard input as an example. With our current implementation, we can check if a key is down using [**KeyboardState.IsKeyDown**](xref:Microsoft.Xna.Framework.Input.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys)):
+Now, we will look at the difference using keyboard input as an example. With our current implementation, we can check if a key is down using [**KeyboardState.IsKeyDown**](xref:Microsoft.Xna.Framework.Input.KeyboardState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys)):
 
 [!code[](./snippets/key_down_every_frame.cs)]
 
-However, many game actions shouldn't repeat while a key is held. For instance, if the Space key makes your character jump, you probably don't want them to jump repeatedly just because the player is holding the key down. Instead, you want the jump to happen only on the first frame when Space is pressed.
+However, many game actions should not repeat while a key is held. For instance, if the Space key makes your character jump, you probably do not want them to jump repeatedly just because the player is holding the key down. Instead, you want the jump to happen only on the first frame when Space is pressed.
 
 To detect this "just pressed" state, we need to compare two states:
 
@@ -36,17 +36,17 @@ If both conditions are true, we know the key was just pressed.  If we were to mo
 
 [!code-csharp[](./snippets/compare_previous_state.cs)]
 
-This same concept applies to mouse buttons and gamepad input as well. Any time you need to detect a "just pressed" or "just released" state, you'll need to compare the current input state with the previous frame's state.
+This same concept applies to mouse buttons and gamepad input as well. Any time you need to detect a "just pressed" or "just released" state, you will need to compare the current input state with the previous frame's state.
 
-So far, we've only been working with our game within the *Game1.cs* file.  This has been fine for the examples given.  Overtime, as the game grows, we're going to have a more complex system setup with different scenes, and each scene will need a way to track the state of input over time.  We could do this by creating a lot of variables in each scene to track this information, or we can use object-oriented design concepts to create a reusable `InputManager` class to simplify this for us.
+So far, we have only been working with our game within the *Game1.cs* file.  This has been fine for the examples given.  Overtime, as the game grows, we are going to have a more complex system setup with different scenes, and each scene will need a way to track the state of input over time.  We could do this by creating a lot of variables in each scene to track this information, or we can use object-oriented design concepts to create a reusable `InputManager` class to simplify this for us.
 
-Before we create the `InputManager` class, let's first create classes for the keyboard, mouse, and gamepad that encapsulates the information about those inputs which will then be exposed through the `InputManager`.
+Before we create the `InputManager` class, we should first create classes for the keyboard, mouse, and gamepad that encapsulates the information about those inputs which will then be exposed through the `InputManager`.  
 
 To get started, create a new folder called *Input* in the *MonoGameLibrary* project.  We will put all of our input related classes here.
 
 ## The KeyboardInfo Class
 
-Let's start our input management system by creating a class to handle keyboard input. The `KeyboardInfo` class will encapsulate all keyboard-related functionality, making it easier to:
+We will start our input management system by creating a class to handle keyboard input. The `KeyboardInfo` class will encapsulate all keyboard-related functionality, making it easier to:
 
 - Track current and previous keyboard states
 - Detect when keys are pressed or released
@@ -80,7 +80,7 @@ This initialization ensures we have valid states to compare against in the first
 
 ### KeyboardInfo Methods
 
-The `KeyboardInfo` class needs methods both for updating states and checking key states. Let's start with our update method:
+The `KeyboardInfo` class needs methods both for updating states and checking key states. First, we will start with our update method:
 
 [!code-csharp[](./snippets/keyboardinfo.cs#methods_update)]
 
@@ -104,7 +104,7 @@ And for detecting state changes:
 > [!TIP]
 > Use continuous state checks (`IsKeyDown`/`IsKeyUp`) for actions that should repeat while a key is held, like movement. Use single-frame checks (`WasKeyJustPressed`/`WasKeyJustReleased`) for actions that should happen once per key press, like jumping or shooting.
 
-That's it for the `KeyboardInfo` class, let's move on to mouse input next.
+That's it for the `KeyboardInfo` class, now we can move on to mouse input next.
 
 ## MouseButton Enum
 
@@ -133,14 +133,14 @@ To manage mouse input effectively, we need to track both current and previous st
 - Track scroll wheel changes.
 - Detect when mouse buttons are pressed or released
 - Check if mouse buttons are being held down
-
-Let's create this class in the *Input* folder of the *MonoGameLibrary* project. Add a new file named *MouseInfo.cs* with the following initial structure:
+  
+To get started, in the *Input* folder of the *MonoGameLibrary* project, create a new file named *MouseInfo.cs* with the following initial structure:
 
 [!code-csharp[](./snippets/mouseinfo.cs#declaration)]
 
 ### MouseInfo Properties
 
-The `MouseInfo` class needs properties to track both mouse states and provide easy access to common mouse information. Let's add these properties.
+The `MouseInfo` class needs properties to track both mouse states and provide easy access to common mouse information. Add the following proerties to the `MouseInfo` class:
 
 First, we need properties for tracking mouse states:
 
@@ -197,7 +197,7 @@ This initialization ensures we have valid states to compare against in the first
 
 ### MouseInfo Methods
 
-The `MouseInfo` class needs methods for updating states, checking button states, and setting the cursor position. Let's start with our update method:
+The `MouseInfo` class needs methods for updating states, checking button states, and setting the cursor position. Add the following method to the `MouseInfo` class:
 
 [!code-csharp[](./snippets/mouseinfo.cs#methods_update)]
 
@@ -239,7 +239,7 @@ To manage gamepad input effectively, we need to track both current and previous 
 - Check if gamepad buttons are being held down.
 - Start and Stop vibration of a gamepad.
 
-Let's create this class in the *Input* folder of the *MonoGameLibrary* project. Add a new file named *GamePadInfo.cs* with the following initial structure:
+To get started, in the *Input* folder f the *MonoGameLibrary* project, create a new file name *GamePadInfo.cs* with the following initial structure:
 
 [!code-csharp[](./snippets/gamepadinfo.cs#declaration)]
 
@@ -281,7 +281,7 @@ This initialization ensures we have valid states to compare against in the first
 
 ### GamePadInfo Methods
 
-The `GamePadInfo` class needs methods for updating states, checking button states, and controlling vibration. Let's start with our update method:
+The `GamePadInfo` class needs methods for updating states, checking button states, and controlling vibration. Add the following method to the `GamePadInfo` class:
 
 [!code-csharp[](./snippets/gamepadinfo.cs#methods_update)]
 
@@ -312,9 +312,9 @@ The vibration methods provide control over the gamepad's haptic feedback:
 - `StopVibration`: Immediately stops all vibration.
 
 > [!TIP]
-> When setting vibration, you can specify both the strength (`0.0f` to `1.0f`) and duration. The vibration will automatically stop after the specified time has elapsed, so you don't need to manage stopping it manually.
+> When setting vibration, you can specify both the strength (`0.0f` to `1.0f`) and duration. The vibration will automatically stop after the specified time has elapsed, so you do not need to manage stopping it manually.
 
-That's it for the `GamePadInfo` class.  Next, let's create the actual input manager.
+That's it for the `GamePadInfo` class.  Next, we can create the actual input manager.
 
 ## The InputManager Class
 
@@ -347,7 +347,7 @@ The `Update` method for the `InputManager` calls update for each device so that 
 
 ## Implementing the InputManager Class
 
-Now tha we have our input management system complete, let's update our game to use it.  We will do this in two steps:
+Now tha we have our input management system complete, we will update our game to use it.  We will do this in two steps:
 
 1. First, update the `Core` class to add the `InputManager` globally.
 2. Update the `Game1` class to use the global input manager from `Core`.
@@ -370,7 +370,7 @@ The key changes to the `Core` class are:
 
 ### Updating the Game1 Class
 
-Now let's update our `Game1` class to use the new input management system through the `Core` class.  Open *Game1.cs* in the game project and update it to the following:
+Now we can update our `Game1` class to use the new input management system through the `Core` class.  Open *Game1.cs* in the game project and update it to the following:
 
 [!code-csharp[](./snippets/game1.cs?highlight=76,82,88,94,100,108,113,116,120,126,128-129,134,140,146,152)]
 
@@ -379,7 +379,7 @@ The key changes to the `Game1` class are:
 1. In [**Update**](xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)), the check for the gamepad back button or keyboard escape key being pressed was removed.  This is now handled by the `ExitOnEscape` property and the `Update` method of the `Core` class.
 2. In `CheckKeyboardInput` and `CheckGamepadInput`, instead of getting the keyboard and gamepad states and then using the states, calls to check those devices are now done through the input.
 
-Running the game now, you will be able to control it the same as before, only now we're using our new `InputManager` class instead.
+Running the game now, you will be able to control it the same as before, only now we are using our new `InputManager` class instead.
 
 | ![Figure 11-1: The slime moving around based on device input](./videos/input-moving-slime.webm) |
 |:-----------------------------------------------------------------------------------------------:|
@@ -387,7 +387,7 @@ Running the game now, you will be able to control it the same as before, only no
 
 ## Conclusion
 
-In this chapter, you learned how to:
+In this chapter, you accomplished the following:
 
 - Detect the difference between continuous and single-frame input states.
 - Create classes to manage different input devices.

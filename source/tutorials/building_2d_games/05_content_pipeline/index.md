@@ -1,9 +1,9 @@
 ---
 title: "Chapter 05: Content Pipeline"
-description: Learn the advantages of using the Content Pipeline to load assets and go through the processes of loading your first asset
+description: Learn the advantages of using the Content Pipeline to load assets and go through the processes of loading your first asset 
 ---
 
-Every game has assets; images to represent the visual graphics to players, audio to provide sound effects and background music, fonts to render text with, and much more.  These assets start out as raw files (e.g. *.png* image files or *.mp3* audio files), which you'll need to load into the game to use.
+Every game has assets; images to represent the visual graphics to players, audio to provide sound effects and background music, fonts to render text with, and much more.  These assets start out as raw files (e.g. *.png* image files or *.mp3* audio files), which you will need to load into the game to use.
 
 ## Loading Assets
 
@@ -16,7 +16,7 @@ For instance, to load an image file directly at runtime, you would need to:
 3. Load the image file as a texture at runtime using the [**Texture2D.FromFile**](xref:Microsoft.Xna.Framework.Graphics.Texture2D.FromFile(Microsoft.Xna.Framework.Graphics.GraphicsDevice,System.String)) method.
 
 > [!IMPORTANT]
-> A big disadvantage to loading an image file as a texture directly, is when that when it loads it, it does so in its compressed format such as *.png* or *.jpg*.  These compression formats are not understood by a Graphics Processing Unit (GPU); they will need to be decompressed into raw bytes as a format the GPU does understand before it can store the data.  Doing this can potentially leave a larger memory footprint for your assets.  You will also need to handle how different compression formats work on the platform you are targeting such as desktops, mobile, and consoles.
+> A big disadvantage to loading an image file as a texture directly, is when that when it loads it, it does so in its compressed format such as *.png* or *.jpg*.  These compression formats are not understood by a Graphics Processing Unit (GPU); they will need to be decompressed into raw bytes as a format the GPU does understand before it can store the data.  Doing this can potentially leave a larger memory footprint for your assets.  You will also need to handle how different compression formats work on the platform you are targeting such as desktops, mobile, and consoles.  
 >
 > Alternatively, as we will explore below, using the **Content Pipeline** handles this for you automatically.
 
@@ -50,7 +50,7 @@ The MGCB Editor is a GUI tool that can be used to edit your content project.  Th
 - **Xml Content (.xml)**: A structured data file for storing game information like levels, dialogues, or configuration settings.
 
 > [!NOTE]
-> The content project is the *Content.mgcb* file in your game project folder.  This file can be edited manually by hand, however it's much easier to use the MGCB Editor instead.
+> The content project is the *Content.mgcb* file in your game project folder.  This file can be edited manually by hand, however it is much easier to use the MGCB Editor instead.  
 
 ### Opening the MGCB Editor
 
@@ -101,8 +101,8 @@ To add an existing asset to the content project:
 
 When adding existing assets to the content project, a pop-up dialog will appear with the following options:
 
-- **Copy the file to the folder**: Creates a duplicate of the file inside your project's Content folder. This creates an independent copy, meaning any later changes to the original file won't affect your project.
-- **Add a link**: Creates a reference to the original file without making a copy. This maintains a connection to the source file, so any updates to the original will be included when you build. Note that the link uses a path relative to the Content.mgcb file, so if either the source file or your project moves, you'll need to reestablish the link.
+- **Copy the file to the folder**: Creates a duplicate of the file inside your project's Content folder. This creates an independent copy, meaning any later changes to the original file wo not affect your project.
+- **Add a link**: Creates a reference to the original file without making a copy. This maintains a connection to the source file, so any updates to the original will be included when you build. Note that the link uses a path relative to the Content.mgcb file, so if either the source file or your project moves, you will need to reestablish the link.
 - **Skip**: Cancels adding the current file while continuing with any other selected files.
 
 | ![Figure 5-4: Add existing file pop-up](./images/add-file-popup.png) |
@@ -148,7 +148,7 @@ The new folder will appear in your content tree, and you can now add items to it
 - Adding existing assets directly to the folder
 - Creating new assets within the folder
 
-The folder structure you create in the MGCB Editor affects how you'll access your content in code. It's good practice to establish a folder structure early in your project development to avoid having to reorganize and update content paths later.
+The folder structure you create in the MGCB Editor affects how you will access your content in code. It is good practice to establish a folder structure early in your project development to avoid having to reorganize and update content paths later.
 
 ## The ContentManager Class
 
@@ -213,7 +213,7 @@ When the [**ContentManager**](xref:Microsoft.Xna.Framework.Content.ContentManage
 
 ## Loading Our First Asset
 
-Let's walk through the process of editing our content project using the MGCB Editor to add a new image asset and then load it in our game.  To get started, we will first need an image to load.  Right-click the following image of the MonoGame logo and save it named *logo.png* somewhere on your computer:
+Now, we will walk through the process of editing our content project using the MGCB Editor to add a new image asset and then load it in our game.  To get started, we will first need an image to load.  Right-click the following image of the MonoGame logo and save it named *logo.png* somewhere on your computer:
 
 | ![Figure 5-7: MonoGame Horizontal Logo](./images/logo.png) |
 |:----------------------------------------------------------:|
@@ -233,7 +233,7 @@ Now that we have an image file to add, perform the following:
 10. Save the changes made to the content project by selecting *File > Save* from the top menu.
 
 > [!IMPORTANT]
-> After changes have been made in the MGCB Editor, ensure that you save the changes.  They are not automatically saved, though you will be warned if you close the editor and haven't saved changes. You can tell that changes have not been saved by looking at the title bar of the MGCB editor window.  If it has an '*' at the end of the window title, this means changes have not been saved
+> After changes have been made in the MGCB Editor, ensure that you save the changes.  They are not automatically saved, though you will be warned if you close the editor and have not saved changes. You can tell that changes have not been saved by looking at the title bar of the MGCB editor window.  If it has an '*' at the end of the window title, this means changes have not been saved
 
 | ![Figure 5-8: The logo image added to the content project in the MGCB Editor](./images/mgcb-logo-added.png) |
 |:-----------------------------------------------------------------------------------------------------------:|
@@ -260,7 +260,7 @@ Running the game now will show the MonoGame logo displayed in the upper-left cor
 
 ## Conclusion
 
-Let's review what you accomplished in this chapter:
+In this chapter, you accomplished the following:
 
 - You learned about the advantages of loading assets using the **Content Pipeline**.
 - You added an image file asset to the *Content.mgcb* content project using the MGCB Editor.

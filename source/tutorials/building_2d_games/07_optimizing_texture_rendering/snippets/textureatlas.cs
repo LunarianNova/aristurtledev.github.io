@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGameLibrary.Graphics;
 
-public class TextureAtlas
+public class TextureAtlas 
 {
 
 }
@@ -112,7 +112,7 @@ public class TextureAtlas
                 atlas.Texture = content.Load<Texture2D>(texturePath);
 
                 // The <Regions> element contains individual <Region> elements, each one describing
-                // a different texture region within the atlas.
+                // a different texture region within the atlas.  
                 //
                 // Example:
                 // <Regions>

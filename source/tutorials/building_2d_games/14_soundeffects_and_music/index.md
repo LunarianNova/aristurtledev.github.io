@@ -14,7 +14,7 @@ In this chapter, you will:
 - Implement sound effects for collision events.
 - Add background music to enhance atmosphere.
 
-Let's start by understanding how MonoGame approaches audio content.
+We will first start by understanding how MonoGame approaches audio content.
 
 ## Understanding Audio in MonoGame
 
@@ -124,7 +124,7 @@ Sound effects are played using the [**SoundEffect**](xref:Microsoft.Xna.Framewor
     [!code-csharp[](./snippets/play_soundeffect_instance.cs)]
 
 - Use [**SoundEffect.Play**](xref:Microsoft.Xna.Framework.Audio.SoundEffect.Play) for simple sound effects that you just want to play once.
-- Use [**SoundEffect.CreateInstance**](xref:Microsoft.Xna.Framework.Audio.SoundEffect.CreateInstance) when you need more control over the sound effect, like adjusting volume, looping, or managing multiple instances of the same sound.
+- Use [**SoundEffect.CreateInstance**](xref:Microsoft.Xna.Framework.Audio.SoundEffect.CreateInstance) when you need more control over the sound effect, like adjusting volume, looping, or managing multiple instances of the same sound.  
 
 [**SoundEffectInstance**](xref:Microsoft.Xna.Framework.Audio.SoundEffectInstance) contains several properties that can be used to control how the sound effect is played:
 
@@ -194,7 +194,7 @@ Running the game now, the theme music plays in the background, you can hear the 
 
 ## Conclusion
 
-Let's review what you accomplished in this chapter:
+In this chapter, you accomplished the following:
 
 - Learned about MonoGame's audio system including sound effects and music.
 - Explored the key differences between:
@@ -230,7 +230,7 @@ In the next chapter, we will explore additional ways to manage audio by creating
 3. What file formats are best suited for sound effects and music, respectively, and why?
 
     :::question-answer
-    For sound effects, .wav files are generally best because they're uncompressed and load quickly into memory for immediate playback. For music, compressed formats like .mp3 or .ogg are better suited because they greatly reduce file size while maintaining good audio quality, which is important for longer audio that's streamed rather than fully loaded.
+    For sound effects, .wav files are generally best because they are uncompressed and load quickly into memory for immediate playback. For music, compressed formats like .mp3 or .ogg are better suited because they greatly reduce file size while maintaining good audio quality, which is important for longer audio that's streamed rather than fully loaded.
     :::
 
 4. What is the difference between using [**SoundEffect.Play**](xref:Microsoft.Xna.Framework.Audio.SoundEffect.Play) directly and creating a [**SoundEffectInstance**](xref:Microsoft.Xna.Framework.Audio.SoundEffectInstance)?

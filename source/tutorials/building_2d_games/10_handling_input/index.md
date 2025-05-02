@@ -101,7 +101,7 @@ The [**GamePadState.Buttons**](xref:Microsoft.Xna.Framework.Input.GamePadState.B
 > [!NOTE]
 > Recall from [Chapter 01](../01_what_is_monogame/index.md) that MonoGame is a implementation the XNA API.  Since XNA was originally created for making games on Windows PC and Xbox 360, the names of the gamepad buttons match those of an Xbox 360 controller.
 >
-> The [**BigButton**](xref:Microsoft.Xna.Framework.Input.GamePadButtons.BigButton) refers to the large, centrally located button on special Xbox 360 controllers created for games like "Scene It?" - this button is not present on standard controllers and isn't mapped to any button on modern controllers. It remains in the API for backward compatibility with XNA.
+> The [**BigButton**](xref:Microsoft.Xna.Framework.Input.GamePadButtons.BigButton) refers to the large, centrally located button on special Xbox 360 controllers created for games like "Scene It?" - this button is not present on standard controllers and is not mapped to any button on modern controllers. It remains in the API for backward compatibility with XNA.
 >
 > | Front                                                      | Back                                                     |
 > | :--------------------------------------------------------- | :------------------------------------------------------- |
@@ -161,7 +161,7 @@ The [**Triggers**](xref:Microsoft.Xna.Framework.Input.GamePadState.Triggers) pro
 | [**Left**](xref:Microsoft.Xna.Framework.Input.GamePadTriggers.Left)   | `float` | The value of the left trigger. |
 | [**Right**](xref:Microsoft.Xna.Framework.Input.GamePadTriggers.Right) | `float` | The value of the left trigger. |
 
-The trigger values are represented as a float value between `0.0f` (not pressed) to `1.0f` (fully pressed). The triggers on a gamepad, however, can be either *analog* or *digital* depending the gamepad manufacturer.  For gamepads with *digital* triggers, the value will always be either `0.0f` or `1.0f`, as a digital trigger does not register values in between based on the amount of pressure applied to the trigger.
+The trigger values are represented as a float value between `0.0f` (not pressed) to `1.0f` (fully pressed). The triggers on a gamepad, however, can be either *analog* or *digital* depending the gamepad manufacturer.  For gamepads with *digital* triggers, the value will always be either `0.0f` or `1.0f`, as a digital trigger does not register values in between based on the amount of pressure applied to the trigger.  
 
 For example, if we were creating a racing game, the right trigger could be used for acceleration like the following:
 
@@ -226,7 +226,7 @@ Most modern gamepads have two vibration motors, a larger one (usually the left m
 
 ## TouchPanel Input
 
-For mobile devices such as Android/iOS phones and tablets, the primary input device is the touch panel screen.  Touching a location on the screen is similar to clicking a location on your computer with a mouse.  MonoGame provides the [**TouchPanel**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel) class to handle touch input.
+For mobile devices such as Android/iOS phones and tablets, the primary input device is the touch panel screen.  Touching a location on the screen is similar to clicking a location on your computer with a mouse.  MonoGame provides the [**TouchPanel**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel) class to handle touch input.  
 
 The [**TouchPanel**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel) class offers two ways of retrieving information about touch input:
 
@@ -235,7 +235,7 @@ The [**TouchPanel**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel) class 
 
 ### TouchCollection
 
-When calling [**TouchPanel.GetState**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.GetState) a [**TouchCollection**](xref:Microsoft.Xna.Framework.Input.Touch.TouchCollection) struct is returned.  This collection contains a [**TouchLocation**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation) value for each point of touch.
+When calling [**TouchPanel.GetState**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.GetState) a [**TouchCollection**](xref:Microsoft.Xna.Framework.Input.Touch.TouchCollection) struct is returned.  This collection contains a [**TouchLocation**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation) value for each point of touch.  
 
 #### TouchLocation
 
@@ -312,13 +312,13 @@ The following is an example of using a gesture to detect horizontal and vertical
 [!code-csharp[](./snippets/gestures.cs)]
 
 > [!IMPORTANT]
-> Notice above that we use a `while` loop with [**TouchPanel.IsGestureAvailable**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.IsGestureAvailable) as the condition for the loop.  The reason we do this is because when a user performs a gesture, such as a horizontal drag across the screen, very quickly, what can often occurs is a series of multiple small drag gestures are registered and queued.
+> Notice above that we use a `while` loop with [**TouchPanel.IsGestureAvailable**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.IsGestureAvailable) as the condition for the loop.  The reason we do this is because when a user performs a gesture, such as a horizontal drag across the screen, very quickly, what can often occurs is a series of multiple small drag gestures are registered and queued.  
 >
 > Each time [**TouchPanel.ReadGesture**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.ReadGesture) is called, it will dequeue the next gesture.  So to ensure that we handle the complete gesture, we loop the gesture queue until there are none left.
 
 ## Implementing Input in Our Game
 
-For our game, we're going to implement keyboard and gamepad controls based on the following criteria:
+For our game, we are going to implement keyboard and gamepad controls based on the following criteria:
 
 | Keyboard Input            | Gamepad Input                               | Description                          |
 |---------------------------|---------------------------------------------|--------------------------------------|
@@ -355,7 +355,7 @@ Running the game now, you can move the slime around using the keyboard with the 
 
 ## Conclusion
 
-In this chapter, you learned how to:
+In this chapter, you accomplished the following:
 
 - Handle keyboard input to detect key presses.
 - Handle mouse input including button clicks and cursor position.
@@ -389,7 +389,7 @@ In the next chapter, we will learn how to track previous input states to handle 
 4. What is the difference between analog and digital trigger input on a gamepad?
 
     :::question-answer
-    Analog triggers provide values between 0.0f and 1.0f based on how far they're pressed, while digital triggers only report 0.0f (not pressed) or 1.0f (pressed). This affects how you handle trigger input in your game.
+    Analog triggers provide values between 0.0f and 1.0f based on how far they are pressed, while digital triggers only report 0.0f (not pressed) or 1.0f (pressed). This affects how you handle trigger input in your game.
     :::
 
 5. What is the key difference between [**TouchPanel.GetState**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.GetState) and [**TouchPanel.ReadGesture**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.ReadGesture)?
@@ -407,7 +407,7 @@ In the next chapter, we will learn how to track previous input states to handle 
 7. How does touch input differ from mouse input in terms of handling multiple input points?
 
     :::question-answer
-    Touch input can handle multiple simultaneous touch points through the [**TouchCollection**](xref:Microsoft.Xna.Framework.Input.Touch.TouchCollection), while mouse input only tracks a single cursor position. This allows touch input to support features like multi-touch gestures that aren't possible with a mouse.
+    Touch input can handle multiple simultaneous touch points through the [**TouchCollection**](xref:Microsoft.Xna.Framework.Input.Touch.TouchCollection), while mouse input only tracks a single cursor position. This allows touch input to support features like multi-touch gestures that are not possible with a mouse.
     :::
 
 8. What are the different states a [**TouchLocation**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation) can have and what do they indicate?
