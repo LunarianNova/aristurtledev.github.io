@@ -65,19 +65,23 @@ The key changes here are:
 
 Now that we have a fully configured XML configuration for the atlas, we need to update the `TextureAtlas` class to manage animation data.  Open the *TextureAtlas.cs* file and make the following changes:
 
-1. Add storage for animations
+1. Add the following using statement so we can reference the `TimeSpan` struct:
+
+   [!code-csharp[](./snippets/textureatlas/usings.cs?highlight=1)]
+
+2. Add storage for animations
 
     [!code-csharp[](./snippets/textureatlas/add_animation_storage.cs)]
 
-2. Update the constructors so that the animations dictionary is initialized:
+3. Update the constructors so that the animations dictionary is initialized:
 
     [!code-csharp[](./snippets//textureatlas/update_ctors.cs?highlight=7,18)]
 
-3. Add methods to manage animations, similar to those that we use to manage regions:
+4. Add methods to manage animations, similar to those that we use to manage regions:
 
     [!code-csharp[](./snippets/textureatlas/add_animation_management.cs)]
 
-4. Update the `FromFile` method to parse the new `<Animation>` animation definitions from the XML configuration file
+5. Update the `FromFile` method to parse the new `<Animation>` animation definitions from the XML configuration file
 
     [!code-csharp[](./snippets//textureatlas/update_from_file.cs?highlight=55-95)]
 
@@ -98,7 +102,7 @@ With our `Animation` class handling animation data, and the `TextureAtlas` updat
 
 The key to this design is the `Sprite.Region` property. Our `Sprite` class already knows how to render whatever region is currently set, so our `AnimatedSprite` class just needs to update this region property to the correct animation frame at the right time.
 
-Let's create the initial structure for our `AnimatedSprite` class. In the *Graphics* folder within the *MonoGameLibrary* project, add a new file named *AnimatedSprite.cs*:
+Let's create the initial structure for our `AnimatedSprite` class. In the *Graphics* folder within the *MonoGameLibrary* project, add a new file named *AnimatedSprite.cs* and add the following initial code to that file:
 
 [!code-csharp[](./snippets/animatedsprite.cs#declaration)]
 
@@ -132,7 +136,7 @@ The default constructor creates an empty animated sprite that can be configured 
 
 ### AnimatedSprite Methods
 
-The `AnimatedSprite` class needs a way to update its animation state over time. This is handled by a single `Update` method:
+The `AnimatedSprite` class needs a way to update its animation state over time. Add the following method to the `AnimatedSprite` class:
 
 [!code-csharp[](./snippets/animatedsprite.cs#methods)]
 
