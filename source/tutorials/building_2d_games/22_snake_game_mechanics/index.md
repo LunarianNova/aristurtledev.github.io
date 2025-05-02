@@ -36,7 +36,7 @@ In snake, players input a cardinal direction (up, down, left, and right), to ind
 
 For example, if the snake is moving to the right, an invalid input would allow a player to move it to the left.  Doing so would cause the head of the snake to reverse direction and immediately collide with the first body segment. This means the only valid inputs are those where the next direction would be the same as the current direction or perpendicular to the current direction.
 
-| ![Figure 22-1: An example snake with four segments, the head segment highlighted in orange, moving to the right.  Arrows show that the only valid movements for the head segment are up or down (perpendicular) or to continue to the right.](./images/snake_directions.svg) |
+| ![Figure 22-1: An example snake with four segments, the head segment highlighted in orange, moving to the right.  Arrows show that the only valid movements for the head segment are up or down (perpendicular) or to continue to the right.](./images/snake_directions.png) |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |                **Figure 22-1: An example snake with four segments, the head segment highlighted in orange, moving to the right.  Arrows show that the only valid movements for the head segment are up or down (perpendicular) or to continue to the right.**                |
 
@@ -44,26 +44,26 @@ For example, if the snake is moving to the right, an invalid input would allow a
 
 Instead of moving every update frame as a directional input is being pressed, the snake instead only moves during regular timed intervals.  A timer is used to determine how much time has passed since the last movement cycle, and when it reaches a set threshold, the next movement cycle occurs.  During this movement cycle, the snake should move forward in the direction that was input by the player between the last and current movement cycles.  This creates the grid-based movement system typically found in snake-like games.
 
-There are various methods for handling the movement, such as iterating through each segment of the snake and updating the position of that segment to move forward.  Methods such as this though are wasteful, since visually the only parts of the snake that move on the screen are the head and the tail.
+There are various methods for handling the movement, such as iterating through each segment of the snake and updating the position of that segment to move forward.  Methods such as this though are wasteful, since visually the only parts of the snake that move on the screen are the head and the tail.  
 
 Instead, a more common approach is to:
 
 1. Make a copy of the head segment.
 
-    | ![Figure 22-2: From a snake with four segments, a copy of the head segment is made, represented by the orange block](./images/snake_copy_head.svg) |
+    | ![Figure 22-2: From a snake with four segments, a copy of the head segment is made, represented by the orange block](./images/snake_copy_head.png) |
     | :------------------------------------------------------------------------------------------------------------------------------------------------: |
     |                **Figure 22-2 From a snake with four segments, a copy of the head segment is made, represented by the orange block**                |
 
 2. Update the properties of the copy so that it is positioned where the original head segment would have moved to.
 3. Insert the copy at the front of the segment collection.
 
-    | ![Figure 22-3: The copy of the head segment, represented by the orange block, is inserted at the front of the segment collection as the new head, which now makes it five segments (one too many)](./images/snake_insert_head.svg) |
+    | ![Figure 22-3: The copy of the head segment, represented by the orange block, is inserted at the front of the segment collection as the new head, which now makes it five segments (one too many)](./images/snake_insert_head.png) |
     | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
     |                **Figure 22-3: The copy of the head segment, represented by the orange block, is inserted at the front of the segment collection as the new head, which now makes it five segments (one too many)**                 |
 
 4. Remove the tail segment.
 
-    | ![Figure 22-4: The tail segment of the snake is removed, bringing it back to the original four segments, giving the illusion that the entire snake moved forward ](./images/snake_remove_tail.svg) |
+    | ![Figure 22-4: The tail segment of the snake is removed, bringing it back to the original four segments, giving the illusion that the entire snake moved forward ](./images/snake_remove_tail.png) |
     | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
     |                 **Figure 22-4: The tail segment of the snake is removed, bringing it back to the original four segments, giving the illusion that the entire snake moved forward**                 |
 
@@ -143,9 +143,9 @@ Next, let's implement a class to encapsulate the properties and functionality of
 
 [!code-csharp[](./snippets/slime/definition.cs)]
 
-This code sets up the basic structure for our `Slime` class. We've added the necessary using statements to access MonoGame's framework components and placed the class in the `DungeonSlime.GameObjects` namespace to keep our code organized. The empty class will serve as our foundation, and we will build it up piece by piece in the following sections.
+This code sets up the basic structure for our `Slime` class. We've added the necessary using statements to access MonoGame's framework components and placed the class in the `DungeonSlime.GameObjects` namespace to keep our code organized. The empty class will serve as our foundation, and we'll build it up piece by piece in the following sections.
 
-Now, we will add several components to this class in sequence. Each section below should be added to the `Slime` class in the order presented. As we go through each part, the class will gradually take shape to handle all the snake-like behavior we need.
+Now, we'll add several components to this class in sequence. Each section below should be added to the `Slime` class in the order presented. As we go through each part, the class will gradually take shape to handle all the snake-like behavior we need.
 
 > [!NOTE]
 > When adding these sections one by one, you may see compiler errors until all sections are in place. This is normal, as some parts of the code will reference fields or methods that haven't been added yet. Once all sections are complete, these errors will resolve.
@@ -238,7 +238,7 @@ This method performs the core snake-like movement cycle logic by:
 
 #### Slime Growth
 
-To handle the snake-like growth of the slime, we will create a method called `Grow`.  Add the following method to the `Slime` class after the `Move` method:
+To handle the snake-like growth of the slime, we'll create a method called `Grow`.  Add the following method to the `Slime` class after the `Move` method:
 
 [!code-csharp[](./snippets/slime/grow.cs)]
 
@@ -400,7 +400,7 @@ With the `Bat` class complete, we've now encapsulated all the behavior needed fo
 
 ## Conclusion
 
-IN this chapter, we have learned about and implemented the core mechanics of a class snake-like game.  We created:
+In this chapter, we have learned about and implemented the core mechanics of a class snake-like game.  We created:
 
 - A [`GameController`](#the-gamecontroller-class) class that provides a unified input interface, separating game actions from specific input devices.
 - A [`SlimeSegment`](#the-slimesegment-struct) struct to efficiently store and manage individual segments of our snake-like character.
@@ -446,7 +446,7 @@ These implementations encapsulate the core gameplay mechanics into reusable, mai
 4. How does the implementation use [**Vector2.Lerp**](xref:Microsoft.Xna.Framework.Vector2.Lerp(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Single)) to create smooth visual movement, and why is this important?
 
     :::question-answer
-    The implementation uses [**Vector2.Lerp**](xref:Microsoft.Xna.Framework.Vector2.Lerp(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Single)) to interpolate between a segment's current position (`At`) and its target position (`To`) based on a normalized movement progress value. This creates smooth visual movement by drawing the segments at intermediate positions between grid points rather than abruptly jumping from one grid position to the next.
+    The implementation uses [**Vector2.Lerp**](xref:Microsoft.Xna.Framework.Vector2.Lerp(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Single)) to interpolate between a segment's current position (`At`) and its target position (`To`) based on a normalized movement progress value. This creates smooth visual movement by drawing the segments at intermediate positions between grid points rather than abruptly jumping from one grid position to the next. 
 
     This is important because it provides more fluid animation while maintaining the logical grid-based movement, enhancing the visual quality of the game without changing the core mechanics.
     :::
