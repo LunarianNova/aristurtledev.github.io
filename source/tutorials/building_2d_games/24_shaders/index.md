@@ -227,9 +227,9 @@ The key modifications made to create this grayscale effect include:
 
 #### Understanding the Shader Code
 
-The heart of the grayscale effect is this line
+The heart of the grayscale effect is this line:
 
-[!code-c[](./snippets/grayscaleeffect.fx?start=33&end34)]
+[!code-c[](./snippets/grayscaleeffect.fx?start=33&end=34)]
 
 This uses the [`dot`](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-dot) function to calculate the do product between the color's RGB values and the vector $(0.3, 0.59, 0.11)$.  This effectively calculates a weighted average where:
 
@@ -363,7 +363,7 @@ This chapter explored the fundamentals of creating and adding a shader to MonoGa
 - Effect parameters allow runtime control of shader behavior.
 - In Monogame, shaders are written in High-Level Shader Language (HLSL) and can be loaded through the content pipeline like other game assets.
 - Pixel shaders determine the color of each rendered pixel, making them ideal for effects like our grayscale shader.
-- The timing of the shader application depends on the [**SpriteSortMode](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) used with [**SpriteBatch**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch), with most effects being applied during the [**SpriteBatch.End**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch.End) call.
+- The timing of the shader application depends on the [**SpriteSortMode**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) used with [**SpriteBatch**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch), with most effects being applied during the [**SpriteBatch.End**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch.End) call.
 
 While we only focused on a simple grayscale effect, the principles learned here can be used to start learning more about shaders and creating more complex visual effects.
 
@@ -371,7 +371,7 @@ While we only focused on a simple grayscale effect, the principles learned here 
 
 1. What is the primary difference between pixel shaders and vertex shaders in the context of 2D games?
 
-    ::question-answer
+    :::question-answer
     Pixel shaders determine the color of each pixel being rendered, making them ideal for visual effects like grayscale, color tinting, and image filters. Vertex shaders manipulate the position of vertices, which can be used for effects like distortion, waves, or character deformation. In 2D games, pixel shaders are more commonly used for visual effects while vertex shaders are less frequently needed.
     :::
 
