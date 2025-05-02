@@ -318,7 +318,7 @@ To Add the Gum NuGet package in Visual Studio 2022:
 
 To add the Gum NuGet package using the dotnet CLI:
 
-1. Open a Command Prompt or Terminal window in the same directory as the *DungeonSlime.csproj* project file.
+1. Open a Command Prompt or Terminal window in the same folder as the *DungeonSlime.csproj* project file.
 2. Enter the following command:
 
     ```sh
@@ -340,7 +340,7 @@ This will install the latest version of the package, which is "2025.4.23.1" as o
 
 To make our UI more responsive and engaging, we'll add audio feedback that plays when players interact with buttons and other UI elements. Sound effects provide immediate confirmation that an input has been recognized, creating a more engaging experience.
 
-First, download the UI sound effect by right-clicking the following link and saving it as *ui.wav* in the game project's *Content/audio* directory:
+First, download the UI sound effect by right-clicking the following link and saving it as *ui.wav* in the game project's *Content/audio* folder:
 
 - [ui.wav](./files/ui.wav)
 
@@ -384,7 +384,7 @@ Let's examine each part of this initialization process:
 2. **Content Loading**: Gum needs to be made aware of which content manager to use to load assets through the content pipeline.  By setting `GumService.Default.ContentLoader.XnaContentManager = Core.Content`, we tell Gum to use our game's content manager when loading assets.  By using the game's existing content manager, Gum also gets the benefit of the caching that the content manager performs when loading assets.
 3. **Input Configuration**:
    - By default, all Forms controls automatically respond to mouse and touch screen input devices.  We need to explicitly register keyboard and gamepad input devices by using th `FrameworkElement.KeyboardsForUiControl` and `Framework.GamePadsForUiControl` properties.
-   - By default, Forms controls will automatically respond to tab and shift-tab for navigation. By using the `FrameworkElement.TabKeyCombos` and `FrameworkElement.TabReverseKeyCombos` properties, we can add additional key combinations for tabbing.  Here map the Up arrow for reverse tabbing and the Down arrow for forward tabbing.
+   - By default, Forms controls will automatically respond to tab and shift-tab for navigation. By using the `FrameworkElement.TabKeyCombos` and `FrameworkElement.TabReverseKeyCombos` properties, we can add additional key combinations for tabbing.  Here map the Up arrow for reverse tabbing and the Down arrow for forward tabbing.  
 
    > [!TIP]
    > If you prefer different navigation keys, you can remove the built-in Tab/Shift+Tab navigation.
@@ -482,7 +482,7 @@ Finally, add Gum's drawing call to the end of the `Draw` method:
 
 [!code[](./snippets/titlescene/draw.cs?highlight=36)]
 
-With these changes, our UI system is now fully integrated into the scene's game loop.  Gum updates its controls in the `Update` method and draws them in the `Draw` method.  This produces a fully functional title screen with buttons that allows players to start the game or adjust audio settings.
+With these changes, our UI system is now fully integrated into the scene's game loop.  Gum updates its controls in the `Update` method and draws them in the `Draw` method.  This produces a fully functional title screen with buttons that allows players to start the game or adjust audio settings.  
 
 | ![Figure 20-1: Title screen with default Gum buttons](./images/title-unstyled.png) |
 | :--------------------------------------------------------------------------------: |
@@ -566,7 +566,7 @@ In this chapter, you've successfully implemented a functional UI system for our 
 - Handle user input from various input devices.
 - Create transitions between different UI screens.
 - Integrate the UI system with the game's scene architecture.
-
+  
 While this UI is now functional, you may have noticed that it uses Gum's default styling which doesn't match our game's visual theme.  In the next chapter, we'll learn how to customize the appearance of our UI elements to create a cohesive visual style that complements our game's aesthetic.
 
 ## Test Your Knowledge
@@ -578,7 +578,7 @@ While this UI is now functional, you may have noticed that it uses Gum's default
 
     - **Forms**: Interactive UI elements like buttons, sliders, and panels that handle user input. They provide built-in functionality for common UI interactions.
     - **Visuals**: Display elements like TextRuntime, ColoredRectangleRuntime, and NineSliceRuntime that are used to render graphics. They have no built-in interaction behavior but can be customized visually.
-
+  
     Forms controls contain Visuals, accessible through the `Visual` property, creating a separation between functionality and presentation.
     :::
 

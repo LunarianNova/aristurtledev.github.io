@@ -37,9 +37,9 @@ The first thing we need to do is install the .NET *Software Development Kit* (SD
     > [!NOTE]
     > The minimum supported version is .NET 8
 
-3. Once the download finishes, run the installer.
+3. Once the download finishes, run the installer.  
 
-> [!NOTE]
+> [!NOTE]  
 > For the time being, MonoGame requires that you install the **Intel** version even if you are using an Apple Silicon (M1/M2) Mac. For Apple Silicon Macs, it also requires that [Rosetta](https://support.apple.com/en-us/HT211861) be enabled.
 
 ### [Linux](#tab/linux)
@@ -90,7 +90,7 @@ To install VSCode, follow the instructions for your operating system below:
 1. Open a web browser and navigate to https://code.visualstudio.com/.
 2. Click the *Download for macOS* button to start the download of the *.zip* archive.
 3. Once the download finishes, double click the *.zip* archive to extract the *Visual Studio Code.app* application package
-4. Drag-and-drop the *Visual Studio Code.app* application package into your *Application* directory to make it available in the macOS *LaunchPad*.
+4. Drag-and-drop the *Visual Studio Code.app* application package into your *Application* folder to make it available in the macOS *LaunchPad*.
 
 ### [Linux](#tab/linux)
 
@@ -104,7 +104,7 @@ To install VSCode, follow the instructions for your operating system below:
 
 For C# development using VSCode, it is recommended to use the official *C# Dev Kit* extension provided by Microsoft. Installing this extension will add additional features to VSCode such as a project system and *Solution Explorer* for C# projects. It also provides code editing features such as syntax highlighting, code completion, code navigation, refactoring, NuGet package management, and debugging tools.
 
-> [!NOTE]
+> [!NOTE]  
 > The *Solution Explorer* panel is a hierarchial view provided by the C# Dev Kit extension that displays your solution structure similar  to Visual Studio's Solution Explorer.
 >
 > When you open a workspace in Visual Studio Code containing a .NET solution file (*.sln*), the *Solution Explorer* panel automatically appears and loads your solution.  From this panel, you can perform common operations like:
@@ -127,7 +127,7 @@ To install the C# Dev Kit extension, perform the following:
 | :-------------------------------------------------------------------------------------------------: |
 |                **Figure 2-1: The C# Dev Kit Extension listed in Visual Studio Code**                |
 
-> [!NOTE]
+> [!NOTE]  
 > When you search `C#` in the *Extension Panel* you may notice there is the C# Dev Kit extension and a base standard C# extension. When installing the C# Dev Kit extension, the base extension will also be installed as a requirement.
 
 ## Installing the "MonoGame for VSCode" Extension
@@ -160,7 +160,7 @@ wget -qO- https://monogame.net/downloads/net8_mgfxc_wine_setup.sh | bash
 ```
 
 > [!NOTE]
-> After performing these steps, a new directory called *.winemonogame* will be created in your home directory. If you ever wish to undo the setup performed by this script, you can simply delete this directory.
+> After performing these steps, a new folder called *.winemonogame* will be created in your home folder. If you ever wish to undo the setup performed by this script, you can simply delete this folder.
 
 ### [Linux](#tab/linux)
 
@@ -168,11 +168,11 @@ Open a new *Terminal* window and execute the following commands:
 
 ```sh
 sudo apt-get update && sudo apt-get install -y curl p7zip-full wine64
-wget -qO- https://monogame.net/downloads/net8_mgfxc_wine_setup.sh | bash
+wget -qO- https://monogame.net/downloads/net8_mgfxc_wine_setup.sh | bash  
 ```
 
 > [!NOTE]
-> After performing these steps, a new directory called *.winemonogame* will be created in your home directory. If you ever wish to undo the setup performed by this script, you can simply delete this directory.
+> After performing these steps, a new folder called *.winemonogame* will be created in your home folder. If you ever wish to undo the setup performed by this script, you can simply delete this folder.
 
 ---
 
@@ -210,7 +210,7 @@ Be amazed, the default MonoGame Cornflower Blue game window. You have just creat
 
 You can exit the game at any time by pressing the `Esc` key on your keyboard.
 
-> [!NOTE]
+> [!NOTE]  
 > Above, I mentioned that a loop is entered. This is commonly referred to as the *game loop*, which we will discuss in more detail in the next chapter. The reason the application enters this loop is because game applications work differently than traditional desktop applications, such as your web browser.
 >
 > Desktop applications are event based, meaning once loaded, they do not do much at all while waiting for input from the user. They respond to user interactions and redraw the window only when necessary.
@@ -239,7 +239,7 @@ Now that your development environment is setup and ready to go, you can dive in 
     - Integration: MonoGame easily integrates with other .NET libraries
     - Cross-platform Development: Projects can be developed on Windows, macOS, or Linux
     - Version Control Friendly: The code-first approach works well with systems like Git
-
+  
     :::
 
 2. What is the primary reason that game applications implement a *game loop* structure instead of using an event-based approach like traditional desktop applications?

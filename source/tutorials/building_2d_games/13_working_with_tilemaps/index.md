@@ -64,7 +64,7 @@ Let's implement this concept in our game by creating a `Tileset` class and a `Ti
 
 The `Tileset` class will manage a collection of tiles from a texture atlas.  Each tile will be represented as a `TextureRegion`, building on the tools in the library we created earlier.
 
-In the *Graphics* directory of the *MonoGameLibrary* project, create a new file named *Tileset.cs* with the following code as the initial structure:
+In the *Graphics* folder of the *MonoGameLibrary* project, create a new file named *Tileset.cs* with the following code as the initial structure:
 
 [!code-csharp[](./snippets/tileset.cs#declaration)]
 
@@ -90,7 +90,7 @@ The `Tileset` class needs to provide methods to retrieve the `TextureRegion` of 
 
 Now that we have a `Tileset` class to define our tile collection, we need a `Tilemap` class to arrange these tiles into a game level.  The `Tilemap` class will store which tile goes where in our game world and provide methods to draw the entire map.
 
-In the *Graphics* directory of the *MonoGameLibrary* project, create a new file named *Tilemap.cs* with the following code as the initial structure:
+In the *Graphics* folder of the *MonoGameLibrary* project, create a new file named *Tilemap.cs* with the following code as the initial structure:
 
 [!code-csharp[](./snippets/tilemap.cs#declaration)]
 
@@ -134,23 +134,20 @@ Now that we have the `Tilemap` and `Tileset` classes defined, let's update our g
 
 ### Update the Texture Atlas
 
-Currently, the texture atlas we've been using only contains the sprites for the slime and bat animations. Let's update it to a new version that contains the tileset as well.  Download the new texture atlas below by right-clicking the following image and saving it as *atlas.png* in the *Content/images* directory of the game project, overwriting the existing one.
+Currently, the texture atlas we've been using only contains the sprites for the slime and bat animations. Let's update it to a new version that contains the tileset as well.  Download the new texture atlas below by right-clicking the following image and saving it as *atlas.png* in the *Content/images* folder of the game project, overwriting the existing one.
 
 | ![Figure 13-3: The texture atlas for our game updated to include the tileset for the tilemap](./images/atlas.png) |
 |:-----------------------------------------------------------------------------------------------------------------:|
 |          **Figure 13-3: The texture atlas for our game updated to include the tileset for the tilemap**           |
 
-Since the texture atlas image was updated and the location of the slime and bat sprites were repositioned, we need to update the atlas configuration file as well.  Open the *atlas-definition.xml* configuration file and update it to the following:
-
-[!code-xml[](./snippets/atlas-definition.xml)]
-
-This change just adjusts the x and y coordinate positions to match the new locations of the slime and bat sprites in the atlas.
+> [!NOTE]
+> Since the slime and bat sprites are in the same position in the new texture atlas, we do not need to update the atlas XML configuration file.
 
 ## Creating a Tilemap XML Configuration
 
 Now that we have the texture atlas updated to include the tileset, let's create a tilemap configuration that our game can load.  The configuration will be an XML file that specifies the tileset to use and the arrangement of tiles in the tilemap.
 
-Create a new file named *tilemap-definition.xml* in the *Content/images* directory of the game project and add the following:
+Create a new file named *tilemap-definition.xml* in the *Content/images* folder of the game project and add the following:
 
 [!code-xml[](./snippets/tilemap-definition.xml)]
 
@@ -179,7 +176,7 @@ Next, we need to add this configuration file to our content project with the MGC
 
 With all of the assets now in place and configured, let's update the `Game1` class to load the tilemap and draw it.  We'll also need to update the collision logic so that the boundary is no longer the edge of the screen, but instead the edges of the wall tiles of the tilemap.  Open *Game1.cs* and make the following updates:
 
-[!code-csharp[](./snippets/game1.cs?highlight=31-35,46-61,78-79,111,113,115,117,120,122,124,126,144,147,149,152,155,158,160,163,183-186,308-309)]
+[!code-csharp[](./snippets/game1.cs?highlight=31-35,46-61,80-82,114,116,118,120,123,125,127,129,147,150,152,155,158,161,163,166,181-183,305-306)]
 
 The key changes to the `Game1` class include:
 
@@ -188,7 +185,9 @@ The key changes to the `Game1` class include:
 3. In [**Initialize**](xref:Microsoft.Xna.Framework.Game.Initialize):
    1. The `_roomBounds` is set based on the tilemap's tile size.
    2. The starting position of the slime is now set to be in the center of the room.
-4. In [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent), the tilemap is loaded from the XML configuration file.
+4. In [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent):
+   1. The tilemap is loaded from the XML configuration file.
+   2. The scale of the tilemap is set to a factor of 4.0.
 5. In [**Update**](xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)), the `screenBounds` variable was removed and the collision logic has been updated to instead use the `_roomBounds` instead.
 6. In [**Draw**](Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)) the tilemap is drawn.
 

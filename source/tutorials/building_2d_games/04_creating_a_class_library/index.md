@@ -43,7 +43,7 @@ As your library grows, you'll accumulate a personal collection of well-tested mo
 
 ## Adding the Class Library
 
-MonoGame offers the *MonoGame Game Library* project template to add a new class library project that is configured with the correct monoGame framework references.  Using this template saves time and ensures compatibility with MonoGame projects.
+MonoGame offers the *MonoGame Game Library* project template to add a new class library project that is configured with the correct monoGame framework references.  Using this template saves time and ensures compatibility with MonoGame projects.  
 
 To use the template to add the class library, perform the following based on which development environment you are using:
 
@@ -73,7 +73,7 @@ To add the class library using the MonoGame Game Library project template in Vis
 
 To add the class library using the MonoGame Game Library project template with the dotnet CLI, perform the following:
 
-1. Open a new Command Prompt or Terminal window in the same directory as the *DungeonSlime.sln* solution file.
+1. Open a new Command Prompt or Terminal window in the same folder as the *DungeonSlime.sln* solution file.
 2. Enter the command `dotnet new mglib -n MonoGameLibrary` to create the project, placing it in a folder next to your game project.
 3. Enter the command `dotnet sln DungeonSlime.sln add ./MonoGameLibrary/MonoGameLibrary.csproj` to add the newly created class library project to the *DungeonSlime.sln* solution file.
 
@@ -110,21 +110,21 @@ To add the game library project as a reference to the game project in Visual Stu
 
 To add the game library project as a reference to the game project with the dotnet CLI:
 
-1. Open a new Command Prompt or Terminal window in the same directory as the *DungeonSlime.csproj* C# project file.
+1. Open a new Command Prompt or Terminal window in the same folder as the *DungeonSlime.csproj* C# project file.
 2. Enter the command `dotnet add ./DungeonSlime.csproj reference ../MonoGameLibrary/MonoGameLibrary.csproj`.  This will add the *MonoGameLibrary* reference to the *DungeonSlime* game project.
 
 ---
 
 ### Clean Up
 
-When using the *MonoGame Game Library* project template, the generated project contains file similar to a standard MonoGame game project, including a *dotnet-tools.json* manifest file, a *Content.mgcb* file, and a *Game1.cs* file.  For the purposes of this tutorial, we will not need these.   To clean these up, locate the following in the *MonoGameLibrary* project directory and delete them:
+When using the *MonoGame Game Library* project template, the generated project contains file similar to a standard MonoGame game project, including a *dotnet-tools.json* manifest file, a *Content.mgcb* file, and a *Game1.cs* file.  For the purposes of this tutorial, we will not need these.   To clean these up, locate the following in the *MonoGameLibrary* project folder and delete them:
 
-1. The *.config/* directory.
-2. The *Content/* directory
+1. The *.config/* folder.
+2. The *Content/* folder
 3. The *Game1.cs* file.
 
 > [!TIP]
-> These files are needed in more advanced scenarios such as creating a central code base for game logic that is referenced by other projects of which each target different platforms such as desktop, mobile, and console.  Creating a project structure of this type is out of scope for this tutorial.
+> These files are needed in more advanced scenarios such as creating a central code base for game logic that is referenced by other projects of which each target different platforms such as desktop, mobile, and console.  Creating a project structure of this type is out of scope for this tutorial.  
 >
 > If you would like more information on this, Simon Jackson has written the article [Going cross-platform with MonoGame](https://darkgenesis.zenithmoon.com/going-cross-platform-with-monogame.html) which covers this in more detail.
 

@@ -25,8 +25,8 @@ By the end of this chapter, you'll have an audio control system that can be easi
 
 To get started, in the *MonoGameLibrary* project:
 
-1. Create a new directory named *Audio*.
-2. Add a new class file named *AudioController.cs* to the *Audio* directory you just created.
+1. Create a new folder named *Audio*.
+2. Add a new class file named *AudioController.cs* to the *Audio* folder you just created.
 3. Add the following code as the initial structure for the class
 
     [!code-csharp[](./snippets/audiocontroller.cs#declaration)]
@@ -121,7 +121,7 @@ The key changes made here are:
 
 Next, update the `Game1` class to use the audio controller for audio playback.  Open *Game1.cs* and make the following updates:
 
-[!code-csharp[](./snippets/game1.cs?highlight=45-46,77-78,101-102,196-197,215-216,269-287)]
+[!code-csharp[](./snippets/game1.cs?highlight=45-46,77-78,104-105,199-200,218-219,272-290)]
 
 The key changes made here are:
 

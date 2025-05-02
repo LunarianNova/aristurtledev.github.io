@@ -20,7 +20,7 @@ In this chapter, we'll build off of the `Sprite` class we created in [Chapter 08
 
 ## The Animation Class
 
-Before we can create animated sprites, we need a way to manage animation data. Let's create an `Animation` class to encapsulate this information. In the *Graphics* directory within the *MonoGameLibrary* project, add a new file named *Animation.cs* with this initial structure:
+Before we can create animated sprites, we need a way to manage animation data. Let's create an `Animation` class to encapsulate this information. In the *Graphics* folder within the *MonoGameLibrary* project, add a new file named *Animation.cs* with this initial structure:
 
 [!code-csharp[](./snippets/animation.cs#declaration)]
 
@@ -98,7 +98,7 @@ With our `Animation` class handling animation data, and the `TextureAtlas` updat
 
 The key to this design is the `Sprite.Region` property. Our `Sprite` class already knows how to render whatever region is currently set, so our `AnimatedSprite` class just needs to update this region property to the correct animation frame at the right time.
 
-Let's create the initial structure for our `AnimatedSprite` class. In the *Graphics* directory within the *MonoGameLibrary* project, add a new file named *AnimatedSprite.cs*:
+Let's create the initial structure for our `AnimatedSprite` class. In the *Graphics* folder within the *MonoGameLibrary* project, add a new file named *AnimatedSprite.cs*:
 
 [!code-csharp[](./snippets/animatedsprite.cs#declaration)]
 
@@ -166,13 +166,13 @@ We can simplify this process by adding an animated spirte creation method to the
 
 Let's adjust our game now to use the `AnimatedSprite` class to see our sprites come to life. Replaces the contents of *Game1.cs* with the following:
 
-[!code-csharp[](./snippets/game1.cs?highlight=11-15,34-38,48-52)]
+[!code-csharp[](./snippets/game1.cs?highlight=11-15,34-40,50-54)]
 
 Let's examine the key changes in this implementation:
 
 - The `_slime` and `_bat` members were changed from `Sprite`  to `AnimatedSprite`.
 - In [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent) the `_slime` and `_bat` sprites are now created using the new `TextureAtlas.CreateAnimatedSprite` method.
-- In [**Update**](xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)), the animations are updated based on the game time using hte `AnimatedSprite.Update` method.
+- In [**Update**](xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)), the animations are updated based on the game time using the `AnimatedSprite.Update` method.
 
 Running the game now shows both sprites animating automatically:
 

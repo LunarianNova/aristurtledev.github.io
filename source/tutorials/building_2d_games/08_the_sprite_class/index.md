@@ -20,7 +20,7 @@ A sprite in our game represents a visual object created from a texture region al
 
 By creating a `Sprite` class, we can encapsulate both the texture region and its rendering parameters into a single, reusable component. This not only makes our code more organized but also makes it easier to manage multiple instances of the same type of sprite.
 
-In the *Graphics* directory within the *MonoGameLibrary* project, add a new file named *Sprite.cs*.  Add the following code for the foundation of the `Sprite` class to the *Sprite.cs* file:
+In the *Graphics* folder within the *MonoGameLibrary* project, add a new file named *Sprite.cs*.  Add the following code for the foundation of the `Sprite` class to the *Sprite.cs* file:
 
 [!code-csharp[](./snippets/sprite.cs#declaration)]
 
@@ -72,12 +72,14 @@ We can simplify this process by adding a sprite creation method to the `TextureA
 
 Let's adjust our game now to use the `Sprite` class instead of just the texture regions.  Replace the contents of *Game1.cs* with the following:
 
-[!code-csharp[](./snippets/game1.cs?highlight=11-15,34-38,61-65)]
+[!code-csharp[](./snippets/game1.cs?highlight=11-15,34-40,63-67)]
 
 The key changes in this implementation are:
 
 - The `_slime` and `_bat` members were changed from `TextureRegion`  to `Sprite`.
-- In [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent) the `_slime` and `_bat` sprites are now created using the new `TextureAtlas.CreateSprite` method.
+- In [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent)
+  - The `_slime` and `_bat` sprites are now created using the new `TextureAtlas.CreateSprite` method.
+  - Both the `_slime` and `_bat` sprites are given a scale of 4.0f.
 - In [**Draw**](xref:Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)), the draw calls were updated to use the `Sprite.Draw` method.
 
 Running the game now will produce the same result as in the previous chapter.  
@@ -85,6 +87,9 @@ Running the game now will produce the same result as in the previous chapter.
 | ![Figure 8-1: The slime and bat sprites being rendered in the upper-left corner of the game window](./images/slime-and-bat-rendered.png) |
 |:----------------------------------------------------------------------------------------------------------------------------------------:|
 |                   **Figure 8-1: The slime and bat sprites being rendered in the upper-left corner of the game window**                   |
+
+> [!NOTE]
+> Notice how even though we increased the scale of both sprites, the bat sprite is still only 10px to the right of the bat.  This is because the `Width` property we created for the `Sprite` class takes into account the scale factor of the sprite as well.  
 
 Try adjusting the various properties available for the slime and the bat sprites to see how they affect the rendering.
 
