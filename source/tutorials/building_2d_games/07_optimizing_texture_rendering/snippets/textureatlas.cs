@@ -9,10 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGameLibrary.Graphics;
 
-public class TextureAtlas 
-{
-
-}
+public class TextureAtlas { }
 #endregion
 {
     #region members
@@ -107,7 +104,7 @@ public class TextureAtlas
                 XElement root = doc.Root;
 
                 // The <Texture> element contains the content path for the Texture2D to load.
-                // So we will retrieve that value then use the content manager to load the texture.
+                // So we'll retrieve that value then use the content manager to load the texture.
                 string texturePath = root.Element("Texture").Value;
                 atlas.Texture = content.Load<Texture2D>(texturePath);
 

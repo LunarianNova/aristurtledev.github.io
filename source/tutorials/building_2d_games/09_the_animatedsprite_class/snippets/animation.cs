@@ -4,10 +4,7 @@ using System.Collections.Generic;
 
 namespace MonoGameLibrary.Graphics;
 
-public class Animation 
-{
-
-}
+public class Animation { }
 #endregion
 {
     #region members

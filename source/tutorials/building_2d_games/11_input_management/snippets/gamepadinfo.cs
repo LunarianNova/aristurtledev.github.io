@@ -5,10 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MonoGameLibrary.Input;
 
-public class GamePadInfo 
-{
-    
-}
+public class GamePadInfo { }
 #endregion
 {
     #region member_fields
