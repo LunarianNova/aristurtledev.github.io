@@ -49,3 +49,5 @@
   href: 23_completing_the_game/
 - name: "24: Shaders"
   href: 24_shaders/
+- name: "25: Packaging Your Game for Distribution"
+  href: 25_packaging_game/
