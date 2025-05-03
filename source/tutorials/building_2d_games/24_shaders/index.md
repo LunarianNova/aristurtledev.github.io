@@ -14,9 +14,11 @@ In this chapter, you will:
 - Create a custom grayscale shader for visual feedback.
 
 > [!IMPORTANT]
-> This chapter is an introduction to shaders in MonoGame and will focus on the basic foundation of understanding how to create shader effect (.fx) files, loading them through the content pipeline, and using them in your game.
+> This chapter is an introduction to shaders in MonoGame and will focus on the basic foundation fo understanding how to create shader effect (*.fx*) files, loading them through the content pipeline, and using them in your game.
 >
-> It is out of scope for this tutorial series to go into depth about the syntax and many built in functions for the shader language itself.  If you would like to dive deeper into learning the language itself, a good place to start would be the [Microsoft Learn: High-level shader language (HLSL)](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl) documentation.
+> If you want to learn more about the shader language itself, a good place to start would be the [High-level shader language (HLSL)](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl) documentation on Microsoft Learn.  
+>
+> For inspiration on what can be achieved with shaders, check out [ShaderToy](https://www.shadertoy.com), which showcases real-time shader effects created by others.  Note that ShaderToy uses [OpenGL Shading Language (GLSL)](https://www.khronos.org/opengl/wiki/OpenGL_Shading_Language) which has some syntactic differences from HLSL, but the underlying concepts and mathematics are very similar for inspiration.
 
 Let's start by understanding what shaders are and how they work in MonoGame.
 
@@ -56,9 +58,12 @@ Pixel shaders are useful in 2D games for creating effects like:
 
 For our Dungeon Slime game, we'll focus primarily on pixel shaders since we want to create a color effect for our game over state.
 
+> [!NOTE]
+> There are other types of shaders beyond vertex and pixel shaders, such as compute shaders, geometry shaders, and hull/domain shaders.  These more advanced shader types enabled powerful features like physics simulations, procedural geometry, and complex post-processing effects.  However, they are not currently supported in the standard MonoGame implementation and are beyond the scope of this beginner tutorial.  As the MonoGame graphics pipeline evolves, support for these advanced shader types may be added in future versions.
+
 ### Shader Languages and Cross-Platform Considerations
 
-MonoGame uses High-Level Shader Language (HLSL) for writing shader effects. HLSL is a C-like programming language developed by Microsoft for DirectX. However, since MonoGame supports multiple platforms, including those that use OpenGL instead of DirectX, it needs a way to make shaders work everywhere.
+MonoGame uses the [High-Level Shader Language (HLSL)](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl) for writing shader effects. HLSL is a C-like programming language developed by Microsoft for DirectX. As MonoGame also supports OpenGL which uses the [OpenGL Shading Language (GLSL)](https://www.khronos.org/opengl/wiki/OpenGL_Shading_Language) instead of DirectX, it needs a way to make shaders work everywhere.
 
 This is where MojoShader comes in. MojoShader is a library that automatically translates your HLSL shader code into whatever format the target platform requires (like GLSL for OpenGL platforms). This translation happens during the content build process when you compile your game.
 
@@ -66,28 +71,31 @@ This is where MojoShader comes in. MojoShader is a library that automatically tr
 
 Different platforms support different shader capabilities, known as "shader models." When writing shaders for MonoGame, you need to consider compatibility across platforms. MonoGame supports the following shader models when targeting DirectX platforms:
 
-| Vertex Shader Model | Pixel Shader Model |
-| ------------------- | ------------------ |
-| `vs_4_0_level_9_1`  | `ps_4_0_level_9_1` |
-| `vs_4_0_level_9_3`  | `ps_4_0_level_9_3` |
-| `vs_4_0`            | `ps_4_0`           |
-| `vs_4_1`            | `ps_4_1`           |
-| `vs_5_0`            | `ps_5_0`           |
+| Vertex Shader Profile | Pixel Shader Profile |
+| --------------------- | -------------------- |
+| `vs_4_0_level_9_1`    | `ps_4_0_level_9_1`   |
+| `vs_4_0_level_9_3`    | `ps_4_0_level_9_3`   |
+| `vs_4_0`              | `ps_4_0`             |
+| `vs_4_1`              | `ps_4_1`             |
+| `vs_5_0`              | `ps_5_0`             |
 
 When targeting OpenGL platforms, MonoGame supports:
 
-| Vertex Shader Model | Pixel Shader Model |
-| ------------------- | ------------------ |
-| `vs_2_0`            | `ps_2_0`           |
-| `vs_3_0`            | `ps_3_0`           |
+| Vertex Shader Profile | Pixel Shader Profile |
+| --------------------- | -------------------- |
+| `vs_2_0`              | `ps_2_0`             |
+| `vs_3_0`              | `ps_3_0`             |
 
-For maximum compatibility, it's best to target the lower shader models:
+For maximum compatibility, it's best to target the following shader models:
 
 - For DirectX platforms: `vs_4_0_level_9_1` (vertex) and `ps_4_0_level_9_1` (pixel)
-- For OpenGL platforms: `vs_2_0` (vertex) and `ps_2_0` (pixel)
+- For OpenGL platforms: `vs_3_0` (vertex) and `ps_3_0` (pixel)
 
 > [!NOTE]
 > In shader model notation, "vs" stands for "vertex shader" and "ps" stands for "pixel shader". The numbers represent the version and feature level of the shader model, with higher numbers indicating more advanced capabilities.
+
+> [!NOTE]
+> MonoGame is currently planning to upgrade its graphics pipeline to support Vulkan and DirectX 12, which will significantly enhance graphical capabilities and shader support across platforms, enabling more advanced visual effects and better performance in future versions.
 
 ## Understanding the Default Shader Template
 
@@ -101,11 +109,19 @@ Let's break down what each section of this template is:
 
     [!code-c[](./snippets/defaultshader.fx?start=1&end=8)]
 
+    > [!IMPORTANT]
+    > These preprocessor directives ensure your shader works across different platforms by defining appropriate shader models and semantics.  When MonoGame compiles your shader:
+    >
+    > - On OpenGL platforms (macOS, Linux, etc.), it uses the `OPENGL` defiition, setting shader models to `vs_3_0` and `ps_3_0`.
+    > - On DirectX platforms (Windows, Xbox), it uses the DirectX path, setting shader models to `vs_4_0_level_9_1` and `ps_4_0_level_9_1`.
+    >
+    > This compatibility block directly impacts which HLSL features you can use in your shader.  To maintain cross-platform compatibility, you should restrict yourself to features available at the lowest shader model you target.  Using advanced features only available in higher shader models will require additional conditional compilation blocks and platform-specific code paths.
+
 2. **Texture declaration**: This declares a `Texture2D` variable called `SpriteTexture` that will receive the texture being drawn by the [**SpriteBatch**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch).
 
     [!code-c[](./snippets/defaultshader.fx?start=10&end=10)]
 
-3. **Sampler state**: This creates a `sampler2D` called `SpriteTextureSampler` that is used sample the texture received from the [**SpriteBatch**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch).  Think of this as similar to the [**SamplerState**](xref:Microsoft.Xna.Framework.Graphics.SamplerState) we discussed in [Chapter 18](../18_texture_sampling/index.md).
+3. **Sampler state**: This creates a `sampler2D` called `SpriteTextureSampler` that controls how the shader reads pixel data from the texture received from the [**SpriteBatch**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch).  It defines properties like [filtering](../18_texture_sampling/index.md#filtering-modes) and [addressing](../18_texture_sampling/index.md#addressing-modes) modes for texture sampling, similar to the [**SamplerState**](xref:Microsoft.Xna.Framework.Graphics.SamplerState) we discussed in [Chapter 18](../18_texture_sampling/index.md).
 
     [!code-c[](./snippets/defaultshader.fx?start=12&end=15)]
 
@@ -114,7 +130,7 @@ Let's break down what each section of this template is:
     [!code-c[](./snippets/defaultshader.fx?start=17&end=22)]
 
     > [!TIP]
-    > Notice the unusual syntax like `float4 Position : SV_POSITION` where there's a colon followed by something after each variable declaration.  These are called *semantics* in HLSL and they're special labels that define how the data should be used by the graphics hardware or passed between shader stages (like from vertex shader to pixel shader).
+    > Notice the unusual syntax like `float4 Position : SV_POSITION` where there's a colon followed by something after each variable declaration.  These are called [*semantics*](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-semantics) in HLSL and they are special labels that define how the data should be used by the graphics hardware or passed between shader stages (like from vertex shader to pixel shader).
     >
     > For example, `SV_POSITION` tells the system "this contains the final screen position," `COLOR0` means "this contains color data," and `TEXCOORD0` means "this contains texture coordinates."
     >
@@ -147,11 +163,18 @@ Think of it like baking a cake:
 
 In simple shaders, such as a grayscale shader, you would only need one technique with one pass.  For more complex effects like blur, you might use multiple passes: one to blur horizontally and another to blur vertically.
 
+> [!TIP]
+> For a real-world example of a blur shader with multiple techniques and passes, take a look at the [Blur shader from the MonoGme Ship Game](https://github.com/MonoGame/MonoGame.Samples/blob/3.8.2/ShipGame/ShipGame.Core/Content/shaders/Blur.fx) sample.  This shader demonstrates how visual effects can be built by combining multiple rendering passes, with separate horizontal and vertical blur passes that work together to create a final blur effect.
+
 The line `PixelShader = compile PS_SHADERMODEL MainPS();` simply tells the GPU which pixel shader function to use for this pass (in this case the `MainPS` function) and compiles it using the appropriate shader model defined earlier.
 
-## Loading Shader Effects
+## Using Shaders in MonoGame
 
-Shader effects are loaded in MonoGame using the content manager, much like any other asset that is compiled using the content pipeline.  The type to use when loading a shader is [**Effect**](xref:Microsoft.Xna.Framework.Graphics.Effect).
+Now that we understand what shaders are, we can explore how to integrate them into a MonoGame project. Before implementing a shader in our game, we will first take a look at the process of loading and using shaders with [**SpriteBatch**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch).
+
+### Loading Shader Effects
+
+Like other game assets such as textures and sounds, shader effects are loaded through the content pipeline using the [**ContentManager**](xref:Microsoft.Xna.Framework.Content.ContentManager).  When loading a shader, we specify [**Effect**](xref:Microsoft.Xna.Framework.Graphics.Effect) as the target type
 
 ```cs
 // Example of loading an effect
@@ -160,9 +183,9 @@ Effect exampleEffect = Content.Load<Effect>("exampleEffect");
 
 You should typically load shader effects during your game's [**LoadContent**](xref:Microsoft.Xna.Framework.Game.LoadContent) method along with other game assets, and store them in class fields so they can be accessed during the [**Draw**](xref:Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)) method.
 
-## Using Effects With SpriteBatch
+### Using Effects With SpriteBatch
 
-Once you've loaded a shader effect, applying it to your game's visuals requires integrating it with the [**SpriteBatch**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch). The effect is specified during the `Begin` call, but is actually applied during drawing operations or when `End` is called (depending on the SpriteSortMode).
+Once you have loaded a shader effect, applying it to your game's visuals requires integrating it with the [**SpriteBatch**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch). The effect is specified during the `Begin` call, but is actually applied during drawing operations or when `End` is called (depending on the SpriteSortMode).
 
 ```cs
 // Specify the effect during Begin
@@ -190,9 +213,9 @@ spriteBatch.Begin(effect: exampleEffect);
 // Draw calls will use the effect with Saturation = 0.5f when processed
 ```
 
-## Creating a Grayscale Shader
+## Implementing a Shader In Our Game
 
-Now that we understand the basics of shaders, we will create a simple grayscale effect that we can apply when the game is paused or there is a game over to provide visual feedback to the player that the game is inactive.
+Now it is time to implement a shader for our game.  The shader we will create is a simple grayscale effect that can be applied when the game is paused or there is a game over to provide visual feedback to the player that the game is inactive.
 
 ### Creating the Shader File
 
@@ -215,7 +238,11 @@ In the *DungeonSlime* project (your main game project), open the *Content/effect
 
 The key modifications made to create this grayscale effect include:
 
-1. **Added a Parameter**: A `Saturation` parameter was added that controls he intensity fo the grayscale effect.  When set to 0, the image will be fully grayscale.  When set to 1, the image will be its original color.  Values in between create a partial grayscale effect.
+1. **Added a Parameter**: A `Saturation` parameter was added that controls he intensity of the grayscale effect.  
+
+   - When set to 0, the image will be fully grayscale.  
+   - When set to 1, the image will be its original color.  
+   - Values in between create a partial grayscale effect.
 
 2. **Modified the Pixel Shader**: The `MainPS` function has been updated to:
 
@@ -231,7 +258,7 @@ The heart of the grayscale effect is this line:
 
 [!code-c[](./snippets/grayscaleeffect.fx?start=33&end=34)]
 
-This uses the [`dot`](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-dot) function to calculate the do product between the color's RGB values and the vector $(0.3, 0.59, 0.11)$.  This effectively calculates a weighted average where:
+This uses the [`dot`](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-dot) function to calculate the dot product between the color's RGB values and the vector $(0.3, 0.59, 0.11)$.  This effectively calculates a weighted average where:
 
 - Red contributes 30%.
 - Green contributes 59%.
@@ -280,6 +307,9 @@ Now that we have our grayscale shader, we can implement it in our game when the 
 
     [!code-csharp[](./snippets/gamescene/draw.cs?highlight=6-18)]
 
+    > [!NOTE]
+    > Notice how we set the shader parameters with the current saturation value every frame before beginning the sprite batch.  This is because shaders are stateless; they do not remember any values from the previous draw cycle.  Each time the GPU processes a shader, it only works with the parameters provided in that specific frame.  Event if the saturation value has not changed since the last frame, we still need to send it to the shader again to apply it.  This is why we update the shader parameters in the `Draw` method rather than only when the value is changed.
+
 With these changes, when the game enters a paused or game over state, the screen will gradually fade to gray using the grayscale shader effect.  This provides a clear indication that the game is inactive during these states.  
 
 | ![Figure 24-1: The game, now using a grayscale effect when paused or a game over state occurs to visually indicate that the game is inactive](./videos/gameplay.webm) |
@@ -316,10 +346,9 @@ When working with effects in [**SpriteBatch**](xref:Microsoft.Xna.Framework.Grap
     spriteBatch.Begin();
     spriteBatch.Draw(texture, position, color);
     spriteBatch.End();
-
     ```  
 
-3. Even though the effect to use is specified during the [**SpriteBatch.Begin**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode,Microsoft.Xna.Framework.Graphics.BlendState,Microsoft.Xna.Framework.Graphics.SamplerState,Microsoft.Xna.Framework.Graphics.DepthStencilState,Microsoft.Xna.Framework.Graphics.RasterizerState,Microsoft.Xna.Framework.Graphics.Effect,System.Nullable{Microsoft.Xna.Framework.Matrix})) call, the actual effect is not applied until all batched items are processed when [**SpriteBatch.End**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch.End) is called.  This means if you adjust parameter values of the effect between draw calls, the last parameter value set is what is applied to all draw calls within the [**SpriteBatch.Begin**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode,Microsoft.Xna.Framework.Graphics.BlendState,Microsoft.Xna.Framework.Graphics.SamplerState,Microsoft.Xna.Framework.Graphics.DepthStencilState,Microsoft.Xna.Framework.Graphics.RasterizerState,Microsoft.Xna.Framework.Graphics.Effect,System.Nullable{Microsoft.Xna.Framework.Matrix})).
+3. Even though the effect to use is specified during the [**SpriteBatch.Begin**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode,Microsoft.Xna.Framework.Graphics.BlendState,Microsoft.Xna.Framework.Graphics.SamplerState,Microsoft.Xna.Framework.Graphics.DepthStencilState,Microsoft.Xna.Framework.Graphics.RasterizerState,Microsoft.Xna.Framework.Graphics.Effect,System.Nullable{Microsoft.Xna.Framework.Matrix})) call, the actual effect is not applied until all batched items are processed when [**SpriteBatch.End**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch.End) is called.  This means if you adjust parameter values of the effect between draw calls, **only the last parameter value set** is what is applied to all draw calls within the [**SpriteBatch.Begin**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode,Microsoft.Xna.Framework.Graphics.BlendState,Microsoft.Xna.Framework.Graphics.SamplerState,Microsoft.Xna.Framework.Graphics.DepthStencilState,Microsoft.Xna.Framework.Graphics.RasterizerState,Microsoft.Xna.Framework.Graphics.Effect,System.Nullable{Microsoft.Xna.Framework.Matrix})).
 
     ```cs
     // Begin sprite batch with effect.
@@ -341,7 +370,10 @@ When working with effects in [**SpriteBatch**](xref:Microsoft.Xna.Framework.Grap
     spriteBatch.End();
     ```
 
-4. There is an exception to #2 above.  In [Chapter 06: Working with Textures](../06_working_with_textures/index.md#layer-depth), we discussed the different [**SpriteSortMode**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) values that can be used when rendering.  From this chapter, we learned that when using [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) that when a draw call is made, it is immediately flushed to the GPU and rendered to the screen, ignoring batching.  This means that if you are using [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) then changing parameters between draw calls will apply the parameter change after it is made for the next draw call.  However, as mentioned in that chapter, [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) can cause performance issues and should only be used when absolutely necessary.
+4. There is an exception to #2 above.  In [Chapter 06: Working with Textures](../06_working_with_textures/index.md#layer-depth), we discussed the different [**SpriteSortMode**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) values that can be used when rendering.  From this chapter, we learned that when using [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) that when a draw call is made, it is immediately flushed to the GPU and rendered to the screen, ignoring batching.  This means that if you are using [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) then changing parameters between draw calls will apply the parameter change after it is made for the next draw call.  
+
+    > [!IMPORTANT]
+    > As mentioned in [Chapter 06](../06_working_with_textures/index.md#layer-depth), [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) can cause performance issues and should only be used when absolutely necessary.
 
     ```cs
     // Begins sprite batch with the effect AND intentionally specifying SpriteSortMode.Immediate
