@@ -336,13 +336,27 @@ However, AOT has limitations:
 
 For MonoGame game, AOT can work well if you avoid these limitations.
 
+> [!NOTE]
+> Native AoT is recommended for mobile platforms due to its performance benefits and smaller binary size, which are important for mobile devices with limited resources.  Additionally, it is mandatory when targeting console platforms (Xbox, PlayStation, Switch) as these platforms typically do not support JIT compilation for security and performance reasons.
+
 For more information on Native AOT, refer to the [Native AOT deployment overview](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/?tabs=windows%2Cnet8) documentation on Microsoft Learn.
 
 ### Trimming
 
 Trimming (specified with `-p:Trimming:true`) removes unused code from your distribution to reduce size.  It is automatically enabled when using AOT.
 
-While trimming can significantly reduce your game's size, it may remove types that appear unused bot are accessed indirectly through reflection or generics causing runtime errors.
+While trimming can significantly reduce your game's size, it may remove types that appear unused but are accessed indirectly through reflection or generics causing runtime errors.
+
+> [!IMPORTANT]
+> Trimming can cause issues with content pipeline extensions that are used at runtime.  When the compiler cannot detect that certain types are used (especially with reflection or generic collections), thy might be trimmed away, resulting in "type not found" exceptions when loading content.
+>
+> If you encounter runtime exceptions about missing types when loading content with trimming enabled, you can resolve this by ensuring the compiler recognizes the types being uset at runtime by making the following call:
+>
+> ```cs
+> ContentTypeReaderManager.AddTypeCreator(typeof(ReflectiveReader<ReaderType>).FullName, () => new ReflectiveReader<ReaderType>())
+> ```
+>
+> Where `ReaderType` is the `ContentTypeReader` of the content pipeline extension to be preserved.  This call should be made somewhere in your code before loading content that uses these types.
 
 For more information on Trimming, refer to the [Trim self-contained applications](https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trim-self-contained) documentation on Microsoft Learn.
 
@@ -362,13 +376,35 @@ When distributing your games across multiple platforms, be aware of these additi
 
 Different operating systems use different path separators (Windows uses backslashes, macOS and Linux use forward slashes).  Always use `Path.Combine` in your code rather than hardcoding path separators.
 
+```cs
+// Incorrect approach - will fail on some platforms
+string path = "Content\\images\\atlas-definition.xml";
+
+// Correct approach, works on all platforms
+string path = Path.Combine("Content", "images", "atlas-definition.xml");
+```
+
 ### Case Sensitivity
 
 Windows is case-insensitive for filenames, but macOS and Linux are case-sensitive.  Ensure your asset references use the exact case that matches your files for maximum compatibility.
 
+```cs
+// If the content path on disk is:
+// images/Atlas.xnb
+
+// On Windows, this would work fine since windows is case-insensitive.
+// ON macOS and Linux, this would fail since they are case-sensitive.
+Texture2D text = Content.Load<Texture2D>("images/atlas");
+```
+
 ### External Dependencies
 
 Try to minimize external dependencies.  If your game requires additional libraries or runtimes, document these requirements clearly for players.
+
+> [!NOTE]
+> When publishing to distribution platforms and app stores (such as Steam, Epic Game Sore, App Store, or Google Play), you are typically required to disclose all external dependencies in your privacy policy or a dedicate dependencies section.  This includes third-party libraries, analytics tools, and any software components that your game depends on.
+>
+> Check specific requirements for each distribution platform you plant to target, as well as requirements by third-party libraries for using them, as disclosure requirements may vary.
 
 ## Mobile Platforms
 
@@ -388,9 +424,9 @@ For the Dungeon Slime game, adapting to mobile would require:
 - Potentially rethinking game mechanics to suit mobile play patterns.
 
 > [!NOTE]
-> Mobile deployment for MonoGame games is significantly more complex than desktop deployment and typically requires platform-specific development environs (Android Studio for Android and Xcode for iOS).  A comprehensive guide to mobile deployment would require its own dedicated tutorial series.
+> Mobile deployment for MonoGame games is significantly more complex than desktop deployment and typically requires platform-specific development environments (Android Studio for Android and Xcode for iOS).  A comprehensive guide to mobile deployment will be covered in a future tutorial.
 
-If you are interested in extending the Dungeon Slime game, or future games, to mobile paltforms after completing this tutorial series, these resources provide a good starting point:
+If you are interested in extending the Dungeon Slime game, or future games, to mobile platforms after completing this tutorial series, these resources provide a good starting point:
 
 - [Android Deployment Guide](https://learn.microsoft.com/en-us/previous-versions/xamarin/android/deploy-test/publishing/)
 - [iOS App Store Distribution](https://learn.microsoft.com/en-us/previous-versions/xamarin/ios/deploy-test/app-distribution/app-store-distribution/publishing-to-the-app-store?tabs=windows)
@@ -416,7 +452,7 @@ Key features include:
 - Cross-platform packaging capabilities (build for any OS from any OS).
 - Automatic creation of macOS application bundles.
 - Appropriate compression formats for each target platform for distribution.
-  
+
 For more information about MonoPack, including installation and usage instructions, visit the [official repository on GitHub](https://github.com/shyfox-studio/MonoPack)
 
 ## Conclusion
@@ -448,7 +484,7 @@ Whether you choose to use the manual platform-specific packaging steps or automa
 4. What is the advantage of using a tar.gz archive over zip file when distributing for macOS and Linux?
 
     :::question-answer
-    A tar.gz archive preserves Unix fil permissions, which is crucial for maintaining the executable permissions set on game files.  Without these permissions, users would need to manually set execute permissions before running the game.  ZIP files do not reliably preserve these Unix-specific permissions, which could prevent the game from running directly after extraction on macOS and Linux platforms.
+    A tar.gz archive preserves Unix file permissions, which is crucial for maintaining the executable permissions set on game files.  Without these permissions, users would need to manually set execute permissions before running the game.  ZIP files do not reliably preserve these Unix-specific permissions, which could prevent the game from running directly after extraction on macOS and Linux platforms.
     :::
 
 5. What is the purpose of creating a universal binary for macOS distributions?
