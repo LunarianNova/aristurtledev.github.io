@@ -297,13 +297,13 @@ To add input buffering for the `Slime` class, we will begin by adding the necess
 
 The queue will store the directional vectors (up, down, left, right) that we will apply to the slime's movement in the order they were received.
 
-Next, we need to initialize this queue.  In the `Slime` class, locate the `Initialize` method and and update it to the following:
+Next, we need to initialize The queue.  In the `Slime` class, locate the `Initialize` method and and update it to the following:
 
 [!code-csharp[](./snippets/slime/initialize.cs?highlight=30-31)]
 
 Next, we need to update the input handling method to store the inputs in the queue instead of immediately overwriting the `_nextDirection` field.  In the `Slime` class, locate the `HandleInput` method and update it to the following
 
-[!code-csharp[](./snippets/slime/handleinput.cs?hightlight=3,22-38)]
+[!code-csharp[](./snippets/slime/handleinput.cs?highlight=3,22-38)]
 
 1. The `potentialNewDirection` is now given the initial value of [**Vector2.Zero**](xref:Microsoft.Xna.Framework.Vector2.Zero).
 2. A check is made to see if the player has pressed a direction key and if the input buffer is not already at maximum capacity.
