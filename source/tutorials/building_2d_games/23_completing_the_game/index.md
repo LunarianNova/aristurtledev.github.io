@@ -297,7 +297,7 @@ To add input buffering for the `Slime` class, we will begin by adding the necess
 
 The queue will store the directional vectors (up, down, left, right) that we will apply to the slime's movement in the order they were received.
 
-Next, we need to initialize The queue.  In the `Slime` class, locate the `Initialize` method and and update it to the following:
+Next, we need to initialize the queue.  In the `Slime` class, locate the `Initialize` method and and update it to the following:
 
 [!code-csharp[](./snippets/slime/initialize.cs?highlight=30-31)]
 
