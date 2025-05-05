@@ -51,3 +51,5 @@
   href: 24_shaders/
 - name: "25: Packaging Your Game for Distribution"
   href: 25_packaging_game/
+- name: "26: Publishing Your Game to itch.io"
+  href: 26_publish_to_itch/
