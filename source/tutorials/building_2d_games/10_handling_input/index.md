@@ -393,7 +393,7 @@ Consider implementing input buffering in your game when:
 - Actions require precise timing that is difficult for players to hit consistently.
 - You want to allow players to "queue up" their next few moves.
 
-We'll see a practical implementation of input buffering in [Chapter 23](../23_completing_the_game/index.md) when we finalize our snake-like game mechanics, where timing and direction changes are critical to gameplay.
+We will implement input buffering in [Chapter 23](../23_completing_the_game/index.md) when we finalize our snake-like game mechanics, where timing and direction changes are critical to gameplay.
 
 ## Conclusion
 
