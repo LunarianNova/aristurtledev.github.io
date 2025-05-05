@@ -14,7 +14,7 @@ In this chapter, you will:
 - Create a custom grayscale shader for visual feedback.
 
 > [!IMPORTANT]
-> This chapter is an introduction to shaders in MonoGame and will focus on the basic foundation fo understanding how to create shader effect (*.fx*) files, loading them through the content pipeline, and using them in your game.
+> This chapter is an introduction to shaders in MonoGame and will focus on the basic foundation of understanding how to create shader effect (*.fx*) files, loading them through the content pipeline, and using them in your game.
 >
 > If you want to learn more about the shader language itself, a good place to start would be the [High-level shader language (HLSL)](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl) documentation on Microsoft Learn.  
 >
@@ -60,6 +60,26 @@ For our Dungeon Slime game, we'll focus primarily on pixel shaders since we want
 
 > [!NOTE]
 > There are other types of shaders beyond vertex and pixel shaders, such as compute shaders, geometry shaders, and hull/domain shaders.  These more advanced shader types enabled powerful features like physics simulations, procedural geometry, and complex post-processing effects.  However, they are not currently supported in the standard MonoGame implementation and are beyond the scope of this beginner tutorial.  As the MonoGame graphics pipeline evolves, support for these advanced shader types may be added in future versions.
+
+### The Shader Pipeline
+
+To understand how shaders work, it helps to visualize how data flow through the rendering pipeline.
+
+| ![Figure 24-1: Basic shader pipeline showing how data flows through the rendering process](./images/shader-pipeline.png) |
+| :----------------------------------------------------------------------------------------------------------------------: |
+|               **Figure 24-1: Basic shader pipeline showing how data flows through the rendering process**                |
+
+This diagram illustrates the fundamental steps of the shader pipeline:
+
+1. **Input Data**: The process begins with input data that is sent to the GPU to render:
+   1. **Vertex Data**: The vertex data (positions, colors, etc.) that define the geometry of what is being drawn.
+   2. **Texture**: The image data that will be applied to the geometry.
+2. **Vertex Shader**: Processes each vertex, calculating its final position on the screen and passing the data to the next stage.
+3. **Sampler**: Controls how texture data is accessed, applying [filtering](../18_texture_sampling/index.md#filtering-modes) (how pixels blend when scaled) and [addressing](../18_texture_sampling/index.md#addressing-modes) (what happens at texture edges).
+4. **Pixel Shader**: Takes the transformed vertices and sampled texture data to calculate the final color of each pixel.
+5. **Output**: The final rendered image that appears on your screen.
+
+When working with [**SpriteBatch**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch) (2D) in MonoGame, the framework handles most of the vertex shader work automatically, which is why we will focus primarily on writing pixel shaders for visual effects.
 
 ### Shader Languages and Cross-Platform Considerations
 
@@ -238,7 +258,7 @@ In the *DungeonSlime* project (your main game project), open the *Content/effect
 
 The key modifications made to create this grayscale effect include:
 
-1. **Added a Parameter**: A `Saturation` parameter was added that controls he intensity of the grayscale effect.  
+1. **Added a Parameter**: A `Saturation` parameter was added that controls the intensity of the grayscale effect.  
 
    - When set to 0, the image will be fully grayscale.  
    - When set to 1, the image will be its original color.  
