@@ -299,8 +299,8 @@ For macOS:
         2. Make the game executable with the command: chmod +x ./[YourGameName].app/Contents/MacOS/[YourGameName]
 ```
 
-[!TIP]
-Consider testing your installation instructions on a clean system or with someone who has not seen your game before.  This can help identify any missing steps or assumptions you might have made.
+> [!TIP]
+> Consider testing your installation instructions on a clean system or with someone who has not seen your game before.  This can help identify any missing steps or assumptions you might have made.
 
 | ![Figure 26-7: Example of download and installation instructions for a MonoGame project](./images/download-install-instructions.png) |
 | :----------------------------------------------------------------------------------------------------------------------------------: |
@@ -452,6 +452,12 @@ Your game is now publicly accessible to the itch.io community.  It will appear i
 > 4. Make necessary adjustments before promoting your game to a wider audience.
 >
 > This approach helps identify potential issues you may have missed before presenting it to a larger audience.
+
+## Dungeon Slime on itch.io
+
+To see a completed version of a project uploaded to itch.io, you can explore the Dungeon Slime example at [https://shyfoxstudio.itch.io/dungeon-slime](https://shyfoxstudio.itch.io/dungeon-slime).
+
+This published version demonstrates the concepts we covered in this chapter, showing how they come together in a finished project.
 
 ## Conclusion
 
