@@ -384,7 +384,7 @@ The following is a breakdown of this initialization process:
 2. **Content Loading**: Gum needs to be made aware of which content manager to use to load assets through the content pipeline.  By setting `GumService.Default.ContentLoader.XnaContentManager = Core.Content`, we tell Gum to use our game's content manager when loading assets.  By using the game's existing content manager, Gum also gets the benefit of the caching that the content manager performs when loading assets.
 3. **Input Configuration**:
    - By default, all Forms controls automatically respond to mouse and touch screen input devices.  We need to explicitly register keyboard and gamepad input devices by using th `FrameworkElement.KeyboardsForUiControl` and `Framework.GamePadsForUiControl` properties.
-   - By default, Forms controls will automatically respond to tab and shift-tab for navigation. By using the `FrameworkElement.TabKeyCombos` and `FrameworkElement.TabReverseKeyCombos` properties, we can add additional key combinations for tabbing.  Here map the Up arrow for reverse tabbing and the Down arrow for forward tabbing.
+   - By default, Forms controls will automatically respond to tab and shift-tab for navigation. By using the `FrameworkElement.TabKeyCombos` and `FrameworkElement.TabReverseKeyCombos` properties, we can add additional key combinations for tabbing.  Here map the Up arrow for reverse tabbing and the Down arrow for forward tabbing.  
 
    > [!TIP]
    > If you prefer different navigation keys, you can remove the built-in Tab/Shift+Tab navigation.
@@ -487,7 +487,7 @@ Update the `Draw` method to the following:
 
 [!code[](./snippets/titlescene/draw.cs?highlight=10-34,36)]
 
-With these changes, our UI system is now fully integrated into the scene's game loop.  Gum updates its controls in the `Update` method and draws them in the `Draw` method.  This produces a fully functional title screen with buttons that allows players to start the game or adjust audio settings.
+With these changes, our UI system is now fully integrated into the scene's game loop.  Gum updates its controls in the `Update` method and draws them in the `Draw` method.  This produces a fully functional title screen with buttons that allows players to start the game or adjust audio settings.  
 
 | ![Figure 20-1: Title screen with default Gum buttons](./images/title-unstyled.png) |
 | :--------------------------------------------------------------------------------: |
@@ -502,7 +502,7 @@ Now that we have setup the UI for the title scene, we will add a pause menu to o
 
 First, open the *GameScene.cs* file in the game project and add the following using declarations to the top of the `GameScene` class.
 
-[!code-csharp[](./snippets/gamescene/usings.cs?highlight=2,7-9)]
+[!code-csharp[](./snippets/gamescene/usings.cs?highlight=2-3,8-10)]
 
 Next, add the following fields:
 
@@ -571,7 +571,7 @@ In this chapter, you accomplished the following:
 - Handle user input from various input devices.
 - Create transitions between different UI screens.
 - Integrate the UI system with the game's scene architecture.
-
+  
 While this UI is now functional, you may have noticed that it uses Gum's default styling which does not match our game's visual theme.  In the next chapter, we will learn how to customize the appearance of our UI elements to create a cohesive visual style that complements our game's aesthetic.
 
 ## Test Your Knowledge
@@ -583,7 +583,7 @@ While this UI is now functional, you may have noticed that it uses Gum's default
 
     - **Forms**: Interactive UI elements like buttons, sliders, and panels that handle user input. They provide built-in functionality for common UI interactions.
     - **Visuals**: Display elements like TextRuntime, ColoredRectangleRuntime, and NineSliceRuntime that are used to render graphics. They have no built-in interaction behavior but can be customized visually.
-
+  
     Forms controls contain Visuals, accessible through the `Visual` property, creating a separation between functionality and presentation.
     :::
 
