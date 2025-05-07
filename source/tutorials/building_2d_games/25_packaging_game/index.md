@@ -356,7 +356,7 @@ While trimming can significantly reduce your game's size, it may remove types th
 > ContentTypeReaderManager.AddTypeCreator(typeof(ReflectiveReader<ReaderType>).FullName, () => new ReflectiveReader<ReaderType>())
 > ```
 >
-> Where `ReaderType` is the `ContentTypeReader` of the content pipeline extension to be preserved.  This call should be made somewhere in your code before loading content that uses these types.
+> Where `ReaderType` is the `ContentTypeReader` of the content pipeline extension to be preserved.  This call should be made somewhere in your code before loading content that uses these types.  
 
 For more information on Trimming, refer to the [Trim self-contained applications](https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trim-self-contained) documentation on Microsoft Learn.
 
@@ -378,7 +378,7 @@ Different operating systems use different path separators (Windows uses backslas
 
 ```cs
 // Incorrect approach - will fail on some platforms
-string path = "Content\\images\\atlas-definition.xml";
+string path = "Content\\images\\atlas-definition.xml"; 
 
 // Correct approach, works on all platforms
 string path = Path.Combine("Content", "images", "atlas-definition.xml");
@@ -450,7 +450,7 @@ Key features include:
 - Cross-platform packaging capabilities (build for any OS from any OS).
 - Automatic creation of macOS application bundles.
 - Appropriate compression formats for each target platform for distribution.
-
+  
 For more information about MonoPack, including installation and usage instructions, visit the [official repository on GitHub](https://github.com/shyfox-studio/MonoPack)
 
 ## Conclusion

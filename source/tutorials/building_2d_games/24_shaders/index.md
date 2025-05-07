@@ -16,7 +16,7 @@ In this chapter, you will:
 > [!IMPORTANT]
 > This chapter is an introduction to shaders in MonoGame and will focus on the basic foundation of understanding how to create shader effect (*.fx*) files, loading them through the content pipeline, and using them in your game.
 >
-> If you want to learn more about the shader language itself, a good place to start would be the [High-level shader language (HLSL)](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl) documentation on Microsoft Learn.
+> If you want to learn more about the shader language itself, a good place to start would be the [High-level shader language (HLSL)](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl) documentation on Microsoft Learn.  
 >
 > For inspiration on what can be achieved with shaders, check out [ShaderToy](https://www.shadertoy.com), which showcases real-time shader effects created by others.  Note that ShaderToy uses [OpenGL Shading Language (GLSL)](https://www.khronos.org/opengl/wiki/OpenGL_Shading_Language) which has some syntactic differences from HLSL, but the underlying concepts and mathematics are very similar for inspiration.
 
@@ -239,7 +239,7 @@ Now it is time to implement a shader for our game.  The shader we will create is
 
 ### Creating the Shader File
 
-First, we need to create a new shader effect file and add it to our content project.
+First, we need to create a new shader effect file and add it to our content project.  
 
 1. In the *DungeonSlime* project (your main game project), open the */Content/Content.mgcb* content project file in the MGCB Editor.
 2. In the MGCB Editor, right-click the *Content* now and choose *Add* > *New Folder...*.
@@ -258,10 +258,10 @@ In the *DungeonSlime* project (your main game project), open the *Content/effect
 
 The key modifications made to create this grayscale effect include:
 
-1. **Added a Parameter**: A `Saturation` parameter was added that controls the intensity of the grayscale effect.
+1. **Added a Parameter**: A `Saturation` parameter was added that controls the intensity of the grayscale effect.  
 
-   - When set to 0, the image will be fully grayscale.
-   - When set to 1, the image will be its original color.
+   - When set to 0, the image will be fully grayscale.  
+   - When set to 1, the image will be its original color.  
    - Values in between create a partial grayscale effect.
 
 2. **Modified the Pixel Shader**: The `MainPS` function has been updated to:
@@ -285,7 +285,7 @@ This uses the [`dot`](https://learn.microsoft.com/en-us/windows/win32/direct3dhl
 - Blue contributes 11%.
 
 > [!NOTE]
-> These specific weights are based on how the human eye perceives brightness in different colors.  Green appears brighter to us than red, which appears brighter than blue.
+> These specific weights are based on how the human eye perceives brightness in different colors.  Green appears brighter to us than red, which appears brighter than blue.  
 >
 > The weighted values themselves are based on the formula that represents the luma component from the [ITU-R BT.601](https://en.wikipedia.org/wiki/Rec._601) standard, which is commonly used for converting RGB images to grayscale based on human perception where:
 >
@@ -330,7 +330,7 @@ Now that we have our grayscale shader, we can implement it in our game when the 
     > [!NOTE]
     > Notice how we set the shader parameters with the current saturation value every frame before beginning the sprite batch.  This is because shaders are stateless; they do not remember any values from the previous draw cycle.  Each time the GPU processes a shader, it only works with the parameters provided in that specific frame.  Event if the saturation value has not changed since the last frame, we still need to send it to the shader again to apply it.  This is why we update the shader parameters in the `Draw` method rather than only when the value is changed.
 
-With these changes, when the game enters a paused or game over state, the screen will gradually fade to gray using the grayscale shader effect.  This provides a clear indication that the game is inactive during these states.
+With these changes, when the game enters a paused or game over state, the screen will gradually fade to gray using the grayscale shader effect.  This provides a clear indication that the game is inactive during these states.  
 
 | ![Figure 24-1: The game, now using a grayscale effect when paused or a game over state occurs to visually indicate that the game is inactive](./videos/gameplay.webm) |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -366,7 +366,7 @@ When working with effects in [**SpriteBatch**](xref:Microsoft.Xna.Framework.Grap
     spriteBatch.Begin();
     spriteBatch.Draw(texture, position, color);
     spriteBatch.End();
-    ```
+    ```  
 
 3. Even though the effect to use is specified during the [**SpriteBatch.Begin**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode,Microsoft.Xna.Framework.Graphics.BlendState,Microsoft.Xna.Framework.Graphics.SamplerState,Microsoft.Xna.Framework.Graphics.DepthStencilState,Microsoft.Xna.Framework.Graphics.RasterizerState,Microsoft.Xna.Framework.Graphics.Effect,System.Nullable{Microsoft.Xna.Framework.Matrix})) call, the actual effect is not applied until all batched items are processed when [**SpriteBatch.End**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch.End) is called.  This means if you adjust parameter values of the effect between draw calls, **only the last parameter value set** is what is applied to all draw calls within the [**SpriteBatch.Begin**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode,Microsoft.Xna.Framework.Graphics.BlendState,Microsoft.Xna.Framework.Graphics.SamplerState,Microsoft.Xna.Framework.Graphics.DepthStencilState,Microsoft.Xna.Framework.Graphics.RasterizerState,Microsoft.Xna.Framework.Graphics.Effect,System.Nullable{Microsoft.Xna.Framework.Matrix})).
 
@@ -374,7 +374,7 @@ When working with effects in [**SpriteBatch**](xref:Microsoft.Xna.Framework.Grap
     // Begin sprite batch with effect.
     // Specifying the effect here is only specifying what effect to apply when batching ends
     spriteBatch.Begin(effect: exampleEffect);
-
+    
     // Change a parameter and draw something
     exampleEffect.Parameters["ExampleParameter"].SetValue(1.0f);
     spriteBatch.Draw(texture1, position, color);
@@ -390,7 +390,7 @@ When working with effects in [**SpriteBatch**](xref:Microsoft.Xna.Framework.Grap
     spriteBatch.End();
     ```
 
-4. There is an exception to #2 above.  In [Chapter 06: Working with Textures](../06_working_with_textures/index.md#layer-depth), we discussed the different [**SpriteSortMode**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) values that can be used when rendering.  From this chapter, we learned that when using [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) that when a draw call is made, it is immediately flushed to the GPU and rendered to the screen, ignoring batching.  This means that if you are using [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) then changing parameters between draw calls will apply the parameter change after it is made for the next draw call.
+4. There is an exception to #2 above.  In [Chapter 06: Working with Textures](../06_working_with_textures/index.md#layer-depth), we discussed the different [**SpriteSortMode**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) values that can be used when rendering.  From this chapter, we learned that when using [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) that when a draw call is made, it is immediately flushed to the GPU and rendered to the screen, ignoring batching.  This means that if you are using [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) then changing parameters between draw calls will apply the parameter change after it is made for the next draw call.  
 
     > [!IMPORTANT]
     > As mentioned in [Chapter 06](../06_working_with_textures/index.md#layer-depth), [**SpriteSortMode.Immediate**](xref:Microsoft.Xna.Framework.Graphics.SpriteSortMode) can cause performance issues and should only be used when absolutely necessary.
@@ -398,7 +398,7 @@ When working with effects in [**SpriteBatch**](xref:Microsoft.Xna.Framework.Grap
     ```cs
     // Begins sprite batch with the effect AND intentionally specifying SpriteSortMode.Immediate
     spriteBatch.Begin(effect: exampleEffect, sortMode: SpriteSortMode.Immediate);
-
+    
     // Change a parameter and draw something.  Since we're in immediate mode, the value of the parameter is used because the shader is immediately applied to the draw call.
     exampleEffect.Parameters["ExampleParameter"].SetValue(1.0f);
     spriteBatch.Draw(texture1, position, color);
