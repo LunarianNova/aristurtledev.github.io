@@ -124,7 +124,7 @@ Sound effects are played using the [**SoundEffect**](xref:Microsoft.Xna.Framewor
     [!code-csharp[](./snippets/play_soundeffect_instance.cs)]
 
 - Use [**SoundEffect.Play**](xref:Microsoft.Xna.Framework.Audio.SoundEffect.Play) for simple sound effects that you just want to play once.
-- Use [**SoundEffect.CreateInstance**](xref:Microsoft.Xna.Framework.Audio.SoundEffect.CreateInstance) when you need more control over the sound effect, like adjusting volume, looping, or managing multiple instances of the same sound.  
+- Use [**SoundEffect.CreateInstance**](xref:Microsoft.Xna.Framework.Audio.SoundEffect.CreateInstance) when you need more control over the sound effect, like adjusting volume, looping, or managing multiple instances of the same sound.
 
 [**SoundEffectInstance**](xref:Microsoft.Xna.Framework.Audio.SoundEffectInstance) contains several properties that can be used to control how the sound effect is played:
 
@@ -149,9 +149,9 @@ Unlike sound effects, music is played through the [**MediaPlayer**](xref:Microso
 
 Before we can add audio to our game, we need some sound files to work with. Download the following audio files:
 
-- [bounce.wav](./files/bounce.wav) - For when the bat bounces off screen edges
-- [collect.wav](./files/collect.wav) - For when the slime eats the bat
-- [theme.ogg](./files/theme.ogg) - Background music
+- [bounce.wav](./files/bounce.wav){download} - For when the bat bounces off screen edges
+- [collect.wav](./files/collect.wav){download} - For when the slime eats the bat
+- [theme.ogg](./files/theme.ogg){download} - Background music
 
 > [!NOTE]
 >
