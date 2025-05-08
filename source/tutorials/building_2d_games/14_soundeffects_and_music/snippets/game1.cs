@@ -109,6 +109,8 @@ public class Game1 : Core
 
         // Set the theme music to repeat.
         MediaPlayer.IsRepeating = true;
+
+        base.LoadContent();
     }
 
     protected override void Update(GameTime gameTime)

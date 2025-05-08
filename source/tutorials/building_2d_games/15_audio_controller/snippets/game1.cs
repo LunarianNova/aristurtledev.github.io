@@ -103,6 +103,8 @@ public class Game1 : Core
 
         // Load the background theme music
         _themeSong = Content.Load<Song>("audio/theme");
+
+        base.LoadContent();
     }
 
     protected override void Update(GameTime gameTime)
