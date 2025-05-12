@@ -5,6 +5,22 @@ description: A beginner tutorial for building 2D games with MonoGame.
 
 This tutorial covers game development concepts using the MonoGame framework as our tool. Throughout each chapter, we will explore game development with MonoGame, introducing new concepts to build upon previous ones as we go. We will create a Snake game, which will serve as the vehicle to apply the concepts learned throughout the tutorial. The goal of this tutorial is to give you a solid foundation in 2D game development with MonoGame and provide you with reusable modules that you can leverage to jump start future projects.
 
+## What We Will Build
+
+Throughout this tutorial series, we will build a complete game called **Dungeon Slime**; a snake-like game with a dungeon theme. By the end of this series, you will have created a polished game with:
+
+- Smooth animated sprites
+- Responsive controls across keyboard and gamepad
+- Sound effects and background music
+- UI menus with customized styling
+- A complete game loop with scoring and game over states
+
+You can see the finished game here: [Dungeon Slime on itch.io](https://shyfoxstudio.itch.io/dungeon-slime)
+
+| ![Figure 0-1: The title screen of Dungeon Slime](./images/dungeon-slime-title.png) | ![Figure 0-2: The gameplay screen of Dungeon Slime showing the player controlling a chain of slime segments (in blue) while navigating through the dungeon to collect bats for points.](./images/dungeon-slime-game.png) |
+| :--------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                 **Figure 0-1: The title screen of Dungeon Slime**                 |                      **Figure 0-2: Gameplay of Dungeon Slime showing the player controlling a chain of slime segments (in blue) while navigating through the dungeon to collect bats for points.**                       |
+
 ## Who This Is For
 
 This documentation is meant to be an introduction to game development and MonoGame. Readers should have a foundational understanding of C# and be comfortable with concepts such as classes and objects.
@@ -15,9 +31,6 @@ This documentation is meant to be an introduction to game development and MonoGa
 ## How This Documentation Is Organized
 
 This documentation will introduce game development concepts using the MonoGame framework while walking the reader through the development of a Snake clone. The documentation is organized such that each chapter should be read sequentially, with each introducing new concepts and building off of the previous chapters.
-
-> [!CAUTION]
-> This is currently a work in progress and is not finished.
 
 | Chapter                                                                              | Summary                                                                                                                                                                                           | Source Files                                                                                                                       |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
@@ -54,7 +67,11 @@ The following conventions are used in this documentation.
 
 ### Italics
 
-*Italics* are used for emphasis, technical terms, and paths such as file paths, including filenames and extensions.
+*Italics* are used for emphasis and technical terms.
+
+### Highlights
+
+`Highlights` are used for paths such as file paths, including filenames, extensions and other critical information in the application of steps in a tutorial.  These are similar to Inline code blocks as they stand out more in Markdown and require emphasis.
 
 ### Inline Code Blocks
 
@@ -81,24 +98,24 @@ If you ever have questions about MonoGame or would like to talk with other devel
 
 ## Note From Author
 
-> I have been using MonoGame for the past several years (since 2017). It was a time in my game development journey where I was looking for something that I had more control over. I didn't want to spend the time to write a full game engine, but I also wanted to have more control than what the current engines at the time (i.e. Unity) offered. At that time, there was a vast amount of resources available for getting started, but none of them felt like they fit a good beginner series. Even now, the resources available still seem this way. They either require the reader to have a great understanding of game development and programming, or they assume the reader has none and instead focuses on teaching programming more than teaching MonoGame. Even still, some relied too heavily on third party libraries, while others were simply very bare bones, asking the reader to just copy and paste code without explaining the *what* of it all.
+> I have been using MonoGame for many years (since 2017), it was a time in my game development journey where I was looking for something that I had more control over. I did not want to spend the time to write a full game engine, but I also wanted to have more control than what the current engines at the time (i.e. Unity) offered. At that time, there was a vast amount of resources available for getting started, but none of them felt like they fit a good beginner series. Even now, the resources available still seem this way. They either require the reader to have a great understanding of game development and programming, or they assume the reader has none and instead focuses on teaching programming more than teaching MonoGame. Even still, some relied too heavily on third party libraries, while others were simply very bare bones, asking the reader to just copy and paste code without explaining the *what*/*why* of it all.
 >
-> Since then, I have written various small self contained tutorials on different topics for MonoGame to try and give back to the community for those getting started. I also participate regularly in the community discussion channels, answering questions and offering technical advice, so I'm very familiar with the topics and pain points that users get hung up on when first starting out.
+> Since then, I have written various small self contained tutorials on different topics for MonoGame to try and give back to the community for those getting started. I also participate regularly in the community discussion channels, answering questions and offering technical advice, so I am very familiar with the topics and pain points that users get hung up on when first starting out.
 >
-> With this documentation, I hope to take the lessons I've learned and provide a tutorial series that I wish was available when I first started, and to present using MonoGame in a straight forward way, introducing concepts and building off of them as we go along in a way that makes sense and is easy to follow.
+> With this documentation, I hope to take the lessons I have learned and provide a tutorial series that I wish was available when I first started, and to present using MonoGame in a straight forward way, introducing concepts and building off of them as we go along in a way that makes sense and is easy to follow.
 >
-> \- Christopher Whitley (Aristurtle)
+> \- Christopher Whitley ([Aristurtle](https://github.com/AristurtleDev))
 
 ### Acknowledgements
 
-This documentation would not have been possible without the support and contributions from numerous individuals withing the MonoGame community.
+This documentation would not have been possible without the support and contributions from numerous individuals within the MonoGame community.
 
-First and foremost, I want to express my gratitude to the MonoGame Foundation, its maintainers, and the countless others contributors, who have preserved and evolved this framework, ensuring developers like myself have the tools needed to bring our creative visions to life.  Their dedication to keeping the spirit of XNA alive has been invaluable to indie game developers worldwide.
+First and foremost, I want to express my gratitude to the [MonoGame Foundation](https://monogame.net/about/), its maintainers, and the countless others contributors, who have preserved and evolved this framework, ensuring developers like myself have the tools needed to bring our creative visions to life.  Their dedication to keeping the spirit of XNA alive has been invaluable to indie game developers worldwide.
 
-I am particularly grateful to the members of the MonoGame Discord community who reviewed early drafts of this content, providing feedback that helped shape these chapters into more a accessible and comprehensive learning resource.
+I am particularly grateful to the members of the [MonoGame Discord community](https://discord.gg/monogame) who reviewed early drafts of this content, providing feedback that helped shape these chapters into more a accessible and comprehensive learning resource.
 
-To the many developers of games, such as Celeste, thank you for demonstrating what is possible with MonoGame and inspiring newcomers to explore this framework.
+To the many developers of games, such as [Celeste](https://store.steampowered.com/app/504230/Celeste/), thank you for demonstrating what is possible with MonoGame and inspiring newcomers to explore this framework.
 
-Finally, I would like to thank all the creators and contributors to open-source libraries and tools for MonoGame, including the the creators of Gum, Nez, and MonoGame.Extended and many other libraries that have helped make game development in MonoGame more accessible.
+Finally, I would like to thank all the creators and contributors to open-source libraries and tools for MonoGame, including the the creators of [Gum](https://docs.flatredball.com/gum/code/monogame), [Nez](https://github.com/prime31/Nez), and [MonoGame.Extended](https://github.com/craftworkgames/MonoGame.Extended) and the many other libraries that have helped make game development in MonoGame more accessible.
 
 This documentation stands on the shoulders of a vibrant community that continues to share knowledge, and it is my hope that these tutorials will contribute meaningfully to that ongoing exchange.
