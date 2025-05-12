@@ -114,7 +114,8 @@ Like with the [mouse input](#mousestate-struct), each of these buttons are repre
 
 [!code-csharp[](./snippets/gamepadstate.cs)]
 
-You may notice however, that the GamePadState also requires a controller index, as more than one can be connected at the same time. The latest Xbox console for instance can support up to 8 controllers at a time, for this reason you need to specify which controller you are listening for.  Additionally, if you want ANY controller to start your game, you will need to loop through all possible controllers each frame until the first one "picks up".
+> [!NOTE]
+> You may notice however, that the GamePadState also requires a controller index, as more than one can be connected at the same time. The latest Xbox console for instance can support up to 8 controllers at a time, for this reason you need to specify which controller you are listening for.  Additionally, if you want ANY controller to start your game, you will need to loop through all possible controllers each frame until the first one "picks up".
 
 #### DPad
 
@@ -163,7 +164,7 @@ The [**Triggers**](xref:Microsoft.Xna.Framework.Input.GamePadState.Triggers) pro
 | [**Left**](xref:Microsoft.Xna.Framework.Input.GamePadTriggers.Left)   | `float` | The value of the left trigger. |
 | [**Right**](xref:Microsoft.Xna.Framework.Input.GamePadTriggers.Right) | `float` | The value of the left trigger. |
 
-The trigger values are represented as a float value between `0.0f` (not pressed) to `1.0f` (fully pressed). The triggers on a gamepad, however, can be either *analog* or *digital* depending the gamepad manufacturer.  For gamepads with *digital* triggers, the value will always be either `0.0f` or `1.0f`, as a digital trigger does not register values in between based on the amount of pressure applied to the trigger.  
+The trigger values are represented as a float value between `0.0f` (not pressed) to `1.0f` (fully pressed). The triggers on a gamepad, however, can be either *analog* or *digital* depending the gamepad manufacturer.  For gamepads with *digital* triggers, the value will always be either `0.0f` or `1.0f`, as a digital trigger does not register values in between based on the amount of pressure applied to the trigger.
 
 For example, if we were creating a racing game, the right trigger could be used for acceleration like the following:
 
@@ -228,7 +229,7 @@ Most modern gamepads have two vibration motors, a larger one (usually the left m
 
 ## TouchPanel Input
 
-For mobile devices such as Android/iOS phones and tablets, the primary input device is the touch panel screen.  Touching a location on the screen is similar to clicking a location on your computer with a mouse.  MonoGame provides the [**TouchPanel**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel) class to handle touch input.  
+For mobile devices such as Android/iOS phones and tablets, the primary input device is the touch panel screen.  Touching a location on the screen is similar to clicking a location on your computer with a mouse.  MonoGame provides the [**TouchPanel**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel) class to handle touch input.
 
 The [**TouchPanel**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel) class offers two ways of retrieving information about touch input:
 
@@ -237,7 +238,7 @@ The [**TouchPanel**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel) class 
 
 ### TouchCollection
 
-When calling [**TouchPanel.GetState**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.GetState) a [**TouchCollection**](xref:Microsoft.Xna.Framework.Input.Touch.TouchCollection) struct is returned.  This collection contains a [**TouchLocation**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation) value for each point of touch.  
+When calling [**TouchPanel.GetState**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.GetState) a [**TouchCollection**](xref:Microsoft.Xna.Framework.Input.Touch.TouchCollection) struct is returned.  This collection contains a [**TouchLocation**](xref:Microsoft.Xna.Framework.Input.Touch.TouchLocation) value for each point of touch.
 
 #### TouchLocation
 
@@ -314,7 +315,7 @@ The following is an example of using a gesture to detect horizontal and vertical
 [!code-csharp[](./snippets/gestures.cs)]
 
 > [!IMPORTANT]
-> Notice above that we use a `while` loop with [**TouchPanel.IsGestureAvailable**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.IsGestureAvailable) as the condition for the loop.  The reason we do this is because when a user performs a gesture, such as a horizontal drag across the screen, very quickly, what can often occurs is a series of multiple small drag gestures are registered and queued.  
+> Notice above that we use a `while` loop with [**TouchPanel.IsGestureAvailable**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.IsGestureAvailable) as the condition for the loop.  The reason we do this is because when a user performs a gesture, such as a horizontal drag across the screen, very quickly, what can often occurs is a series of multiple small drag gestures are registered and queued.
 >
 > Each time [**TouchPanel.ReadGesture**](xref:Microsoft.Xna.Framework.Input.Touch.TouchPanel.ReadGesture) is called, it will dequeue the next gesture.  So to ensure that we handle the complete gesture, we loop the gesture queue until there are none left.
 
@@ -332,7 +333,7 @@ For our game, we are going to implement keyboard and gamepad controls based on t
 
 Open `Game1.cs` and update it with the following:
 
-[!code-csharp[](./snippets/game1.cs?highlight=17-21,62-66,71-159,170)]
+[!code-csharp[](./snippets/game1.cs?highlight=17-21,60-64,69-157,168)]
 
 The key changes made here are:
 
@@ -355,7 +356,52 @@ Running the game now, you can move the slime around using the keyboard with the 
 |:-----------------------------------------------------------------------------------------------:|
 |                 **Figure 10-1: The slime moving around based on device input**                  |
 
-You may notice that the slime is capable of moving completely off the screen, this is completely normal as we have not yet implemented any logic to prevent it from doing so, it only doing what we currently tell it to do.
+> [!NOTE]
+> You may notice that the slime is capable of moving completely off the screen, this is completely normal as we have not yet implemented any logic to prevent it from doing so, it only doing what we currently tell it to do.
+
+## Input Buffering
+
+While checking for input every frame works well for continuous actions like movement, many games benefit from more sophisticated input handling techniques. One such technique is **input buffering**, which can significantly improve how responsive controls feel to players.
+
+### Understanding Input Buffering
+
+Input buffering is a technique where the game temporarily stores player inputs that cannot be immediately processed. Instead of discarding these inputs, they are placed in a queue and processed in order when the game is ready to handle them.
+
+Input buffering is particularly valuable in games where:
+
+- Actions occur at fixed intervals rather than continuously (like turn-based games or grid movement).
+- Precise timing is required for complex input sequences (like fighting games).
+- Multiple rapid inputs need to be remembered in order (like quick directional changes).
+
+Without input buffering, players must time their inputs perfectly to align with the game's update cycle. With buffering, the game becomes more forgiving and responsive by:
+
+1. Storing inputs that arrive between action updates.
+2. Preserving the order of inputs for more predictable behavior.
+3. Creating a sense that the game is actually listening to the player.
+
+### Implementing a Simple Input Buffer
+
+A basic input buffer can be implemented using a queue data structure, which follows a First-In-First-Out (FIFO) pattern:
+
+[!code-csharp[](./snippets/inputbuffer.cs)]
+
+> [!NOTE]
+> The [`Queue<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.queue-1?view=net-9.0>) is a First In, First Out (FIFO) collection in C#. When you add items with `Enqueue()`, they join the end of the line, and when you retrieve items with `Dequeue()`, you always get the oldest item (the one at the front of the line). Think of it like people waiting in line - the first person to arrive is the first one served.
+>
+> This contrasts with a [`Stack<T>`](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.stack-1?view=net-9.0>), which follows Last In, First Out (LIFO) behavior, where the most recently added item is the first one retrieved.
+
+The size of an input buffer is an important design decision. If it's too small, players might still feel the game isn't responsive enough. If it's too large, the game might feel like it's playing itself by working through a backlog of commands.
+
+### When to Use Input Buffering
+
+Consider implementing input buffering in your game when:
+
+- Players complain about the game feeling "unresponsive".
+- Your game uses fixed-interval updates for certain mechanics.
+- Actions require precise timing that is difficult for players to hit consistently.
+- You want to allow players to "queue up" their next few moves.
+
+We'll see a practical implementation of input buffering in [Chapter 23](../23_completing_the_game/index.md) when we finalize our snake-like game mechanics, where timing and direction changes are critical to gameplay.
 
 ## Conclusion
 
