@@ -8,7 +8,7 @@ While packing images into a texture atlas and managing them through our `Sprite`
 > [!NOTE]
 > The term "frame" in animation refers to a single image in an animation sequence. This is different from a game frame, which represents one complete render cycle of your game.
 
-In MonoGame, we can create these animations by cycling through different regions of our texture atlas, with each region representing a single frame of the animation. For example, `Figure 9-1` below shows three frames that make up a bat's wing-flapping animation:
+In MonoGame, we can create these animations by cycling through different regions of our texture atlas, with each region representing a single frame of the animation. For example, *Figure 9-1* below shows three frames that make up a bat's wing-flapping animation:
 
 | ![Figure 9-1: Animation example of a bat flapping its wings](./images/bat-animation-example.gif)  |
 | :-----------------------------------------------------------------------------------------------: |
@@ -178,7 +178,7 @@ We can simplify this process by adding an animated sprite creation method to the
 
 We can now adjust our game now to use the `AnimatedSprite` class to see our sprites come to life. Update the contents of `Game1.cs` with the following:
 
-[!code-csharp[](./snippets/game1.cs?highlight=11-15,34-40,50-54)]
+[!code-csharp[](./snippets/game1.cs?highlight=11-15,34-40,48-52)]
 
 Here are the key changes in this implementation:
 

@@ -26,7 +26,7 @@ A tileset is a collection of small images (tiles) that can be combined and arran
 - Decorative elements like plants and furniture.
 - Special tiles like doors, ladders, or water.
 
-Each tile in a tileset is assigned an ID number, which the tilemap uses to reference which tile goes where. For example, in Figure 13-1 below, the tileset we will add to our game in a moment is shown on the left and on the right is the same tileset with an overlay showing how each tile is assigned an ID number.
+Each tile in a tileset is assigned an ID number, which the tilemap uses to reference which tile goes where. For example, in *Figure 13-1* below, the tileset we will add to our game in a moment is shown on the left and on the right is the same tileset with an overlay showing how each tile is assigned an ID number.
 
 | ![Figure 13-1: Left: Original dungeon tileset. Right: The same tileset with an overlay showing how each tile is assigned a numeric ID](./images/tileset-grid-comparison.png) |
 |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
@@ -46,7 +46,7 @@ For example, a simple tilemap may look like this conceptually:
 12 13 14 13 15
 ```
 
-If we took the above tilemap data and mapped each cell to the tile in the related tileset, it would look something similar to Figure 13-2 below:
+If we took the above tilemap data and mapped each cell to the tile in the related tileset, it would look something similar to *Figure 13-2* below:
 
 | ![Figure 13-2: From tileset to tilemap. Left: Tileset with an overlay showing the tile IDs.  Right: The tilemap created using the tiles arranged with the pattern from the code example above](./images/tileset-to-tilemap-example.png) |
 |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
@@ -186,7 +186,7 @@ This tilemap configuration creates a simple dungeon layout with walls around the
 
 With all of the assets now in place and configured, we can update the `Game1` class to load the tilemap and draw it.  We will also need to update the collision logic so that the boundary is no longer the edge of the screen, but instead the edges of the wall tiles of the tilemap.  Open `Game1.cs` and make the following updates:
 
-[!code-csharp[](./snippets/game1.cs?highlight=31-35,46-61,80-82,114,116,118,120,123,125,127,129,147,150,152,155,158,161,163,166,181-183,305-306)]
+[!code-csharp[](./snippets/game1.cs?highlight=31-35,46-61,80-82,112,114,116,128,121,123,125,127,145,148,150,153,156,159,161,164,179-181,303-304)]
 
 The key changes to the `Game1` class include:
 
@@ -199,7 +199,7 @@ The key changes to the `Game1` class include:
    1. The tilemap is loaded from the XML configuration file.
    2. The scale of the tilemap is set to a factor of 4.0.
 5. In [**Update**](xref:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)), the `screenBounds` variable was removed and the collision logic has been updated to instead use the `_roomBounds` instead.
-6. In [**Draw**](Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)) the tilemap is drawn.
+6. In [**Draw**](xref:Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)) the tilemap is drawn.
 
 Running the game now with these changes, our game now visually transforms from a simple screen with sprites to a proper game environment with walls and floors. The slime and bat are now confined within the walls of the dungeon defined by our tilemap.
 

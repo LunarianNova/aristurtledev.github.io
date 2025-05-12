@@ -121,7 +121,7 @@ The `<CharacterRegions>` element defines which Unicode character ranges to inclu
 For most games, the default range is sufficient.
 
 > [!NOTE]
-> ALthough for fun, TRY using the Wingdings font :D
+> Although for fun, TRY using the Wingdings font :D
 
 ## Loading a SpriteFont Description
 
@@ -217,7 +217,7 @@ The key changes here are:
 
 Finally, open the `Game1.cs` file and make the following changes:
 
-[!code-csharp[](./snippets/game1.cs?highlight=48-58,93-99,129-130,246-247,391-402)]
+[!code-csharp[](./snippets/game1.cs?highlight=48-58,93-99,129-130,244-245,389-400)]
 
 The key changes made are:
 
