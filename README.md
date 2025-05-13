@@ -1,4 +1,4 @@
-# Aristurlte.net
+# Aristurtle.net
 
 Personal website and blog for https://aristurtle.net
 
@@ -8,7 +8,7 @@ Personal website and blog for https://aristurtle.net
 Aristurtle Logo © 2022-2023 by Christopher Whitley.  All Rights Reserved.
 
 Except where otherwise noted, Aristurtle Website Source Code © 2022-2023 by
-Christopher WHitley is licensed under the MIT License below
+Christopher Whitley is licensed under the MIT License below
 
 Begin license text.
 
