@@ -127,10 +127,10 @@ Update the code to:
 
 [!code-csharp[](./snippets/origin.cs?highlight=12-14,18-20)]
 
-By moving the sprite's origin point to its center, this not only corrects the point of rotation, but also allows us to use the screen center position directly without needing additional position offset calculations.  Running the game now shows the log properly centered and rotated 90°.
+By moving the sprite's origin point to its center, this not only corrects the point of rotation, but also allows us to use the screen center position directly without needing additional position offset calculations.  Running the game now shows the logo properly centered and rotated 90°.
 
 > [!NOTE]
-> When setting the `origin` parameter, it is based on the sprites width and height, so the center origin will be half the width and half the height of the sprite.
+> When setting the `origin` parameter, it is based on the sprite's width and height, so the center origin will be half the width and half the height of the sprite.
 
 | ![Figure 6-6: The MonoGame logo drawn rotated 90° and centered on the game window](./images/logo-rotated-centered.png) |
 | :--------------------------------------------------------------------------------------------------------------------: |
