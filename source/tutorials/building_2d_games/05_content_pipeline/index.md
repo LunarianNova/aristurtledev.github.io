@@ -152,7 +152,7 @@ The following diagram demonstrates this workflow:
 The Content Pipeline offers significant advantages:
 
 - Assets are pre-processed and optimized for your target platform.
-- Image files can be compiled using formats like DXT compression, which GPU's understand natively.
+- Image files can be compiled using formats like DXT compression, which GPUs understand natively.
 - Asset loading is simplified and consistent across platforms.
 
 ## The ContentManager Class
@@ -165,7 +165,7 @@ They key methods for asset loading are:
 
 | Method                                                                                                                                                     | Returns | Description                                                                                                                                                                                                                                                                                               |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**Load&lt;T&gt;(string)**](xref:Microsoft.Xna.Framework.Content.ContentManager.Load``1(System.String))                                                    | `T`     | Loads the assets of type `T` that has been processed by the content pipeline.                                                                                                                                                                                                                             |
+| [**Load&lt;T&gt;(string)**](xref:Microsoft.Xna.Framework.Content.ContentManager.Load``1(System.String))                                                    | `T`     | Loads the asset of type `T` that has been processed by the content pipeline.                                                                                                                                                                                                                             |
 | [**Unload**](xref:Microsoft.Xna.Framework.Content.ContentManager.Unload)                                                                                   | `void`  | Unloads all assets that have been loaded by that content manager instance.                                                                                                                                                                                                                                |
 
 > [!TIP]
@@ -175,7 +175,7 @@ They key methods for asset loading are:
 
 When loading content, you need to specify the path to the asset, minus the extension.  This path is relative to the ContentManager's [**RootDirectory**](xref:Microsoft.Xna.Framework.Content.ContentManager.RootDirectory) property, which is set to **"Content"** by default in the `Game1` constructor.
 
-For example, with our newly added logo in the "images" folder,the path would be "images/logo" (without the file extension).  The reason for this relates to the build process.  When you build your project, the *MonoGame.Content.Builder.Tasks* NuGet reference [compiles your assets and copies them to the game's output folder](#understanding-the-content-pipeline-workflow).
+For example, with our newly added logo in the "images" folder, the path would be "images/logo" (without the file extension).  The reason for this relates to the build process.  When you build your project, the *MonoGame.Content.Builder.Tasks* NuGet reference [compiles your assets and copies them to the game's output folder](#understanding-the-content-pipeline-workflow).
 
 This creates a folder structure in your output directory similar to:
 
@@ -226,7 +226,7 @@ Now that we have the MonoGame logo added as an asset in the content project, we 
     > [!NOTE]
     > We will go more into detail about the [**SpriteBatch**](xref:Microsoft.Xna.Framework.Graphics.SpriteBatch) in the next chapter.
 
-The complete updated `Game1.cs` file should now look like this
+The complete updated `Game1.cs` file should now look like this:
 
 [!code-csharp[](./snippets/game1.cs?highlight=10-11,27,44-51)]
 
@@ -236,7 +236,7 @@ Running the game now will show the MonoGame logo displayed in the upper-left cor
 | :--------------------------------------------------------------------------------: |
 |             **Figure 5-8: The MonoGame logo drawn to the game window**             |
 
-## Adding Build-In Asset Types
+## Adding Built-In Asset Types
 
 The MGCB Editor can also create certain built-in asset types.  In this section we will explore these types and this functionality.  If not already open, [open the MGCB Editor](#the-mgcb-editor) and perform the following:
 
