@@ -222,5 +222,5 @@ In the next chapter, we will learn about the Content Pipeline and how to load ga
 3. What happens if you do not add a reference to your class library in your game project?
 
     :::question-answer
-    > Without adding a reference, your game project will be unaware of any code in the class library. You wo not be able to use any of the classes or components from the library in your game.
+    > Without adding a reference, your game project will be unaware of any code in the class library. You will not be able to use any of the classes or components from the library in your game.
     :::
